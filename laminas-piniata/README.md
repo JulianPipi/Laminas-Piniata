@@ -22,7 +22,51 @@ laminas-piniata/
     └── chocotransfer/             → imágenes de chocotransfer
 ```
 
-## Cómo agregar un diseño nuevo
+## Cómo agregar diseños nuevos (forma fácil, recomendada)
+
+Hay una carpeta `nuevos-disenos/` con una subcarpeta lista para cada categoría, separada por tipo:
+
+```
+nuevos-disenos/
+├── fototorta/
+│   ├── Futbol/
+│   ├── Dibujos animados/
+│   ├── Disney/
+│   ├── Basquet/
+│   ├── Peliculas/
+│   ├── Series/
+│   ├── Animales/
+│   ├── Cumpleanos/
+│   └── Juegos/
+└── chocotransfer/
+    └── (las mismas 9 categorías)
+```
+
+**Pasos:**
+
+1. Arrastrá cada imagen nueva (jpg, jpeg, png o webp) a la carpeta que le corresponda. El nombre del archivo se usa para sugerir el nombre del diseño — por ejemplo `messi-barcelona.jpg` va a aparecer como "Messi Barcelona". No hace falta que el nombre sea perfecto, después se puede ajustar.
+2. Abrí una terminal en la carpeta del proyecto y corré:
+
+   ```bash
+   node scripts/agregar-disenos.js
+   ```
+
+3. El script va a:
+   - copiar cada imagen a `images/fototorta/` o `images/chocotransfer/` con un nombre único,
+   - agregar el diseño a `data/products.json` con el precio por defecto ($2.500 fototorta / $4.500 chocotransfer), `destacado: false` y `activo: true`,
+   - sacar la imagen de `nuevos-disenos/` (para no volver a procesarla si corrés el script de nuevo).
+4. Revisá `data/products.json` por si algún nombre o precio necesita un ajuste manual (por ejemplo, marcar `"destacado": true` en algún diseño para que aparezca en el Inicio).
+5. Subilo como siempre:
+
+   ```bash
+   git add .
+   git commit -m "Nuevos diseños"
+   git push
+   ```
+
+   Vercel publica el cambio solo.
+
+## Cómo agregar un diseño a mano (alternativa)
 
 1. Poné la imagen (jpg/png, cuadrada de preferencia) en `images/fototorta/` o `images/chocotransfer/`.
 2. Sumá un objeto en `data/products.json`:
