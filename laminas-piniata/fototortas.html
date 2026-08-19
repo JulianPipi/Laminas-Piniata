@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fototortas — Laminas Piniata</title>
+<meta name="description" content="Catálogo de láminas comestibles para fototortas. Filtrá por categoría y armá tu pedido." />
+<link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body data-tipo="fototorta">
+
+<header class="site-header">
+  <div class="container nav-bar">
+    <a href="/index.html" class="brand"><span class="brand-mark"></span>Laminas Piniata</a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="/index.html">Inicio</a></li>
+        <li><a href="/fototortas.html">Fototortas</a></li>
+        <li><a href="/chocotransfer.html">Chocotransfer</a></li>
+        <li><a href="/pedido.html">Mi pedido</a></li>
+        <li><a href="https://wa.me/5491133750433" target="_blank" rel="noopener">WhatsApp</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a href="/pedido.html" class="cart-btn">Mi pedido <span class="cart-count" data-cart-count>0</span></a>
+      <button class="menu-toggle" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="catalog-hero">
+    <span class="eyebrow">🍰 Para tortas</span>
+    <h1>Fototortas</h1>
+    <p>Láminas comestibles de arroz, impresas rectas, en el tamaño que necesites hasta A4. Precio por lámina: <strong>$2.500</strong>.</p>
+  </section>
+
+  <div class="toolbar">
+    <div class="search-box">
+      <span>🔍</span>
+      <input id="buscador" type="text" placeholder="Buscar diseño (ej: Sonic, River, cumpleaños...)" />
+    </div>
+    <select id="select-categoria" class="filter-select">
+      <option value="todas">Todas las categorías</option>
+    </select>
+  </div>
+  <p class="result-count" id="result-count"></p>
+
+  <div class="grid-productos" id="grid-productos"></div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Laminas Piniata</h4>
+        <p>Láminas comestibles para fototortas y diseños de chocotransfer. Zona Vicente López / Munro.</p>
+        <a href="https://instagram.com/Laminas_Piniata" target="_blank" rel="noopener">Instagram: @Laminas_Piniata</a>
+      </div>
+      <div>
+        <h4>Atención</h4>
+        <p>Lunes a domingo, 9 a 21 hs</p>
+        <p>Envíos martes, miércoles y viernes</p>
+        <p>Retiro en persona disponible</p>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <a href="https://wa.me/5491133750433" target="_blank" rel="noopener">WhatsApp: 11 3375-0433</a>
+        <p>Pagos: Mercado Pago o efectivo al entregar</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© <span data-anio></span> Laminas Piniata</div>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/5491133750433" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 32 32" fill="white"><path d="M16 2.7C8.7 2.7 2.7 8.6 2.7 16c0 2.5.7 4.9 1.9 7L2.6 29.3l6.5-1.9c2 1.1 4.3 1.7 6.9 1.7 7.3 0 13.3-5.9 13.3-13.3S23.3 2.7 16 2.7zm0 24.2c-2.2 0-4.4-.6-6.2-1.7l-.4-.3-3.9 1.1 1.1-3.8-.3-.4a10.9 10.9 0 0 1-1.7-5.8C4.6 9.7 9.7 4.6 16 4.6S27.4 9.7 27.4 16 22.3 26.9 16 26.9zm6-8.2c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2-.2.3-.8 1.1-1 1.3-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.6-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.5.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6 0-.2-.7-1.8-1-2.4-.3-.6-.5-.5-.7-.6h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3z"/></svg>
+</a>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal-box" style="position:relative;">
+    <button class="modal-close" data-cerrar-modal aria-label="Cerrar">✕</button>
+    <div class="modal-img"><img id="modal-img" src="" alt="" /></div>
+    <div class="modal-info">
+      <span class="product-cat" id="modal-categoria"></span>
+      <span class="product-name" id="modal-nombre"></span>
+      <span class="product-price" id="modal-precio"></span>
+      <button class="btn btn-rosa btn-block" id="modal-agregar">Agregar al pedido</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/data.js"></script>
+<script src="/js/cart.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/catalogo.js"></script>
+</body>
+</html>

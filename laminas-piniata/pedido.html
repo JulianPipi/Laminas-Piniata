@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mi pedido — Laminas Piniata</title>
+<link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body data-tipo="pedido">
+
+<header class="site-header">
+  <div class="container nav-bar">
+    <a href="/index.html" class="brand"><span class="brand-mark"></span>Laminas Piniata</a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="/index.html">Inicio</a></li>
+        <li><a href="/fototortas.html">Fototortas</a></li>
+        <li><a href="/chocotransfer.html">Chocotransfer</a></li>
+        <li><a href="/pedido.html">Mi pedido</a></li>
+        <li><a href="https://wa.me/5491133750433" target="_blank" rel="noopener">WhatsApp</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a href="/pedido.html" class="cart-btn">Mi pedido <span class="cart-count" data-cart-count>0</span></a>
+      <button class="menu-toggle" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main class="container section">
+  <span class="eyebrow">Revisá antes de enviar</span>
+  <h1 style="margin-bottom:26px;">Mi pedido</h1>
+
+  <div class="pedido-grid">
+    <div>
+      <div id="lista-pedido"></div>
+      <div id="pedido-vacio" class="empty-state" style="display:none;">
+        Todavía no agregaste diseños. <br />
+        <a href="/fototortas.html" class="btn btn-outline btn-sm" style="margin-top:14px;">Ver Fototortas</a>
+        <a href="/chocotransfer.html" class="btn btn-outline btn-sm" style="margin-top:14px;">Ver Chocotransfer</a>
+      </div>
+    </div>
+
+    <aside class="pedido-side">
+      <h3>Resumen</h3>
+      <div class="resumen-row"><span>Unidades</span><span id="resumen-unidades">0</span></div>
+      <div class="resumen-row total"><span>Total</span><span id="resumen-total">$0</span></div>
+      <div class="combo-note" id="combo-note" style="display:none;">
+        🎉 ¡Superaste las 10 unidades! Consultanos por el combo especial.
+      </div>
+
+      <form id="form-pedido" style="margin-top:18px;">
+        <div class="form-field">
+          <label for="nombre">Nombre y apellido</label>
+          <input id="nombre" type="text" required placeholder="¿Cómo te llamás?" />
+        </div>
+        <div class="form-field">
+          <label for="fecha">Fecha de entrega deseada</label>
+          <input id="fecha" type="date" required />
+        </div>
+        <div class="form-field">
+          <label for="horario">Disponibilidad horaria</label>
+          <input id="horario" type="text" required placeholder="Ej: tardes, después de las 18hs" />
+        </div>
+        <button type="submit" class="btn btn-whatsapp btn-block" id="btn-confirmar">
+          Confirmar pedido por WhatsApp
+        </button>
+      </form>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Laminas Piniata</h4>
+        <p>Láminas comestibles para fototortas y diseños de chocotransfer. Zona Vicente López / Munro.</p>
+        <a href="https://instagram.com/Laminas_Piniata" target="_blank" rel="noopener">Instagram: @Laminas_Piniata</a>
+      </div>
+      <div>
+        <h4>Atención</h4>
+        <p>Lunes a domingo, 9 a 21 hs</p>
+        <p>Envíos martes, miércoles y viernes</p>
+        <p>Retiro en persona disponible</p>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <a href="https://wa.me/5491133750433" target="_blank" rel="noopener">WhatsApp: 11 3375-0433</a>
+        <p>Pagos: Mercado Pago o efectivo al entregar</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© <span data-anio></span> Laminas Piniata</div>
+  </div>
+</footer>
+
+<script src="/js/data.js"></script>
+<script src="/js/cart.js"></script>
+<script src="/js/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const lista = document.getElementById("lista-pedido");
+  const vacio = document.getElementById("pedido-vacio");
+  const resumenUnidades = document.getElementById("resumen-unidades");
+  const resumenTotal = document.getElementById("resumen-total");
+  const comboNote = document.getElementById("combo-note");
+  const btnConfirmar = document.getElementById("btn-confirmar");
+  const form = document.getElementById("form-pedido");
+
+  function render() {
+    const items = leerCarrito();
+
+    if (!items.length) {
+      lista.innerHTML = "";
+      vacio.style.display = "block";
+      btnConfirmar.disabled = true;
+    } else {
+      vacio.style.display = "none";
+      btnConfirmar.disabled = false;
+      lista.innerHTML = items
+        .map(
+          (i) => `
+        <div class="pedido-item">
+          <img src="${i.imagen}" alt="${i.nombre}" />
+          <div class="pedido-item-info">
+            <div class="cat">${i.categoria} · ${i.tipo === "fototorta" ? "Fototorta" : "Chocotransfer"}</div>
+            <div class="nom">${i.nombre}</div>
+            <div class="precio">${formatoPrecio(i.precio)} c/u · Subtotal ${formatoPrecio(i.precio * i.cantidad)}</div>
+            <button class="remove-link" data-eliminar="${i.id}">Quitar</button>
+          </div>
+          <div class="qty-control">
+            <button data-restar="${i.id}" aria-label="Restar">−</button>
+            <span>${i.cantidad}</span>
+            <button data-sumar="${i.id}" aria-label="Sumar">+</button>
+          </div>
+        </div>`
+        )
+        .join("");
+    }
+
+    resumenUnidades.textContent = totalUnidades(items);
+    resumenTotal.textContent = formatoPrecio(totalPedido(items));
+    comboNote.style.display = totalUnidades(items) >= COMBO_MINIMO ? "block" : "none";
+
+    lista.querySelectorAll("[data-sumar]").forEach((b) =>
+      b.addEventListener("click", () => { cambiarCantidad(Number(b.dataset.sumar), 1); render(); })
+    );
+    lista.querySelectorAll("[data-restar]").forEach((b) =>
+      b.addEventListener("click", () => { cambiarCantidad(Number(b.dataset.restar), -1); render(); })
+    );
+    lista.querySelectorAll("[data-eliminar]").forEach((b) =>
+      b.addEventListener("click", () => { eliminarDelCarrito(Number(b.dataset.eliminar)); render(); })
+    );
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const items = leerCarrito();
+    if (!items.length) return;
+    const datos = {
+      nombre: document.getElementById("nombre").value,
+      fecha: document.getElementById("fecha").value,
+      horario: document.getElementById("horario").value,
+    };
+    const url = construirMensajeWhatsApp(items, datos);
+    window.open(url, "_blank");
+  });
+
+  render();
+});
+</script>
+</body>
+</html>
