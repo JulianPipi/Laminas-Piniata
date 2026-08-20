@@ -70,38 +70,57 @@ function main() {
     for (const catDir of categorias) {
       const categoria = catDir.name;
       const carpetaCategoria = path.join(carpetaTipo, categoria);
-      const archivos = fs
-        .readdirSync(carpetaCategoria)
-        .filter((f) => EXTENSIONES_VALIDAS.includes(path.extname(f).toLowerCase()));
 
-      for (const archivo of archivos) {
-        const rutaOrigen = path.join(carpetaCategoria, archivo);
-        const extension = path.extname(archivo).toLowerCase();
-        const nombreSugerido = nombreLegibleDesdeArchivo(archivo);
-        const slugArchivo = `${slugificar(categoria)}-${slugificar(nombreSugerido)}-${siguienteId}${extension}`;
+      // dentro de cada categoría puede haber imágenes sueltas (sin subcategoría)
+      // y/o subcarpetas que representan una subcategoría (ej: Futbol/Messi/*.jpg)
+      const entradas = fs.readdirSync(carpetaCategoria, { withFileTypes: true });
+      const archivosSueltos = entradas.filter(
+        (e) => e.isFile() && EXTENSIONES_VALIDAS.includes(path.extname(e.name).toLowerCase())
+      );
+      const subcarpetas = entradas.filter((e) => e.isDirectory());
 
-        const carpetaDestino = path.join(CARPETA_IMAGENES, tipo);
-        fs.mkdirSync(carpetaDestino, { recursive: true });
-        const rutaDestino = path.join(carpetaDestino, slugArchivo);
+      const grupos = [
+        { subcategoria: null, carpeta: carpetaCategoria, archivos: archivosSueltos.map((f) => f.name) },
+        ...subcarpetas.map((sub) => {
+          const carpetaSub = path.join(carpetaCategoria, sub.name);
+          const archivosSub = fs
+            .readdirSync(carpetaSub)
+            .filter((f) => EXTENSIONES_VALIDAS.includes(path.extname(f).toLowerCase()));
+          return { subcategoria: sub.name, carpeta: carpetaSub, archivos: archivosSub };
+        }),
+      ];
 
-        fs.copyFileSync(rutaOrigen, rutaDestino);
-        fs.unlinkSync(rutaOrigen); // saca la imagen de "nuevos-disenos" para no volver a procesarla
+      for (const grupo of grupos) {
+        for (const archivo of grupo.archivos) {
+          const rutaOrigen = path.join(grupo.carpeta, archivo);
+          const extension = path.extname(archivo).toLowerCase();
+          const nombreSugerido = nombreLegibleDesdeArchivo(archivo);
+          const slugArchivo = `${slugificar(categoria)}-${slugificar(nombreSugerido)}-${siguienteId}${extension}`;
 
-        productos.push({
-          id: siguienteId,
-          nombre: nombreSugerido,
-          imagen: `/images/${tipo}/${slugArchivo}`,
-          tipo,
-          categoria,
-          subcategoria: null,
-          precio: PRECIOS_POR_DEFECTO[tipo],
-          destacado: false,
-          activo: true,
-        });
+          const carpetaDestino = path.join(CARPETA_IMAGENES, tipo);
+          fs.mkdirSync(carpetaDestino, { recursive: true });
+          const rutaDestino = path.join(carpetaDestino, slugArchivo);
 
-        console.log(`✔ Agregado: [${tipo}] ${categoria} → "${nombreSugerido}" (id ${siguienteId})`);
-        siguienteId++;
-        agregados++;
+          fs.copyFileSync(rutaOrigen, rutaDestino);
+          fs.unlinkSync(rutaOrigen); // saca la imagen de "nuevos-disenos" para no volver a procesarla
+
+          productos.push({
+            id: siguienteId,
+            nombre: nombreSugerido,
+            imagen: `/images/${tipo}/${slugArchivo}`,
+            tipo,
+            categoria,
+            subcategoria: grupo.subcategoria,
+            precio: PRECIOS_POR_DEFECTO[tipo],
+            destacado: false,
+            activo: true,
+          });
+
+          const etiquetaSub = grupo.subcategoria ? ` / ${grupo.subcategoria}` : "";
+          console.log(`✔ Agregado: [${tipo}] ${categoria}${etiquetaSub} → "${nombreSugerido}" (id ${siguienteId})`);
+          siguienteId++;
+          agregados++;
+        }
       }
     }
   }

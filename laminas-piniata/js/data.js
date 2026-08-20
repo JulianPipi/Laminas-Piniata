@@ -33,14 +33,25 @@ function formatoPrecio(n) {
   return n.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
 }
 
-function filtrarProductos(productos, { tipo, categoria, texto } = {}) {
+function filtrarProductos(productos, { tipo, categoria, subcategoria, texto } = {}) {
   return productos.filter((p) => {
     if (tipo && p.tipo !== tipo) return false;
     if (categoria && categoria !== "todas" && p.categoria !== categoria) return false;
+    if (subcategoria && subcategoria !== "todas" && p.subcategoria !== subcategoria) return false;
     if (texto) {
       const t = texto.trim().toLowerCase();
       if (t && !p.nombre.toLowerCase().includes(t)) return false;
     }
     return true;
   });
+}
+
+function subcategoriasDe(productos, categoria) {
+  if (!categoria || categoria === "todas") return [];
+  const set = new Set(
+    productos
+      .filter((p) => p.categoria === categoria && p.subcategoria)
+      .map((p) => p.subcategoria)
+  );
+  return [...set];
 }

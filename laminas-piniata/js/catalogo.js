@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const grid = document.getElementById("grid-productos");
   const buscador = document.getElementById("buscador");
   const selectCategoria = document.getElementById("select-categoria");
+  const selectSubcategoria = document.getElementById("select-subcategoria");
   const resultCount = document.getElementById("result-count");
   const modal = document.getElementById("modal");
   const modalImg = document.getElementById("modal-img");
@@ -36,10 +37,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     selectCategoria.value = catInicial;
   }
 
+  function actualizarSubcategorias() {
+    const subs = subcategoriasDe(delTipo, selectCategoria.value);
+    if (!subs.length) {
+      selectSubcategoria.innerHTML = `<option value="todas">Todas las subcategorías</option>`;
+      selectSubcategoria.style.display = "none";
+      return;
+    }
+    selectSubcategoria.style.display = "";
+    selectSubcategoria.innerHTML =
+      `<option value="todas">Todas las subcategorías</option>` +
+      subs.map((s) => `<option value="${s}">${s}</option>`).join("");
+  }
+  actualizarSubcategorias();
+
   function render() {
     const filtrados = filtrarProductos(delTipo, {
       tipo,
       categoria: selectCategoria.value,
+      subcategoria: selectSubcategoria.value,
       texto: buscador.value,
     });
 
@@ -59,7 +75,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" />
         </div>
         <div class="product-body">
-          <span class="product-cat">${p.categoria}</span>
+          <span class="product-cat">${p.categoria}${p.subcategoria ? " · " + p.subcategoria : ""}</span>
           <span class="product-name">${p.nombre}</span>
           <span class="product-price">${formatoPrecio(p.precio)}</span>
           <div class="product-actions">
@@ -111,7 +127,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   buscador.addEventListener("input", render);
-  selectCategoria.addEventListener("change", render);
+  selectCategoria.addEventListener("change", () => {
+    actualizarSubcategorias();
+    render();
+  });
+  selectSubcategoria.addEventListener("change", render);
 
   render();
 });
