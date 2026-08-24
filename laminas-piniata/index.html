@@ -62,16 +62,6 @@
     </div>
   </section>
 
-  <section class="section container">
-    <div class="section-head">
-      <div>
-        <span class="eyebrow">Explorá por tema</span>
-        <h2>Categorías</h2>
-      </div>
-    </div>
-    <div class="chips" id="chips-categorias"></div>
-  </section>
-
   <section class="section container" id="destacados-wrap" style="display:none;">
     <div class="section-head">
       <div>
@@ -142,12 +132,6 @@
 <script src="/js/main.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", async () => {
-    // chips de categorías
-    const chipsWrap = document.getElementById("chips-categorias");
-    chipsWrap.innerHTML = CATEGORIAS.map(
-      (c) => `<a class="chip" href="/fototortas.html?categoria=${encodeURIComponent(c)}">${c}</a>`
-    ).join("");
-
     // destacados (de ambos tipos)
     const productos = await cargarProductos();
     const destacados = productos.filter((p) => p.destacado).slice(0, 8);
