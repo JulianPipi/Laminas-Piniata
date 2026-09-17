@@ -23,9 +23,14 @@ let PRODUCTOS_CACHE = null;
 
 async function cargarProductos() {
   if (PRODUCTOS_CACHE) return PRODUCTOS_CACHE;
-  const res = await fetch("/data/products.json");
+  const res = await fetch("data/products.json");
   const data = await res.json();
-  PRODUCTOS_CACHE = data.filter((p) => p.activo !== false);
+  PRODUCTOS_CACHE = data
+    .filter((p) => p.activo !== false)
+    .map((p) => ({
+      ...p,
+      imagen: p.imagen && p.imagen.startsWith("/") ? p.imagen.slice(1) : p.imagen,
+    }));
   return PRODUCTOS_CACHE;
 }
 

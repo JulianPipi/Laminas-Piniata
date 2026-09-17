@@ -5,27 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Laminas Piniata — Fototortas y Chocotransfer</title>
 <meta name="description" content="Diseños de láminas comestibles para fototortas y chocotransfer. Elegí tu diseño y armá tu pedido por WhatsApp." />
-<link rel="stylesheet" href="/css/styles.css" />
+<link rel="stylesheet" href="css/styles.css" />
 </head>
 <body data-tipo="home">
 
 <header class="site-header">
   <div class="container nav-bar">
-    <a href="/index.html" class="brand">
+    <a href="index.html" class="brand">
       <span class="brand-mark"></span>
       Laminas Piniata
     </a>
     <nav>
       <ul class="nav-links">
-        <li><a href="/index.html">Inicio</a></li>
-        <li><a href="/fototortas.html">Laminas Comestibles</a></li>
-        <li><a href="/chocotransfer.html">Chocotransfer</a></li>
-        <li><a href="/pedido.html">Mi pedido</a></li>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="fototortas.html">Laminas Comestibles</a></li>
+        <li><a href="chocotransfer.html">Chocotransfer</a></li>
+        <li><a href="pedido.html">Mi pedido</a></li>
         <li><a href="https://wa.me/5491133750433" target="_blank" rel="noopener">WhatsApp</a></li>
       </ul>
     </nav>
     <div class="nav-actions">
-      <a href="/pedido.html" class="cart-btn">
+      <a href="pedido.html" class="cart-btn">
         Mi pedido
         <span class="cart-count" data-cart-count>0</span>
       </a>
@@ -41,19 +41,19 @@
       <h1>Diseños listos para tu torta o tu chocolate favorito</h1>
       <p>Bienvenido a Laminas Piniata. Acá te muestro los diseños generales con los que cuento, además de un apartado donde podemos hablar y armar un diseño personalizado vía WhatsApp.</p>
       <div class="hero-cta">
-        <a href="/fototortas.html" class="btn btn-rosa">Ver Fototortas</a>
-        <a href="/chocotransfer.html" class="btn btn-chocolate">Ver Chocotransfer</a>
+        <a href="fototortas.html" class="btn btn-rosa">Ver Fototortas</a>
+        <a href="chocotransfer.html" class="btn btn-chocolate">Ver Chocotransfer</a>
       </div>
     </div>
 
     <div class="hero-split">
-      <a href="/fototortas.html" class="peel-card fototorta-card">
+      <a href="fototortas.html" class="peel-card fototorta-card">
         <span class="peel-eyebrow">Para tortas</span>
         <h3>Fototortas</h3>
         <p>Láminas de arroz rectas, tamaño hasta A4. Ideales para cubrir toda la torta.</p>
         <span class="peel-go">Ver catálogo →</span>
       </a>
-      <a href="/chocotransfer.html" class="peel-card chocotransfer-card">
+      <a href="chocotransfer.html" class="peel-card chocotransfer-card">
         <span class="peel-eyebrow">Para chocolates</span>
         <h3>Chocotransfer</h3>
         <p>Diseños impresos al revés, en formatos más chicos, pensados para chocolate.</p>
@@ -127,9 +127,9 @@
   </div>
 </div>
 
-<script src="/js/data.js"></script>
-<script src="/js/cart.js"></script>
-<script src="/js/main.js"></script>
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", async () => {
     // destacados (de ambos tipos)
@@ -150,7 +150,7 @@
             <span class="product-name">${p.nombre}</span>
             <span class="product-price">${formatoPrecio(p.precio)}</span>
             <div class="product-actions">
-              <a class="btn btn-outline btn-sm btn-block" href="/${p.tipo === "fototorta" ? "fototortas" : "chocotransfer"}.html">Ver diseño</a>
+              <a class="btn btn-outline btn-sm btn-block" href="${p.tipo === "fototorta" ? "fototortas" : "chocotransfer"}.html">Ver diseño</a>
             </div>
           </div>
         </article>`

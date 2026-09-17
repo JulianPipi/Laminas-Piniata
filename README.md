@@ -1,11 +1,10 @@
 # Laminas Piniata 🎂🍫
 
-Catálogo online de láminas comestibles (Fototortas y Chocotransfer) con pedido armado en carrito y confirmación por WhatsApp. Sin backend, sin pagos online: 100% archivos estáticos, listo para Vercel.
+Catálogo online de láminas comestibles (Fototortas y Chocotransfer) con pedido armado en carrito y confirmación por WhatsApp. Sin backend, sin pagos online: 100% archivos estáticos, compatible con GitHub Pages y Vercel.
 
 ## Estructura del proyecto
 
 ```
-laminas-piniata/
 ├── index.html          → Inicio
 ├── fototortas.html      → Catálogo de fototortas
 ├── chocotransfer.html   → Catálogo de chocotransfer

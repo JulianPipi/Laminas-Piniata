@@ -107,7 +107,7 @@ function main() {
           productos.push({
             id: siguienteId,
             nombre: nombreSugerido,
-            imagen: `/images/${tipo}/${slugArchivo}`,
+            imagen: `images/${tipo}/${slugArchivo}`,
             tipo,
             categoria,
             subcategoria: grupo.subcategoria,

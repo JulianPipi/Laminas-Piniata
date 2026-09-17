@@ -2,7 +2,7 @@
     {
         "id": 1,
         "nombre": "Futbol Clasico",
-        "imagen": "/images/fototorta/futbol-1.svg",
+        "imagen": "images/fototorta/futbol-1.svg",
         "tipo": "fototorta",
         "categoria": "Futbol",
         "subcategoria": null,
@@ -13,7 +13,7 @@
     {
         "id": 2,
         "nombre": "Futbol Especial",
-        "imagen": "/images/fototorta/futbol-2.svg",
+        "imagen": "images/fototorta/futbol-2.svg",
         "tipo": "fototorta",
         "categoria": "Futbol",
         "subcategoria": null,
@@ -24,7 +24,7 @@
     {
         "id": 3,
         "nombre": "Futbol Clasico",
-        "imagen": "/images/chocotransfer/futbol-1.svg",
+        "imagen": "images/chocotransfer/futbol-1.svg",
         "tipo": "chocotransfer",
         "categoria": "Futbol",
         "subcategoria": null,
@@ -35,7 +35,7 @@
     {
         "id": 4,
         "nombre": "Futbol Especial",
-        "imagen": "/images/chocotransfer/futbol-2.svg",
+        "imagen": "images/chocotransfer/futbol-2.svg",
         "tipo": "chocotransfer",
         "categoria": "Futbol",
         "subcategoria": null,
@@ -46,7 +46,7 @@
     {
         "id": 5,
         "nombre": "Dibujos animados Clasico",
-        "imagen": "/images/fototorta/dibujos-animados-1.svg",
+        "imagen": "images/fototorta/dibujos-animados-1.svg",
         "tipo": "fototorta",
         "categoria": "Dibujos animados",
         "subcategoria": null,
@@ -57,7 +57,7 @@
     {
         "id": 6,
         "nombre": "Dibujos animados Especial",
-        "imagen": "/images/fototorta/dibujos-animados-2.svg",
+        "imagen": "images/fototorta/dibujos-animados-2.svg",
         "tipo": "fototorta",
         "categoria": "Dibujos animados",
         "subcategoria": null,
@@ -68,7 +68,7 @@
     {
         "id": 7,
         "nombre": "Dibujos animados Clasico",
-        "imagen": "/images/chocotransfer/dibujos-animados-1.svg",
+        "imagen": "images/chocotransfer/dibujos-animados-1.svg",
         "tipo": "chocotransfer",
         "categoria": "Dibujos animados",
         "subcategoria": null,
@@ -79,7 +79,7 @@
     {
         "id": 8,
         "nombre": "Dibujos animados Especial",
-        "imagen": "/images/chocotransfer/dibujos-animados-2.svg",
+        "imagen": "images/chocotransfer/dibujos-animados-2.svg",
         "tipo": "chocotransfer",
         "categoria": "Dibujos animados",
         "subcategoria": null,
@@ -90,7 +90,7 @@
     {
         "id": 9,
         "nombre": "Disney Clasico",
-        "imagen": "/images/fototorta/disney-1.svg",
+        "imagen": "images/fototorta/disney-1.svg",
         "tipo": "fototorta",
         "categoria": "Disney",
         "subcategoria": null,
@@ -101,7 +101,7 @@
     {
         "id": 10,
         "nombre": "Disney Especial",
-        "imagen": "/images/fototorta/disney-2.svg",
+        "imagen": "images/fototorta/disney-2.svg",
         "tipo": "fototorta",
         "categoria": "Disney",
         "subcategoria": null,
@@ -112,7 +112,7 @@
     {
         "id": 11,
         "nombre": "Disney Clasico",
-        "imagen": "/images/chocotransfer/disney-1.svg",
+        "imagen": "images/chocotransfer/disney-1.svg",
         "tipo": "chocotransfer",
         "categoria": "Disney",
         "subcategoria": null,
@@ -123,7 +123,7 @@
     {
         "id": 12,
         "nombre": "Disney Especial",
-        "imagen": "/images/chocotransfer/disney-2.svg",
+        "imagen": "images/chocotransfer/disney-2.svg",
         "tipo": "chocotransfer",
         "categoria": "Disney",
         "subcategoria": null,
@@ -134,7 +134,7 @@
     {
         "id": 13,
         "nombre": "Basquet Clasico",
-        "imagen": "/images/fototorta/basquet-1.svg",
+        "imagen": "images/fototorta/basquet-1.svg",
         "tipo": "fototorta",
         "categoria": "Basquet",
         "subcategoria": null,
@@ -145,7 +145,7 @@
     {
         "id": 14,
         "nombre": "Basquet Especial",
-        "imagen": "/images/fototorta/basquet-2.svg",
+        "imagen": "images/fototorta/basquet-2.svg",
         "tipo": "fototorta",
         "categoria": "Basquet",
         "subcategoria": null,
@@ -156,7 +156,7 @@
     {
         "id": 15,
         "nombre": "Basquet Clasico",
-        "imagen": "/images/chocotransfer/basquet-1.svg",
+        "imagen": "images/chocotransfer/basquet-1.svg",
         "tipo": "chocotransfer",
         "categoria": "Basquet",
         "subcategoria": null,
@@ -167,7 +167,7 @@
     {
         "id": 16,
         "nombre": "Basquet Especial",
-        "imagen": "/images/chocotransfer/basquet-2.svg",
+        "imagen": "images/chocotransfer/basquet-2.svg",
         "tipo": "chocotransfer",
         "categoria": "Basquet",
         "subcategoria": null,
@@ -178,7 +178,7 @@
     {
         "id": 17,
         "nombre": "Peliculas Clasico",
-        "imagen": "/images/fototorta/peliculas-1.svg",
+        "imagen": "images/fototorta/peliculas-1.svg",
         "tipo": "fototorta",
         "categoria": "Peliculas",
         "subcategoria": null,
@@ -189,7 +189,7 @@
     {
         "id": 18,
         "nombre": "Peliculas Especial",
-        "imagen": "/images/fototorta/peliculas-2.svg",
+        "imagen": "images/fototorta/peliculas-2.svg",
         "tipo": "fototorta",
         "categoria": "Peliculas",
         "subcategoria": null,
@@ -200,7 +200,7 @@
     {
         "id": 19,
         "nombre": "Peliculas Clasico",
-        "imagen": "/images/chocotransfer/peliculas-1.svg",
+        "imagen": "images/chocotransfer/peliculas-1.svg",
         "tipo": "chocotransfer",
         "categoria": "Peliculas",
         "subcategoria": null,
@@ -211,7 +211,7 @@
     {
         "id": 20,
         "nombre": "Peliculas Especial",
-        "imagen": "/images/chocotransfer/peliculas-2.svg",
+        "imagen": "images/chocotransfer/peliculas-2.svg",
         "tipo": "chocotransfer",
         "categoria": "Peliculas",
         "subcategoria": null,
@@ -222,7 +222,7 @@
     {
         "id": 21,
         "nombre": "Series Clasico",
-        "imagen": "/images/fototorta/series-1.svg",
+        "imagen": "images/fototorta/series-1.svg",
         "tipo": "fototorta",
         "categoria": "Series",
         "subcategoria": null,
@@ -233,7 +233,7 @@
     {
         "id": 22,
         "nombre": "Series Especial",
-        "imagen": "/images/fototorta/series-2.svg",
+        "imagen": "images/fototorta/series-2.svg",
         "tipo": "fototorta",
         "categoria": "Series",
         "subcategoria": null,
@@ -244,7 +244,7 @@
     {
         "id": 23,
         "nombre": "Series Clasico",
-        "imagen": "/images/chocotransfer/series-1.svg",
+        "imagen": "images/chocotransfer/series-1.svg",
         "tipo": "chocotransfer",
         "categoria": "Series",
         "subcategoria": null,
@@ -255,7 +255,7 @@
     {
         "id": 24,
         "nombre": "Series Especial",
-        "imagen": "/images/chocotransfer/series-2.svg",
+        "imagen": "images/chocotransfer/series-2.svg",
         "tipo": "chocotransfer",
         "categoria": "Series",
         "subcategoria": null,
@@ -266,7 +266,7 @@
     {
         "id": 25,
         "nombre": "Animales Clasico",
-        "imagen": "/images/fototorta/animales-1.svg",
+        "imagen": "images/fototorta/animales-1.svg",
         "tipo": "fototorta",
         "categoria": "Animales",
         "subcategoria": null,
@@ -277,7 +277,7 @@
     {
         "id": 26,
         "nombre": "Animales Especial",
-        "imagen": "/images/fototorta/animales-2.svg",
+        "imagen": "images/fototorta/animales-2.svg",
         "tipo": "fototorta",
         "categoria": "Animales",
         "subcategoria": null,
@@ -288,7 +288,7 @@
     {
         "id": 27,
         "nombre": "Animales Clasico",
-        "imagen": "/images/chocotransfer/animales-1.svg",
+        "imagen": "images/chocotransfer/animales-1.svg",
         "tipo": "chocotransfer",
         "categoria": "Animales",
         "subcategoria": null,
@@ -299,7 +299,7 @@
     {
         "id": 28,
         "nombre": "Animales Especial",
-        "imagen": "/images/chocotransfer/animales-2.svg",
+        "imagen": "images/chocotransfer/animales-2.svg",
         "tipo": "chocotransfer",
         "categoria": "Animales",
         "subcategoria": null,
@@ -310,7 +310,7 @@
     {
         "id": 29,
         "nombre": "Cumpleanos Clasico",
-        "imagen": "/images/fototorta/cumpleanos-1.svg",
+        "imagen": "images/fototorta/cumpleanos-1.svg",
         "tipo": "fototorta",
         "categoria": "Cumpleanos",
         "subcategoria": null,
@@ -321,7 +321,7 @@
     {
         "id": 30,
         "nombre": "Cumpleanos Especial",
-        "imagen": "/images/fototorta/cumpleanos-2.svg",
+        "imagen": "images/fototorta/cumpleanos-2.svg",
         "tipo": "fototorta",
         "categoria": "Cumpleanos",
         "subcategoria": null,
@@ -332,7 +332,7 @@
     {
         "id": 31,
         "nombre": "Cumpleanos Clasico",
-        "imagen": "/images/chocotransfer/cumpleanos-1.svg",
+        "imagen": "images/chocotransfer/cumpleanos-1.svg",
         "tipo": "chocotransfer",
         "categoria": "Cumpleanos",
         "subcategoria": null,
@@ -343,7 +343,7 @@
     {
         "id": 32,
         "nombre": "Cumpleanos Especial",
-        "imagen": "/images/chocotransfer/cumpleanos-2.svg",
+        "imagen": "images/chocotransfer/cumpleanos-2.svg",
         "tipo": "chocotransfer",
         "categoria": "Cumpleanos",
         "subcategoria": null,
@@ -354,7 +354,7 @@
     {
         "id": 33,
         "nombre": "Juegos Clasico",
-        "imagen": "/images/fototorta/juegos-1.svg",
+        "imagen": "images/fototorta/juegos-1.svg",
         "tipo": "fototorta",
         "categoria": "Juegos",
         "subcategoria": null,
@@ -365,7 +365,7 @@
     {
         "id": 34,
         "nombre": "Juegos Especial",
-        "imagen": "/images/fototorta/juegos-2.svg",
+        "imagen": "images/fototorta/juegos-2.svg",
         "tipo": "fototorta",
         "categoria": "Juegos",
         "subcategoria": null,
@@ -376,7 +376,7 @@
     {
         "id": 35,
         "nombre": "Juegos Clasico",
-        "imagen": "/images/chocotransfer/juegos-1.svg",
+        "imagen": "images/chocotransfer/juegos-1.svg",
         "tipo": "chocotransfer",
         "categoria": "Juegos",
         "subcategoria": null,
@@ -387,7 +387,7 @@
     {
         "id": 36,
         "nombre": "Juegos Especial",
-        "imagen": "/images/chocotransfer/juegos-2.svg",
+        "imagen": "images/chocotransfer/juegos-2.svg",
         "tipo": "chocotransfer",
         "categoria": "Juegos",
         "subcategoria": null,
@@ -398,7 +398,7 @@
     {
         "id": 37,
         "nombre": "Mariposas Celestes",
-        "imagen": "/images/fototorta/animales-mariposas-celestes-37.png",
+        "imagen": "images/fototorta/animales-mariposas-celestes-37.png",
         "tipo": "fototorta",
         "categoria": "Animales",
         "subcategoria": "Mariposas",
@@ -409,7 +409,7 @@
     {
         "id": 38,
         "nombre": "Mariposas Pastel",
-        "imagen": "/images/fototorta/animales-mariposas-pastel-38.png",
+        "imagen": "images/fototorta/animales-mariposas-pastel-38.png",
         "tipo": "fototorta",
         "categoria": "Animales",
         "subcategoria": "Mariposas",
@@ -420,7 +420,7 @@
     {
         "id": 39,
         "nombre": "Mariposas Rosas",
-        "imagen": "/images/fototorta/animales-mariposas-rosas-39.jpg",
+        "imagen": "images/fototorta/animales-mariposas-rosas-39.jpg",
         "tipo": "fototorta",
         "categoria": "Animales",
         "subcategoria": "Mariposas",
@@ -431,7 +431,7 @@
     {
         "id": 40,
         "nombre": "Mariposas Surtidas",
-        "imagen": "/images/fototorta/animales-mariposas-surtidas-40.jpg",
+        "imagen": "images/fototorta/animales-mariposas-surtidas-40.jpg",
         "tipo": "fototorta",
         "categoria": "Animales",
         "subcategoria": "Mariposas",
@@ -442,7 +442,7 @@
     {
         "id": 41,
         "nombre": "Mariposas Violetas",
-        "imagen": "/images/fototorta/animales-mariposas-violetas-41.png",
+        "imagen": "images/fototorta/animales-mariposas-violetas-41.png",
         "tipo": "fototorta",
         "categoria": "Animales",
         "subcategoria": "Mariposas",
@@ -453,7 +453,7 @@
     {
         "id": 42,
         "nombre": "MARIPOSAS",
-        "imagen": "/images/fototorta/animales-mariposas-42.png",
+        "imagen": "images/fototorta/animales-mariposas-42.png",
         "tipo": "fototorta",
         "categoria": "Animales",
         "subcategoria": "Mariposas",
@@ -464,7 +464,7 @@
     {
         "id": 43,
         "nombre": "Rosa Y Turquesa Pastel",
-        "imagen": "/images/fototorta/animales-rosa-y-turquesa-pastel-43.jpg",
+        "imagen": "images/fototorta/animales-rosa-y-turquesa-pastel-43.jpg",
         "tipo": "fototorta",
         "categoria": "Animales",
         "subcategoria": "Mariposas",
@@ -475,7 +475,7 @@
     {
         "id": 44,
         "nombre": "Villa Adelina Basket",
-        "imagen": "/images/fototorta/basquet-villa-adelina-basket-44.jpg",
+        "imagen": "images/fototorta/basquet-villa-adelina-basket-44.jpg",
         "tipo": "fototorta",
         "categoria": "Basquet",
         "subcategoria": "Otros",
@@ -486,7 +486,7 @@
     {
         "id": 45,
         "nombre": "Kitty",
-        "imagen": "/images/fototorta/dibujos-animados-kitty-45.jpg",
+        "imagen": "images/fototorta/dibujos-animados-kitty-45.jpg",
         "tipo": "fototorta",
         "categoria": "Dibujos animados",
         "subcategoria": "Hello Kitty",
@@ -497,7 +497,7 @@
     {
         "id": 46,
         "nombre": "Masha Topper",
-        "imagen": "/images/fototorta/dibujos-animados-masha-topper-46.jpg",
+        "imagen": "images/fototorta/dibujos-animados-masha-topper-46.jpg",
         "tipo": "fototorta",
         "categoria": "Dibujos animados",
         "subcategoria": "Masha y el Oso",
@@ -508,7 +508,7 @@
     {
         "id": 47,
         "nombre": "Mashaaa Y El Oso",
-        "imagen": "/images/fototorta/dibujos-animados-mashaaa-y-el-oso-47.jpg",
+        "imagen": "images/fototorta/dibujos-animados-mashaaa-y-el-oso-47.jpg",
         "tipo": "fototorta",
         "categoria": "Dibujos animados",
         "subcategoria": "Masha y el Oso",
@@ -519,7 +519,7 @@
     {
         "id": 48,
         "nombre": "Paw Patrol Chico 1",
-        "imagen": "/images/fototorta/dibujos-animados-paw-patrol-chico-1-48.jpg",
+        "imagen": "images/fototorta/dibujos-animados-paw-patrol-chico-1-48.jpg",
         "tipo": "fototorta",
         "categoria": "Dibujos animados",
         "subcategoria": "Paw Patrol",
@@ -530,7 +530,7 @@
     {
         "id": 49,
         "nombre": "Paw Patrol Chico 2",
-        "imagen": "/images/fototorta/dibujos-animados-paw-patrol-chico-2-49.jpg",
+        "imagen": "images/fototorta/dibujos-animados-paw-patrol-chico-2-49.jpg",
         "tipo": "fototorta",
         "categoria": "Dibujos animados",
         "subcategoria": "Paw Patrol",
@@ -541,7 +541,7 @@
     {
         "id": 50,
         "nombre": "Plin Plin Personajes",
-        "imagen": "/images/fototorta/dibujos-animados-plin-plin-personajes-50.jpg",
+        "imagen": "images/fototorta/dibujos-animados-plin-plin-personajes-50.jpg",
         "tipo": "fototorta",
         "categoria": "Dibujos animados",
         "subcategoria": null,
@@ -552,7 +552,7 @@
     {
         "id": 51,
         "nombre": "Galletita Stitch Y Agenl",
-        "imagen": "/images/fototorta/disney-galletita-stitch-y-agenl-51.png",
+        "imagen": "images/fototorta/disney-galletita-stitch-y-agenl-51.png",
         "tipo": "fototorta",
         "categoria": "Disney",
         "subcategoria": null,
@@ -563,7 +563,7 @@
     {
         "id": 52,
         "nombre": "Stitch Redondo",
-        "imagen": "/images/fototorta/disney-stitch-redondo-52.jpg",
+        "imagen": "images/fototorta/disney-stitch-redondo-52.jpg",
         "tipo": "fototorta",
         "categoria": "Disney",
         "subcategoria": null,
@@ -574,7 +574,7 @@
     {
         "id": 53,
         "nombre": "Stitch Redondo",
-        "imagen": "/images/fototorta/disney-stitch-redondo-53.png",
+        "imagen": "images/fototorta/disney-stitch-redondo-53.png",
         "tipo": "fototorta",
         "categoria": "Disney",
         "subcategoria": null,
@@ -585,7 +585,7 @@
     {
         "id": 54,
         "nombre": "Boca Topper",
-        "imagen": "/images/fototorta/futbol-boca-topper-54.png",
+        "imagen": "images/fototorta/futbol-boca-topper-54.png",
         "tipo": "fototorta",
         "categoria": "Futbol",
         "subcategoria": "Boca",
@@ -596,7 +596,7 @@
     {
         "id": 55,
         "nombre": "Boque",
-        "imagen": "/images/fototorta/futbol-boque-55.png",
+        "imagen": "images/fototorta/futbol-boque-55.png",
         "tipo": "fototorta",
         "categoria": "Futbol",
         "subcategoria": "Boca",
@@ -607,7 +607,7 @@
     {
         "id": 56,
         "nombre": "Lautaro Y Messi",
-        "imagen": "/images/fototorta/futbol-lautaro-y-messi-56.png",
+        "imagen": "images/fototorta/futbol-lautaro-y-messi-56.png",
         "tipo": "fototorta",
         "categoria": "Futbol",
         "subcategoria": "Otros",
@@ -618,7 +618,7 @@
     {
         "id": 57,
         "nombre": "Leo Messi Inter",
-        "imagen": "/images/fototorta/futbol-leo-messi-inter-57.png",
+        "imagen": "images/fototorta/futbol-leo-messi-inter-57.png",
         "tipo": "fototorta",
         "categoria": "Futbol",
         "subcategoria": "Otros",
@@ -629,7 +629,7 @@
     {
         "id": 58,
         "nombre": "Messi Lautaro Copa America",
-        "imagen": "/images/fototorta/futbol-messi-lautaro-copa-america-58.jpg",
+        "imagen": "images/fototorta/futbol-messi-lautaro-copa-america-58.jpg",
         "tipo": "fototorta",
         "categoria": "Futbol",
         "subcategoria": "Otros",
@@ -640,7 +640,7 @@
     {
         "id": 59,
         "nombre": "Messi Rectangular",
-        "imagen": "/images/fototorta/futbol-messi-rectangular-59.png",
+        "imagen": "images/fototorta/futbol-messi-rectangular-59.png",
         "tipo": "fototorta",
         "categoria": "Futbol",
         "subcategoria": "Otros",
@@ -651,7 +651,7 @@
     {
         "id": 60,
         "nombre": "Real Madrid Escudos",
-        "imagen": "/images/fototorta/futbol-real-madrid-escudos-60.jpg",
+        "imagen": "images/fototorta/futbol-real-madrid-escudos-60.jpg",
         "tipo": "fototorta",
         "categoria": "Futbol",
         "subcategoria": "Otros",
@@ -662,7 +662,7 @@
     {
         "id": 61,
         "nombre": "SanLorenzo Estrellas Y Logo",
-        "imagen": "/images/fototorta/futbol-sanlorenzo-estrellas-y-logo-61.jpg",
+        "imagen": "images/fototorta/futbol-sanlorenzo-estrellas-y-logo-61.jpg",
         "tipo": "fototorta",
         "categoria": "Futbol",
         "subcategoria": "San Lorenzo",
@@ -673,7 +673,7 @@
     {
         "id": 62,
         "nombre": "Seleccion Campeona Qatar",
-        "imagen": "/images/fototorta/futbol-seleccion-campeona-qatar-62.jpg",
+        "imagen": "images/fototorta/futbol-seleccion-campeona-qatar-62.jpg",
         "tipo": "fototorta",
         "categoria": "Futbol",
         "subcategoria": "Otros",
@@ -684,7 +684,7 @@
     {
         "id": 63,
         "nombre": "Seleccion Galletitas",
-        "imagen": "/images/fototorta/futbol-seleccion-galletitas-63.jpg",
+        "imagen": "images/fototorta/futbol-seleccion-galletitas-63.jpg",
         "tipo": "fototorta",
         "categoria": "Futbol",
         "subcategoria": "Otros",
@@ -695,7 +695,7 @@
     {
         "id": 64,
         "nombre": "Lol Surprise",
-        "imagen": "/images/fototorta/juegos-lol-surprise-64.jpg",
+        "imagen": "images/fototorta/juegos-lol-surprise-64.jpg",
         "tipo": "fototorta",
         "categoria": "Juegos",
         "subcategoria": "LOL Surprise",
@@ -706,7 +706,7 @@
     {
         "id": 65,
         "nombre": "Roblox Cara Y Numeros",
-        "imagen": "/images/fototorta/juegos-roblox-cara-y-numeros-65.jpg",
+        "imagen": "images/fototorta/juegos-roblox-cara-y-numeros-65.jpg",
         "tipo": "fototorta",
         "categoria": "Juegos",
         "subcategoria": "Roblox",
@@ -717,7 +717,7 @@
     {
         "id": 66,
         "nombre": "Transformers Bomblbee",
-        "imagen": "/images/fototorta/peliculas-transformers-bomblbee-66.png",
+        "imagen": "images/fototorta/peliculas-transformers-bomblbee-66.png",
         "tipo": "fototorta",
         "categoria": "Peliculas",
         "subcategoria": null,
@@ -728,7 +728,7 @@
     {
         "id": 67,
         "nombre": "Merlina Liezo",
-        "imagen": "/images/fototorta/series-merlina-liezo-67.jpg",
+        "imagen": "images/fototorta/series-merlina-liezo-67.jpg",
         "tipo": "fototorta",
         "categoria": "Series",
         "subcategoria": "Merlina/Wednesday",
@@ -739,7 +739,7 @@
     {
         "id": 68,
         "nombre": "Merlina Paraguas",
-        "imagen": "/images/fototorta/series-merlina-paraguas-68.jpg",
+        "imagen": "images/fototorta/series-merlina-paraguas-68.jpg",
         "tipo": "fototorta",
         "categoria": "Series",
         "subcategoria": "Merlina/Wednesday",
@@ -750,7 +750,7 @@
     {
         "id": 69,
         "nombre": "Merlina Paraguas",
-        "imagen": "/images/fototorta/series-merlina-paraguas-69.png",
+        "imagen": "images/fototorta/series-merlina-paraguas-69.png",
         "tipo": "fototorta",
         "categoria": "Series",
         "subcategoria": "Merlina/Wednesday",
@@ -761,7 +761,7 @@
     {
         "id": 70,
         "nombre": "Merlina Redondo",
-        "imagen": "/images/fototorta/series-merlina-redondo-70.jpg",
+        "imagen": "images/fototorta/series-merlina-redondo-70.jpg",
         "tipo": "fototorta",
         "categoria": "Series",
         "subcategoria": "Merlina/Wednesday",
@@ -771,8 +771,8 @@
     },
     {
         "id": 71,
-        "nombre": "Merlina Telaraña",
-        "imagen": "/images/fototorta/series-merlina-telarana-71.png",
+        "nombre": "Merlina TelaraÃ±a",
+        "imagen": "images/fototorta/series-merlina-telarana-71.png",
         "tipo": "fototorta",
         "categoria": "Series",
         "subcategoria": "Merlina/Wednesday",
