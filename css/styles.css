@@ -374,8 +374,148 @@ h1, h2, h3, .display {
 .pasos span.desc { font-size: 0.88rem; opacity: 0.75; }
 
 /* =========================================================
-   Grillas de categorías
+   Sección Personalizar Producto
    ========================================================= */
+.seccion-personalizar {
+  background: linear-gradient(135deg, #FFF0F4 0%, #FFF8F0 55%, #FFF2E8 100%);
+  border: 1.5px solid rgba(217, 108, 138, 0.22);
+  border-radius: var(--radio-l);
+  padding: 46px 40px;
+  box-shadow: var(--sombra);
+  position: relative;
+  overflow: hidden;
+  margin: 40px 0;
+}
+.seccion-personalizar::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(246, 198, 214, 0.45) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.personalizar-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 36px;
+  align-items: center;
+}
+.personalizar-header h2 {
+  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+  margin: 6px 0 12px;
+}
+.personalizar-header p {
+  font-size: 1rem;
+  opacity: 0.85;
+  margin: 0;
+  max-width: 600px;
+}
+.personalizar-pasos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 28px 0;
+}
+.personalizar-paso {
+  background: var(--blanco);
+  border-radius: var(--radio-m);
+  padding: 20px 18px;
+  box-shadow: var(--sombra-suave);
+  border: 1px solid rgba(90, 56, 37, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+.personalizar-paso-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+.personalizar-paso strong {
+  display: block;
+  font-size: 0.96rem;
+  color: var(--chocolate);
+  margin-bottom: 6px;
+}
+.personalizar-paso p {
+  font-size: 0.83rem;
+  margin: 0;
+  opacity: 0.78;
+  line-height: 1.45;
+}
+.personalizar-card-lateral {
+  background: var(--blanco);
+  border-radius: var(--radio-m);
+  padding: 26px;
+  box-shadow: var(--sombra);
+  border-top: 4px solid var(--rosa-fuerte);
+}
+.personalizar-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(217, 108, 138, 0.12);
+  color: var(--rosa-fuerte);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+.personalizar-specs-title {
+  font-family: var(--fuente-display);
+  font-size: 1.15rem;
+  margin: 0 0 10px;
+}
+.personalizar-specs {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  font-size: 0.88rem;
+}
+.personalizar-specs li {
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px dashed rgba(90, 56, 37, 0.12);
+}
+.personalizar-specs li:last-child {
+  border-bottom: none;
+}
+.personalizar-precio-tag {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+.personalizar-precio-tag strong {
+  color: var(--rosa-fuerte);
+  font-size: 1.1rem;
+}
+.banner-personalizar-catalogo {
+  background: linear-gradient(135deg, #FFF0F4 0%, #FFF8F0 100%);
+  border: 1.5px dashed rgba(217, 108, 138, 0.35);
+  border-radius: var(--radio-m);
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 20px 0 26px;
+  flex-wrap: wrap;
+}
+.banner-personalizar-catalogo-text h3 {
+  font-size: 1.08rem;
+  margin: 0 0 4px;
+}
+.banner-personalizar-catalogo-text p {
+  font-size: 0.86rem;
+  opacity: 0.8;
+  margin: 0;
+}
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -723,6 +863,9 @@ h1, h2, h3, .display {
 @media (max-width: 860px) {
   .hero-split { grid-template-columns: 1fr; }
   .pasos { grid-template-columns: 1fr 1fr; }
+  .personalizar-grid { grid-template-columns: 1fr; }
+  .personalizar-pasos { grid-template-columns: 1fr 1fr; }
+  .seccion-personalizar { padding: 32px 24px; }
   .pedido-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
 }
@@ -745,6 +888,8 @@ h1, h2, h3, .display {
   .nav-links a { padding: 10px 0; width: 100%; }
   .menu-toggle { display: block; }
   .pasos { grid-template-columns: 1fr; }
+  .personalizar-pasos { grid-template-columns: 1fr; }
+  .banner-personalizar-catalogo { flex-direction: column; align-items: flex-start; }
   .toolbar { top: 62px; }
 }
 

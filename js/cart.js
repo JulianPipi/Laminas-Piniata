@@ -72,34 +72,34 @@ function construirMensajeWhatsApp(items, datos) {
   const fototortas = items.filter((i) => i.tipo === "fototorta");
   const chocotransfers = items.filter((i) => i.tipo === "chocotransfer");
 
-  let msg = `Hola! Quiero hacer un pedido en Laminas Piniata 🎉%0A`;
-  msg += `Nombre: ${datos.nombre}%0A`;
-  msg += `Fecha de entrega deseada: ${datos.fecha}%0A`;
-  msg += `Horario disponible: ${datos.horario}%0A%0A`;
+  let msg = `Hola! Quiero hacer un pedido en Laminas Piniata 🎉\n\n`;
+  msg += `👤 Nombre: ${datos.nombre}\n`;
+  msg += `📅 Fecha de entrega deseada: ${datos.fecha}\n`;
+  msg += `⏰ Horario disponible: ${datos.horario}\n\n`;
 
   if (fototortas.length) {
-    msg += `🍰 Fototortas%0A`;
+    msg += `🍰 Fototortas:\n`;
     fototortas.forEach((i) => {
-      msg += `- ${i.nombre} x${i.cantidad} (${formatoPrecio(i.precio * i.cantidad)})%0A`;
+      msg += `- ${i.nombre} x${i.cantidad} (${formatoPrecio(i.precio * i.cantidad)})\n`;
     });
-    msg += `%0A`;
+    msg += `\n`;
   }
   if (chocotransfers.length) {
-    msg += `🍫 Chocotransfer%0A`;
+    msg += `🍫 Chocotransfer:\n`;
     chocotransfers.forEach((i) => {
-      msg += `- ${i.nombre} x${i.cantidad} (${formatoPrecio(i.precio * i.cantidad)})%0A`;
+      msg += `- ${i.nombre} x${i.cantidad} (${formatoPrecio(i.precio * i.cantidad)})\n`;
     });
-    msg += `%0A`;
+    msg += `\n`;
   }
 
   const total = totalPedido(items);
-  msg += `Total estimado: ${formatoPrecio(total)}%0A`;
+  msg += `💵 Total estimado: ${formatoPrecio(total)}\n`;
   if (totalUnidades(items) >= COMBO_MINIMO) {
-    msg += `(Pedido de ${totalUnidades(items)} unidades, ¿aplica combo?)%0A`;
+    msg += `🎁 (Pedido de ${totalUnidades(items)} unidades, ¿aplica combo?)\n`;
   }
-  msg += `%0A¿Me confirman disponibilidad y forma de pago? Gracias!`;
+  msg += `\n¿Me confirman disponibilidad y forma de pago? ¡Muchas gracias!`;
 
-  return `https://wa.me/${WHATSAPP_NUMERO}?text=${msg}`;
+  return `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(msg)}`;
 }
 
 document.addEventListener("DOMContentLoaded", actualizarContadorCarrito);

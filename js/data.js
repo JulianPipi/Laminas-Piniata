@@ -17,6 +17,7 @@ const CATEGORIAS = [
   "Animales",
   "Cumpleanos",
   "Juegos",
+  "Personalizado",
 ];
 
 let PRODUCTOS_CACHE = null;
@@ -38,14 +39,27 @@ function formatoPrecio(n) {
   return n.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
 }
 
+function normalizarTexto(str) {
+  return (str || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+}
+
 function filtrarProductos(productos, { tipo, categoria, subcategoria, texto } = {}) {
+  const t = normalizarTexto(texto);
   return productos.filter((p) => {
     if (tipo && p.tipo !== tipo) return false;
     if (categoria && categoria !== "todas" && p.categoria !== categoria) return false;
     if (subcategoria && subcategoria !== "todas" && p.subcategoria !== subcategoria) return false;
-    if (texto) {
-      const t = texto.trim().toLowerCase();
-      if (t && !p.nombre.toLowerCase().includes(t)) return false;
+    if (t) {
+      const nombreNorm = normalizarTexto(p.nombre);
+      const catNorm = normalizarTexto(p.categoria);
+      const subNorm = normalizarTexto(p.subcategoria);
+      if (!nombreNorm.includes(t) && !catNorm.includes(t) && !subNorm.includes(t)) {
+        return false;
+      }
     }
     return true;
   });

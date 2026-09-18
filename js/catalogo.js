@@ -62,7 +62,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     resultCount.textContent = `${filtrados.length} diseño${filtrados.length === 1 ? "" : "s"} encontrados`;
 
     if (!filtrados.length) {
-      grid.innerHTML = `<div class="empty-state">No encontramos diseños con esa búsqueda. Probá con otra categoría o palabra clave.</div>`;
+      const termino = (buscador.value || "").trim();
+      const msgWsp = termino
+        ? encodeURIComponent(`Hola! Estaba buscando "${termino}" en su web y no lo encontré. ¿Hacen láminas personalizadas con ese diseño?`)
+        : encodeURIComponent("Hola! Quisiera consultar por un diseño personalizado que no encontré en el catálogo.");
+      grid.innerHTML = `
+        <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 36px 20px;">
+          <p style="font-size: 1.05rem; font-weight:600; margin-bottom: 8px;">No encontramos diseños listos para esa búsqueda.</p>
+          <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 20px; max-width: 480px; margin-left: auto; margin-right: auto;">
+            ¡No te preocupes! Hacemos <strong>láminas personalizadas</strong> con cualquier foto, personaje o temática.
+          </p>
+          <a href="https://wa.me/${WHATSAPP_NUMERO}?text=${msgWsp}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm">
+            📲 Pedir "${termino || "diseño personalizado"}" por WhatsApp
+          </a>
+        </div>`;
       return;
     }
 

@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Mi pedido — Laminas Piniata</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>" />
 <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body data-tipo="pedido">
@@ -14,8 +15,9 @@
     <nav>
       <ul class="nav-links">
         <li><a href="index.html">Inicio</a></li>
-        <li><a href="fototortas.html">Fototortas</a></li>
+        <li><a href="fototortas.html">Laminas Comestibles</a></li>
         <li><a href="chocotransfer.html">Chocotransfer</a></li>
+        <li><a href="index.html#personalizar">Personalizados</a></li>
         <li><a href="pedido.html">Mi pedido</a></li>
         <li><a href="https://wa.me/5491133750433" target="_blank" rel="noopener">WhatsApp</a></li>
       </ul>
@@ -106,6 +108,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const comboNote = document.getElementById("combo-note");
   const btnConfirmar = document.getElementById("btn-confirmar");
   const form = document.getElementById("form-pedido");
+
+  const inputFecha = document.getElementById("fecha");
+  if (inputFecha) {
+    const manana = new Date();
+    manana.setDate(manana.getDate() + 1);
+    inputFecha.min = manana.toISOString().split("T")[0];
+  }
 
   function render() {
     const items = leerCarrito();

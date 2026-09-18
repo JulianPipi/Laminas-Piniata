@@ -7,7 +7,7 @@
         "categoria": "Futbol",
         "subcategoria": null,
         "precio": 2500,
-        "destacado": true,
+        "destacado": false,
         "activo": true
     },
     {
@@ -29,7 +29,7 @@
         "categoria": "Futbol",
         "subcategoria": null,
         "precio": 4500,
-        "destacado": true,
+        "destacado": false,
         "activo": true
     },
     {
@@ -95,7 +95,7 @@
         "categoria": "Disney",
         "subcategoria": null,
         "precio": 2500,
-        "destacado": true,
+        "destacado": false,
         "activo": true
     },
     {
@@ -117,7 +117,7 @@
         "categoria": "Disney",
         "subcategoria": null,
         "precio": 4500,
-        "destacado": true,
+        "destacado": false,
         "activo": true
     },
     {
@@ -315,7 +315,7 @@
         "categoria": "Cumpleanos",
         "subcategoria": null,
         "precio": 2500,
-        "destacado": true,
+        "destacado": false,
         "activo": true
     },
     {
@@ -337,7 +337,7 @@
         "categoria": "Cumpleanos",
         "subcategoria": null,
         "precio": 4500,
-        "destacado": true,
+        "destacado": false,
         "activo": true
     },
     {
@@ -425,7 +425,7 @@
         "categoria": "Animales",
         "subcategoria": "Mariposas",
         "precio": 2500,
-        "destacado": false,
+        "destacado": true,
         "activo": true
     },
     {
@@ -491,7 +491,7 @@
         "categoria": "Dibujos animados",
         "subcategoria": "Hello Kitty",
         "precio": 2500,
-        "destacado": false,
+        "destacado": true,
         "activo": true
     },
     {
@@ -507,7 +507,7 @@
     },
     {
         "id": 47,
-        "nombre": "Mashaaa Y El Oso",
+        "nombre": "Masha y el Oso",
         "imagen": "images/fototorta/dibujos-animados-mashaaa-y-el-oso-47.jpg",
         "tipo": "fototorta",
         "categoria": "Dibujos animados",
@@ -551,7 +551,7 @@
     },
     {
         "id": 51,
-        "nombre": "Galletita Stitch Y Agenl",
+        "nombre": "Galletita Stitch y Angel",
         "imagen": "images/fototorta/disney-galletita-stitch-y-agenl-51.png",
         "tipo": "fototorta",
         "categoria": "Disney",
@@ -568,7 +568,7 @@
         "categoria": "Disney",
         "subcategoria": null,
         "precio": 2500,
-        "destacado": false,
+        "destacado": true,
         "activo": true
     },
     {
@@ -590,7 +590,7 @@
         "categoria": "Futbol",
         "subcategoria": "Boca",
         "precio": 2500,
-        "destacado": false,
+        "destacado": true,
         "activo": true
     },
     {
@@ -678,7 +678,7 @@
         "categoria": "Futbol",
         "subcategoria": "Otros",
         "precio": 2500,
-        "destacado": false,
+        "destacado": true,
         "activo": true
     },
     {
@@ -711,18 +711,18 @@
         "categoria": "Juegos",
         "subcategoria": "Roblox",
         "precio": 2500,
-        "destacado": false,
+        "destacado": true,
         "activo": true
     },
     {
         "id": 66,
-        "nombre": "Transformers Bomblbee",
+        "nombre": "Transformers Bumblebee",
         "imagen": "images/fototorta/peliculas-transformers-bomblbee-66.png",
         "tipo": "fototorta",
         "categoria": "Peliculas",
         "subcategoria": null,
         "precio": 2500,
-        "destacado": false,
+        "destacado": true,
         "activo": true
     },
     {
@@ -744,7 +744,7 @@
         "categoria": "Series",
         "subcategoria": "Merlina/Wednesday",
         "precio": 2500,
-        "destacado": false,
+        "destacado": true,
         "activo": true
     },
     {
@@ -771,12 +771,34 @@
     },
     {
         "id": 71,
-        "nombre": "Merlina TelaraÃ±a",
+        "nombre": "Merlina Telaraña",
         "imagen": "images/fototorta/series-merlina-telarana-71.png",
         "tipo": "fototorta",
         "categoria": "Series",
         "subcategoria": "Merlina/Wednesday",
         "precio": 2500,
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 100,
+        "nombre": "Lámina Personalizada (Tu Foto o Diseño)",
+        "imagen": "images/fototorta/feliz dia de la madre Circulos.jpg",
+        "tipo": "fototorta",
+        "categoria": "Personalizado",
+        "subcategoria": "Foto personal",
+        "precio": 2500,
+        "destacado": true,
+        "activo": true
+    },
+    {
+        "id": 101,
+        "nombre": "Chocotransfer Personalizado",
+        "imagen": "images/chocotransfer/cumpleanos-1.svg",
+        "tipo": "chocotransfer",
+        "categoria": "Personalizado",
+        "subcategoria": "Diseño a medida",
+        "precio": 4500,
         "destacado": false,
         "activo": true
     }
