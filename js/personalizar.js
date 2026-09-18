@@ -406,6 +406,31 @@ document.addEventListener('DOMContentLoaded', () => {
     actualizarMockupVisual();
   }
 
+  function crearMiniatura(imgSrc, callback) {
+    if (!imgSrc || !imgSrc.startsWith('data:')) {
+      callback(imgSrc || 'images/fototorta/Stitch Redondo.jpg');
+      return;
+    }
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = 160;
+        canvas.height = 160;
+        const ctx = canvas.getContext('2d');
+        const minDim = Math.min(img.width, img.height);
+        const sx = (img.width - minDim) / 2;
+        const sy = (img.height - minDim) / 2;
+        ctx.drawImage(img, sx, sy, minDim, minDim, 0, 0, 160, 160);
+        callback(canvas.toDataURL('image/jpeg', 0.75));
+      } catch {
+        callback('images/fototorta/Stitch Redondo.jpg');
+      }
+    };
+    img.onerror = () => callback('images/fototorta/Stitch Redondo.jpg');
+    img.src = imgSrc;
+  }
+
   // --- Sumar al Carrito ---
   if (btnSumarCarrito) {
     btnSumarCarrito.addEventListener('click', () => {
@@ -414,20 +439,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const formatoNombre = NOMBRES_FORMATO[currentFormat];
       const precio = PRECIOS[currentTipo];
 
-      const item = {
-        id: 'custom-' + Date.now(),
-        nombre: `${tipoNombre} (${formatoNombre}${dedicatoria ? ' - "' + dedicatoria + '"' : ''})`,
-        tipo: currentTipo,
-        categoria: 'Personalizado',
-        precio: precio,
-        imagen: currentImageSrc || 'images/fototorta/cumpleaños1.jpg'
-      };
+      crearMiniatura(currentImageSrc, (thumbSrc) => {
+        const item = {
+          id: 'custom-' + Date.now(),
+          nombre: `${tipoNombre} (${formatoNombre}${dedicatoria ? ' - ' + dedicatoria : ''})`,
+          tipo: currentTipo,
+          categoria: 'Personalizado',
+          precio: precio,
+          imagen: thumbSrc || 'images/fototorta/Stitch Redondo.jpg'
+        };
 
-      if (typeof agregarAlCarrito === 'function') {
-        agregarAlCarrito(item, 1);
-        alert(`✅ ¡Agregado a tu pedido!\n\n${item.nombre}\nPrecio: ${typeof formatoPrecio === 'function' ? formatoPrecio(precio) : '$' + precio}\n\nPodés verlo en el botón "Mi pedido" del menú superior.`);
-        limpiarFormulario();
-      }
+        if (typeof agregarAlCarrito === 'function') {
+          agregarAlCarrito(item, 1);
+          alert(`✅ ¡Agregado a tu pedido!\n\n${item.nombre}\nPrecio: ${typeof formatoPrecio === 'function' ? formatoPrecio(precio) : '$' + precio}\n\nPodés verlo en el botón "Mi pedido" del menú superior.`);
+          limpiarFormulario();
+        }
+      });
     });
   }
 

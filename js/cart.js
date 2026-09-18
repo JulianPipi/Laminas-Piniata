@@ -9,7 +9,24 @@ const COMBO_MINIMO = 10; // a partir de esta cantidad total se avisa el combo
 
 function leerCarrito() {
   try {
-    return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    const raw = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    let modificado = false;
+    const sanitizados = raw.map((item, idx) => {
+      if (!item.id) {
+        item.id = "custom-" + idx;
+        modificado = true;
+      }
+      // Evitar que imágenes gigantes base64 congelen el navegador
+      if (item.imagen && item.imagen.startsWith("data:") && item.imagen.length > 80000) {
+        item.imagen = "images/fototorta/Stitch Redondo.jpg";
+        modificado = true;
+      }
+      return item;
+    });
+    if (modificado) {
+      localStorage.setItem(CART_KEY, JSON.stringify(sanitizados));
+    }
+    return sanitizados;
   } catch {
     return [];
   }
@@ -17,6 +34,11 @@ function leerCarrito() {
 
 function guardarCarrito(items) {
   localStorage.setItem(CART_KEY, JSON.stringify(items));
+  actualizarContadorCarrito();
+}
+
+function vaciarCarrito() {
+  localStorage.removeItem(CART_KEY);
   actualizarContadorCarrito();
 }
 
@@ -32,24 +54,38 @@ function agregarAlCarrito(producto, cantidad = 1) {
       tipo: producto.tipo,
       categoria: producto.categoria,
       precio: producto.precio,
-      imagen: producto.imagen,
+      imagen: producto.imagen || "images/fototorta/Stitch Redondo.jpg",
       cantidad,
     });
   }
   guardarCarrito(items);
 }
 
-function cambiarCantidad(id, delta) {
+function cambiarCantidad(id, delta, index = null) {
   const items = leerCarrito();
-  const item = items.find((i) => String(i.id) === String(id));
+  let item = null;
+  if (id !== undefined && id !== null && id !== "" && id !== "undefined" && id !== "null") {
+    item = items.find((i) => String(i.id) === String(id));
+  }
+  if (!item && index !== null && items[index]) {
+    item = items[index];
+  }
   if (!item) return;
   item.cantidad += delta;
-  const filtrados = item.cantidad <= 0 ? items.filter((i) => String(i.id) !== String(id)) : items;
+  const filtrados = item.cantidad <= 0 ? items.filter((i) => i !== item) : items;
   guardarCarrito(filtrados);
 }
 
-function eliminarDelCarrito(id) {
-  guardarCarrito(leerCarrito().filter((i) => String(i.id) !== String(id)));
+function eliminarDelCarrito(id, index = null) {
+  let items = leerCarrito();
+  const initLen = items.length;
+  if (id !== undefined && id !== null && id !== "" && id !== "undefined" && id !== "null") {
+    items = items.filter((i) => String(i.id) !== String(id));
+  }
+  if (items.length === initLen && index !== null && index >= 0 && index < initLen) {
+    items.splice(index, 1);
+  }
+  guardarCarrito(items);
 }
 
 function totalUnidades(items) {

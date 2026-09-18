@@ -31,7 +31,12 @@
 
 <main class="container section">
   <span class="eyebrow">Revisá antes de enviar</span>
-  <h1 style="margin-bottom:26px;">Mi pedido</h1>
+  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:24px; gap:10px;">
+    <h1 style="margin:0;">Mi pedido</h1>
+    <button id="btn-vaciar-pedido" class="btn btn-outline btn-sm" style="color:var(--rosa-fuerte); border-color:rgba(224,76,122,0.35); font-size:0.82rem; padding:6px 12px; display:none;">
+      🗑️ Vaciar todo el pedido
+    </button>
+  </div>
 
   <div class="pedido-grid">
     <div>
@@ -108,7 +113,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const resumenTotal = document.getElementById("resumen-total");
   const comboNote = document.getElementById("combo-note");
   const btnConfirmar = document.getElementById("btn-confirmar");
+  const btnVaciar = document.getElementById("btn-vaciar-pedido");
   const form = document.getElementById("form-pedido");
+
+  // Si se ingresó con ?vaciar en la URL, limpiar el carrito inmediatamente
+  if (new URLSearchParams(location.search).has("vaciar") || new URLSearchParams(location.search).has("limpiar")) {
+    vaciarCarrito();
+    history.replaceState(null, "", location.pathname);
+  }
 
   const inputFecha = document.getElementById("fecha");
   if (inputFecha) {
@@ -117,8 +129,21 @@ document.addEventListener("DOMContentLoaded", () => {
     inputFecha.min = manana.toISOString().split("T")[0];
   }
 
+  function escaparHTML(str) {
+    return String(str || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
   function render() {
     const items = leerCarrito();
+
+    if (btnVaciar) {
+      btnVaciar.style.display = items.length ? "inline-flex" : "none";
+    }
 
     if (!items.length) {
       lista.innerHTML = "";
@@ -129,19 +154,19 @@ document.addEventListener("DOMContentLoaded", () => {
       btnConfirmar.disabled = false;
       lista.innerHTML = items
         .map(
-          (i) => `
+          (i, idx) => `
         <div class="pedido-item">
-          <img src="${i.imagen}" alt="${i.nombre}" />
+          <img src="${escaparHTML(i.imagen || 'images/fototorta/Stitch Redondo.jpg')}" alt="${escaparHTML(i.nombre)}" onerror="this.onerror=null; this.src='images/fototorta/Stitch Redondo.jpg';" />
           <div class="pedido-item-info">
-            <div class="cat">${i.categoria} · ${i.tipo === "fototorta" ? "Fototorta" : "Chocotransfer"}</div>
-            <div class="nom">${i.nombre}</div>
-            <div class="precio">${formatoPrecio(i.precio)} c/u · Subtotal ${formatoPrecio(i.precio * i.cantidad)}</div>
-            <button class="remove-link" data-eliminar="${i.id}">Quitar</button>
+            <div class="cat">${escaparHTML(i.categoria || 'Catálogo')} · ${i.tipo === "fototorta" ? "Fototorta" : "Chocotransfer"}</div>
+            <div class="nom">${escaparHTML(i.nombre)}</div>
+            <div class="precio">${formatoPrecio(i.precio || 0)} c/u · Subtotal ${formatoPrecio((i.precio || 0) * (i.cantidad || 1))}</div>
+            <button class="remove-link" type="button" data-eliminar="${escaparHTML(i.id)}" data-index="${idx}">Quitar</button>
           </div>
           <div class="qty-control">
-            <button data-restar="${i.id}" aria-label="Restar">−</button>
-            <span>${i.cantidad}</span>
-            <button data-sumar="${i.id}" aria-label="Sumar">+</button>
+            <button type="button" data-restar="${escaparHTML(i.id)}" data-index="${idx}" aria-label="Restar">−</button>
+            <span>${i.cantidad || 1}</span>
+            <button type="button" data-sumar="${escaparHTML(i.id)}" data-index="${idx}" aria-label="Sumar">+</button>
           </div>
         </div>`
         )
@@ -151,16 +176,50 @@ document.addEventListener("DOMContentLoaded", () => {
     resumenUnidades.textContent = totalUnidades(items);
     resumenTotal.textContent = formatoPrecio(totalPedido(items));
     comboNote.style.display = totalUnidades(items) >= COMBO_MINIMO ? "block" : "none";
+  }
 
-    lista.querySelectorAll("[data-sumar]").forEach((b) =>
-      b.addEventListener("click", () => { cambiarCantidad(b.dataset.sumar, 1); render(); })
-    );
-    lista.querySelectorAll("[data-restar]").forEach((b) =>
-      b.addEventListener("click", () => { cambiarCantidad(b.dataset.restar, -1); render(); })
-    );
-    lista.querySelectorAll("[data-eliminar]").forEach((b) =>
-      b.addEventListener("click", () => { eliminarDelCarrito(b.dataset.eliminar); render(); })
-    );
+  // Delegación de eventos eficiente (nunca se desengancha ni duplica)
+  if (lista) {
+    lista.addEventListener("click", (e) => {
+      const btnEliminar = e.target.closest("[data-eliminar]");
+      if (btnEliminar) {
+        e.preventDefault();
+        const id = btnEliminar.getAttribute("data-eliminar");
+        const idx = Number(btnEliminar.getAttribute("data-index"));
+        eliminarDelCarrito(id, idx);
+        render();
+        return;
+      }
+
+      const btnSumar = e.target.closest("[data-sumar]");
+      if (btnSumar) {
+        e.preventDefault();
+        const id = btnSumar.getAttribute("data-sumar");
+        const idx = Number(btnSumar.getAttribute("data-index"));
+        cambiarCantidad(id, 1, idx);
+        render();
+        return;
+      }
+
+      const btnRestar = e.target.closest("[data-restar]");
+      if (btnRestar) {
+        e.preventDefault();
+        const id = btnRestar.getAttribute("data-restar");
+        const idx = Number(btnRestar.getAttribute("data-index"));
+        cambiarCantidad(id, -1, idx);
+        render();
+        return;
+      }
+    });
+  }
+
+  if (btnVaciar) {
+    btnVaciar.addEventListener("click", () => {
+      if (confirm("¿Seguro que querés vaciar todos los productos del pedido?")) {
+        vaciarCarrito();
+        render();
+      }
+    });
   }
 
   form.addEventListener("submit", (e) => {
