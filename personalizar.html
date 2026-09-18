@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Personalizá tu Lámina — Laminas Piniata</title>
+<meta name="description" content="Subí tu foto o diseño para fototortas y chocotransfer personalizados. Visualizalo en vivo y pedilo por WhatsApp." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>" />
+<meta property="og:title" content="Personalizá tu Lámina — Laminas Piniata" />
+<meta property="og:description" content="Subí tu foto, mirá cómo queda en vivo y coordiná tu pedido por WhatsApp." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://julianpipi.github.io/Laminas-Piniata/personalizar.html" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-tipo="personalizar">
+
+<header class="site-header">
+  <div class="container nav-bar">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"></span>
+      Laminas Piniata
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="fototortas.html">Laminas Comestibles</a></li>
+        <li><a href="chocotransfer.html">Chocotransfer</a></li>
+        <li><a href="personalizar.html" class="active">Personalizados</a></li>
+        <li><a href="pedido.html">Mi pedido</a></li>
+        <li><a href="https://wa.me/5491133750433" target="_blank" rel="noopener">WhatsApp</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a href="pedido.html" class="cart-btn">
+        Mi pedido
+        <span class="cart-count" data-cart-count>0</span>
+      </a>
+      <button class="menu-toggle" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="catalog-hero">
+    <span class="eyebrow">✨ 100% A TU MEDIDA</span>
+    <h1>Personalizá tu Lámina Comestible</h1>
+    <p>Cargá tu foto o diseño familiar, elegí el formato, sumale una dedicatoria y envianos tu pedido directo a WhatsApp listo para imprimir.</p>
+  </section>
+
+  <div class="customizer-layout">
+    <!-- Columna 1: Simulador en vivo -->
+    <div class="simulator-card">
+      <div class="live-badge">
+        <span class="live-badge-dot"></span> Simulador en tiempo real
+      </div>
+
+      <div class="format-tabs">
+        <button type="button" class="format-tab-btn active" data-format="round">🎂 Redonda (Torta)</button>
+        <button type="button" class="format-tab-btn" data-format="rect">📄 Rectangular A4</button>
+        <button type="button" class="format-tab-btn" data-format="toppers">🧁 Mini Toppers (x12)</button>
+      </div>
+
+      <div class="sheet-stage" id="mockup-stage">
+        <div class="sheet-mockup round" id="sheet-mockup" title="Hacé clic para cargar o cambiar tu imagen">
+          <div class="dropzone-overlay" id="dropzone-prompt">
+            <span class="drop-icon">📸</span>
+            <p><strong>Arrastrá tu foto acá</strong> o hacé clic para elegir archivo</p>
+            <small>Formatos JPG, PNG o WEBP</small>
+          </div>
+          <div class="sheet-text-overlay" id="text-overlay"></div>
+        </div>
+      </div>
+
+      <div class="preview-tools">
+        <input type="file" id="input-foto" accept="image/png, image/jpeg, image/webp" style="display:none;" />
+        <button type="button" class="btn btn-sm btn-rosa" id="btn-choose-file">📁 Elegir mi foto / imagen</button>
+        <button type="button" class="btn btn-sm btn-outline" id="btn-remove-img" style="display:none; color:var(--rosa-fuerte);">🗑️ Quitar foto</button>
+        <button type="button" class="btn btn-sm btn-outline" id="btn-download-preview" style="display:none;">📥 Descargar boceto</button>
+      </div>
+      <div class="file-chosen-name" id="file-name-display" style="margin-top:12px;">Ningún archivo cargado aún</div>
+    </div>
+
+    <!-- Columna 2: Opciones de lámina y formulario -->
+    <div class="pedido-side">
+      <h3>1. Tipo de producto</h3>
+      <div class="tipo-selector-grid">
+        <div class="tipo-choice-card selected" data-tipo-card="fototorta">
+          <strong>🍰 Lámina Fototorta</strong>
+          <span class="desc">Papel de arroz comestible para tortas</span>
+          <span class="price">$2.500</span>
+        </div>
+        <div class="tipo-choice-card" data-tipo-card="chocotransfer">
+          <strong>🍫 Chocotransfer</strong>
+          <span class="desc">Hoja transfer para chocolate y bombones</span>
+          <span class="price">$4.500</span>
+        </div>
+      </div>
+
+      <h3 style="margin-top:20px;">2. Dedicatoria o Texto (Opcional)</h3>
+      <div class="form-field">
+        <label for="custom-text">Texto para la lámina</label>
+        <input type="text" id="custom-text" placeholder="Ej: ¡Feliz Cumple Bautista! / Mis 15 Sofi" maxlength="60" />
+      </div>
+      <div class="form-field">
+        <label for="custom-text-color">Color del texto</label>
+        <select id="custom-text-color">
+          <option value="#FFFFFF" selected>Blanco (con borde negro)</option>
+          <option value="#E04C7A">Rosa pastel</option>
+          <option value="#FBD966">Dorado / Amarillo</option>
+          <option value="#2E1C14">Chocolate oscuro</option>
+          <option value="#3498DB">Azul</option>
+        </select>
+      </div>
+
+      <h3 style="margin-top:20px;">3. Datos para la entrega</h3>
+      <form id="form-personalizar">
+        <div class="form-field">
+          <label for="nombre-cliente">Nombre y Apellido *</label>
+          <input type="text" id="nombre-cliente" required placeholder="¿A nombre de quién?" />
+        </div>
+        <div class="form-field">
+          <label for="fecha-entrega">Fecha de entrega deseada *</label>
+          <input type="date" id="fecha-entrega" required />
+        </div>
+        <div class="form-field">
+          <label for="horario-entrega">Disponibilidad horaria *</label>
+          <input type="text" id="horario-entrega" required placeholder="Ej: Mañana de 10 a 13 hs / Tarde después de 17 hs" />
+        </div>
+        <div class="form-field">
+          <label for="notas-entrega">Observaciones adicionales (opcional)</label>
+          <textarea id="notas-entrega" placeholder="Ej: Centrar la dedicatoria en la parte superior, o torta de 24 cm..."></textarea>
+        </div>
+
+        <div class="resumen-row total" style="margin-bottom:14px;">
+          <span>Precio estimado:</span>
+          <span id="precio-estimado-display">$2.500</span>
+        </div>
+
+        <div class="notice-card">
+          📌 <strong>¿Cómo se envía la imagen?</strong> Al hacer clic en <em>"Enviar pedido por WhatsApp"</em>, se abrirá tu chat con todos los detalles del diseño completados. Solo debés adjuntar tu archivo o foto desde el clip (📎) de WhatsApp para que la imprimamos con la mayor resolución.
+        </div>
+
+        <button type="submit" class="btn btn-whatsapp btn-block" style="font-size:1.02rem; padding:14px;">
+          📲 Enviar pedido personalizado por WhatsApp
+        </button>
+        <button type="button" class="btn btn-outline btn-block" id="btn-sumar-carrito" style="margin-top:10px;">
+          🛒 Sumar a Mi Pedido (guardar en carrito)
+        </button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<!-- Modal de confirmación tras abrir WhatsApp -->
+<div class="modal-overlay" id="modal-whatsapp-confirm" style="display:none;">
+  <div class="whatsapp-modal-content">
+    <span style="font-size:3.2rem;">📲</span>
+    <h3>¡Ya abrimos tu WhatsApp!</h3>
+    <p>Preparamos el mensaje con todos los detalles de tu lámina personalizada.</p>
+    <div class="whatsapp-modal-steps">
+      <ol style="margin:0; padding-left:18px;">
+        <li>Enviá el mensaje que ya quedó escrito en la conversación de WhatsApp.</li>
+        <li>Tocá el ícono de <strong>adjuntar (📎)</strong> y mandanos tu foto o imagen.</li>
+        <li>¡Te confirmamos en el momento la seña y coordinamos el retiro o envío!</li>
+      </ol>
+    </div>
+    <button type="button" class="btn btn-rosa btn-block" id="btn-cerrar-modal-wa">¡Perfecto, entendido!</button>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Laminas Piniata</h4>
+        <p>Láminas comestibles para fototortas y diseños de chocotransfer. Zona Vicente López / Munro.</p>
+        <a href="https://instagram.com/Laminas_Piniata" target="_blank" rel="noopener">Instagram: @Laminas_Piniata</a>
+      </div>
+      <div>
+        <h4>Atención</h4>
+        <p>Lunes a domingo, 9 a 21 hs</p>
+        <p>Envíos martes, miércoles y viernes</p>
+        <p>Retiro en persona disponible</p>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <a href="https://wa.me/5491133750433" target="_blank" rel="noopener">WhatsApp: 11 3375-0433</a>
+        <p>Pagos: Mercado Pago o efectivo al entregar</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© <span data-anio></span> Laminas Piniata</div>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/5491133750433" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 32 32" fill="white"><path d="M16 2.7C8.7 2.7 2.7 8.6 2.7 16c0 2.5.7 4.9 1.9 7L2.6 29.3l6.5-1.9c2 1.1 4.3 1.7 6.9 1.7 7.3 0 13.3-5.9 13.3-13.3S23.3 2.7 16 2.7zm0 24.2c-2.2 0-4.4-.6-6.2-1.7l-.4-.3-3.9 1.1 1.1-3.8-.3-.4a10.9 10.9 0 0 1-1.7-5.8C4.6 9.7 9.7 4.6 16 4.6S27.4 9.7 27.4 16 22.3 26.9 16 26.9zm6-8.2c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2-.2.3-.8 1.1-1 1.3-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.6-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.5.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6 0-.2-.7-1.8-1-2.4-.3-.6-.5-.5-.7-.6h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3z"/></svg>
+</a>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+<script src="js/personalizar.js"></script>
+</body>
+</html>
