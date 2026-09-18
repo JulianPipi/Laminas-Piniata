@@ -153,13 +153,13 @@ document.addEventListener("DOMContentLoaded", () => {
     comboNote.style.display = totalUnidades(items) >= COMBO_MINIMO ? "block" : "none";
 
     lista.querySelectorAll("[data-sumar]").forEach((b) =>
-      b.addEventListener("click", () => { cambiarCantidad(Number(b.dataset.sumar), 1); render(); })
+      b.addEventListener("click", () => { cambiarCantidad(b.dataset.sumar, 1); render(); })
     );
     lista.querySelectorAll("[data-restar]").forEach((b) =>
-      b.addEventListener("click", () => { cambiarCantidad(Number(b.dataset.restar), -1); render(); })
+      b.addEventListener("click", () => { cambiarCantidad(b.dataset.restar, -1); render(); })
     );
     lista.querySelectorAll("[data-eliminar]").forEach((b) =>
-      b.addEventListener("click", () => { eliminarDelCarrito(Number(b.dataset.eliminar)); render(); })
+      b.addEventListener("click", () => { eliminarDelCarrito(b.dataset.eliminar); render(); })
     );
   }
 

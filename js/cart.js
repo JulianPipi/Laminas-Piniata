@@ -22,7 +22,7 @@ function guardarCarrito(items) {
 
 function agregarAlCarrito(producto, cantidad = 1) {
   const items = leerCarrito();
-  const existente = items.find((i) => i.id === producto.id);
+  const existente = items.find((i) => String(i.id) === String(producto.id));
   if (existente) {
     existente.cantidad += cantidad;
   } else {
@@ -41,15 +41,15 @@ function agregarAlCarrito(producto, cantidad = 1) {
 
 function cambiarCantidad(id, delta) {
   const items = leerCarrito();
-  const item = items.find((i) => i.id === id);
+  const item = items.find((i) => String(i.id) === String(id));
   if (!item) return;
   item.cantidad += delta;
-  const filtrados = item.cantidad <= 0 ? items.filter((i) => i.id !== id) : items;
+  const filtrados = item.cantidad <= 0 ? items.filter((i) => String(i.id) !== String(id)) : items;
   guardarCarrito(filtrados);
 }
 
 function eliminarDelCarrito(id) {
-  guardarCarrito(leerCarrito().filter((i) => i.id !== id));
+  guardarCarrito(leerCarrito().filter((i) => String(i.id) !== String(id)));
 }
 
 function totalUnidades(items) {

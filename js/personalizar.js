@@ -396,6 +396,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function limpiarFormulario() {
+    currentImageSrc = null;
+    currentFileName = '';
+    if (fileInput) fileInput.value = '';
+    if (fileNameDisplay) fileNameDisplay.textContent = 'Ningún archivo cargado aún';
+    if (customTextInput) customTextInput.value = '';
+    if (inputNotas) inputNotas.value = '';
+    actualizarMockupVisual();
+  }
+
   // --- Sumar al Carrito ---
   if (btnSumarCarrito) {
     btnSumarCarrito.addEventListener('click', () => {
@@ -416,6 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (typeof agregarAlCarrito === 'function') {
         agregarAlCarrito(item, 1);
         alert(`✅ ¡Agregado a tu pedido!\n\n${item.nombre}\nPrecio: ${typeof formatoPrecio === 'function' ? formatoPrecio(precio) : '$' + precio}\n\nPodés verlo en el botón "Mi pedido" del menú superior.`);
+        limpiarFormulario();
       }
     });
   }
