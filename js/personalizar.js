@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const NOMBRES_FORMATO = {
     round: 'Redonda (hasta 20 cm para torta)',
     rect: 'Rectangular A4 completa (20x29 cm)',
-    toppers: 'Mini Toppers (12 círculos para cupcakes / alfajores)'
+    toppers: 'Mini Toppers (24 círculos para cupcakes / alfajores de 4.5cm de diametro)'
   };
 
   // Configurar fecha mínima (mañana)
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="dropzone-overlay" id="dropzone-prompt">
             <span class="drop-icon">🧁</span>
             <p><strong>Subí tu foto o logo</strong></p>
-            <small>Se repetirá en 12 mini toppers</small>
+            <small>Se repetirá en 24 mini toppers (4.5 cm)</small>
           </div>
         `;
       }
