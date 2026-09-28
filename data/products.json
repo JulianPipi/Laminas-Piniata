@@ -801,5 +801,60 @@
         "precio": 4500,
         "destacado": false,
         "activo": true
+    },
+    {
+        "id": 102,
+        "nombre": "Halloween Calabaza & Noche Iluminada",
+        "imagen": "images/fototorta/halloween-calabazas.svg",
+        "tipo": "fototorta",
+        "categoria": "Halloween",
+        "subcategoria": "Especial Noche de Brujas",
+        "precio": 2500,
+        "destacado": true,
+        "activo": true
+    },
+    {
+        "id": 103,
+        "nombre": "Halloween Fantasmas Dulces Boo",
+        "imagen": "images/fototorta/halloween-fantasmas.svg",
+        "tipo": "fototorta",
+        "categoria": "Halloween",
+        "subcategoria": "Infantil Festivo",
+        "precio": 2500,
+        "destacado": true,
+        "activo": true
+    },
+    {
+        "id": 104,
+        "nombre": "Halloween Merlina Addams",
+        "imagen": "images/fototorta/Merlina Redondo.jpg",
+        "tipo": "fototorta",
+        "categoria": "Halloween",
+        "subcategoria": "Series y Cine",
+        "precio": 2500,
+        "destacado": true,
+        "activo": true
+    },
+    {
+        "id": 105,
+        "nombre": "Halloween Toppers Cupcakes x24",
+        "imagen": "images/fototorta/halloween-toppers.svg",
+        "tipo": "fototorta",
+        "categoria": "Halloween",
+        "subcategoria": "Mini Toppers",
+        "precio": 2500,
+        "destacado": true,
+        "activo": true
+    },
+    {
+        "id": 106,
+        "nombre": "Chocotransfer Halloween Terrorífico",
+        "imagen": "images/chocotransfer/halloween-chocotransfer.svg",
+        "tipo": "chocotransfer",
+        "categoria": "Halloween",
+        "subcategoria": "Chocolate temático",
+        "precio": 4500,
+        "destacado": true,
+        "activo": true
     }
 ]

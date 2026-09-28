@@ -26,13 +26,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   categoriasPresentes.forEach((cat) => {
     const opt = document.createElement("option");
     opt.value = cat;
-    opt.textContent = cat;
+    opt.textContent = cat === "Halloween" ? "🎃 Halloween" : cat;
     selectCategoria.appendChild(opt);
   });
 
-  // si vino ?categoria=Futbol en la URL (desde la home), preseleccionar
+  // si vino ?categoria= o ?cat= en la URL (desde la home o banners), preseleccionar
   const params = new URLSearchParams(location.search);
-  const catInicial = params.get("categoria");
+  const catInicial = params.get("categoria") || params.get("cat");
   if (catInicial && categoriasPresentes.includes(catInicial)) {
     selectCategoria.value = catInicial;
   }
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         (p) => `
       <article class="product-card">
         <div class="product-thumb" data-abrir-modal="${p.id}">
-          ${p.destacado ? '<span class="badge-destacado">Destacado</span>' : ""}
+          ${p.categoria === "Halloween" ? '<span class="badge-halloween">🎃 Halloween</span>' : (p.destacado ? '<span class="badge-destacado">Destacado</span>' : "")}
           <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" />
         </div>
         <div class="product-body">

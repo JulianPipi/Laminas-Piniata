@@ -18,6 +18,7 @@ const CATEGORIAS = [
   "Cumpleanos",
   "Juegos",
   "Personalizado",
+  "Halloween",
 ];
 
 let PRODUCTOS_CACHE = null;

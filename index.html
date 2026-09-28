@@ -14,6 +14,52 @@
 </head>
 <body data-tipo="home">
 
+<aside class="halloween-bar" id="halloween-bar" aria-label="Especial Halloween">
+  <div class="container halloween-bar-inner">
+    <div class="halloween-tag">
+      <span class="halloween-icon" aria-hidden="true">🎃</span>
+      <div class="halloween-text">
+        <strong>¡Especial Halloween!</strong>
+        <span>Hacé tu pedido para el 31 de Octubre</span>
+      </div>
+    </div>
+    
+    <div class="halloween-countdown-wrap" id="hw-countdown-wrap">
+      <span class="hw-timer-label">Faltan:</span>
+      <div class="hw-countdown" role="timer" aria-live="polite">
+        <div class="hw-unit">
+          <span class="hw-num" data-hw-dias>00</span>
+          <span class="hw-lbl">Días</span>
+        </div>
+        <span class="hw-dots">:</span>
+        <div class="hw-unit">
+          <span class="hw-num" data-hw-horas>00</span>
+          <span class="hw-lbl">Hs</span>
+        </div>
+        <span class="hw-dots">:</span>
+        <div class="hw-unit">
+          <span class="hw-num" data-hw-min>00</span>
+          <span class="hw-lbl">Min</span>
+        </div>
+        <span class="hw-dots">:</span>
+        <div class="hw-unit">
+          <span class="hw-num" data-hw-seg>00</span>
+          <span class="hw-lbl">Seg</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="halloween-actions">
+      <a href="fototortas.html?cat=Halloween" class="btn btn-halloween btn-sm">
+        👻 Ver Diseños
+      </a>
+      <a href="personalizar.html" class="btn btn-halloween-ghost btn-sm">
+        ✨ Personalizar
+      </a>
+    </div>
+  </div>
+</aside>
+
 <header class="site-header">
   <div class="container nav-bar">
     <a href="index.html" class="brand">
@@ -66,6 +112,53 @@
         <p>Diseños impresos al revés, en formatos más chicos, pensados para chocolate.</p>
         <span class="peel-go">Ver catálogo →</span>
       </a>
+    </div>
+  </section>
+
+  <!-- Sección Especial Halloween -->
+  <section class="container" id="especial-halloween">
+    <div class="seccion-halloween">
+      <div class="halloween-grid">
+        <div>
+          <span class="eyebrow">🎃 EDICIÓN ESPECIAL OCTUBRE</span>
+          <h2>¡Láminas y Chocotransfer para tu Fiesta de Halloween! 👻</h2>
+          <p>
+            Transformá tus tortas, cupcakes y golosinas en creaciones terroríficamente ricas. 
+            Elegí láminas circulares, toppers listos para recortar o encargá tu diseño personalizado con Merlina, calabazas o tu foto favorita.
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+            <a href="fototortas.html?cat=Halloween" class="btn btn-halloween">
+              🎃 Ver Diseños de Halloween
+            </a>
+            <a href="personalizar.html" class="btn btn-halloween-ghost">
+              ✨ Diseñar con tu Foto / Dedicatoria
+            </a>
+          </div>
+        </div>
+
+        <div class="halloween-card-preview">
+          <a href="fototortas.html?cat=Halloween" class="hw-preview-box">
+            <img src="images/fototorta/halloween-calabazas.svg" alt="Lámina Calabaza Halloween" loading="lazy" />
+            <strong>Calabazas & Noche</strong>
+            <span>Lámina para torta</span>
+          </a>
+          <a href="fototortas.html?cat=Halloween" class="hw-preview-box">
+            <img src="images/fototorta/halloween-fantasmas.svg" alt="Lámina Fantasmas Dulces" loading="lazy" />
+            <strong>Fantasmas Dulces</strong>
+            <span>Fototorta infantil</span>
+          </a>
+          <a href="fototortas.html?cat=Halloween" class="hw-preview-box">
+            <img src="images/fototorta/halloween-toppers.svg" alt="Mini Toppers Cupcakes x24" loading="lazy" />
+            <strong>Toppers Cupcakes</strong>
+            <span>Plancha x24 figuras</span>
+          </a>
+          <a href="chocotransfer.html?cat=Halloween" class="hw-preview-box">
+            <img src="images/chocotransfer/halloween-chocotransfer.svg" alt="Chocotransfer Halloween" loading="lazy" />
+            <strong>Chocotransfer</strong>
+            <span>Para bombones y barras</span>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -269,7 +362,7 @@
           (p) => `
         <article class="product-card">
           <div class="product-thumb" data-abrir-modal="${p.id}">
-            <span class="badge-destacado">Destacado</span>
+            <span class="${p.categoria === 'Halloween' ? 'badge-halloween' : 'badge-destacado'}">${p.categoria === 'Halloween' ? '🎃 Halloween' : 'Destacado'}</span>
             <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" />
           </div>
           <div class="product-body">

@@ -1577,3 +1577,363 @@ h1, h2, h3, .display {
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* =========================================================
+   Halloween Banner, Countdown & Theme 🎃👻
+   ========================================================= */
+.halloween-bar {
+  background: linear-gradient(135deg, #180721 0%, #2e0e3d 45%, #1f0b29 100%);
+  color: #fff;
+  border-bottom: 2px solid #FF7518;
+  box-shadow: 0 4px 18px rgba(255, 117, 24, 0.22);
+  padding: 8px 0;
+  position: relative;
+  z-index: 50;
+  overflow: hidden;
+}
+
+.halloween-bar::before {
+  content: "🦇";
+  position: absolute;
+  left: 2%;
+  top: 18%;
+  font-size: 1.15rem;
+  opacity: 0.4;
+  animation: batFloat 4s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.halloween-bar::after {
+  content: "🕸️";
+  position: absolute;
+  right: 1.5%;
+  top: -4px;
+  font-size: 1.6rem;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+@keyframes batFloat {
+  0% { transform: translateY(0) rotate(-6deg); }
+  100% { transform: translateY(-7px) rotate(6deg); }
+}
+
+.halloween-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.halloween-tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.halloween-icon {
+  font-size: 1.85rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 6px rgba(255, 117, 24, 0.75));
+  animation: pumpkinPulse 2.4s infinite ease-in-out;
+}
+
+@keyframes pumpkinPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+.halloween-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.halloween-text strong {
+  font-size: 0.95rem;
+  color: #FFB74D;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.halloween-text span {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.halloween-countdown-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hw-timer-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #E1BEE7;
+}
+
+.hw-countdown {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.hw-unit {
+  background: rgba(16, 5, 24, 0.88);
+  border: 1.5px solid rgba(255, 117, 24, 0.55);
+  border-radius: 8px;
+  padding: 3px 8px;
+  min-width: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: inset 0 0 8px rgba(255, 117, 24, 0.2);
+}
+
+.hw-num {
+  font-family: monospace, var(--fuente-principal);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #FFF;
+  text-shadow: 0 0 8px #FF7518;
+  line-height: 1.1;
+}
+
+.hw-lbl {
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #FFB74D;
+  letter-spacing: 0.05em;
+}
+
+.hw-dots {
+  font-weight: 800;
+  color: #FF7518;
+  font-size: 1.1rem;
+  line-height: 1;
+  animation: blinkDots 1s infinite;
+}
+
+@keyframes blinkDots {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.halloween-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-halloween {
+  background: #FF7518;
+  color: #12051E !important;
+  font-weight: 800;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  box-shadow: 0 4px 12px rgba(255, 117, 24, 0.4);
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-halloween:hover {
+  background: #FFA726;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 117, 24, 0.6);
+}
+
+.btn-halloween-ghost {
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-halloween-ghost:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* Badge especial para productos de Halloween */
+.badge-halloween {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #FF7518;
+  color: #12051E;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 999px;
+  box-shadow: 0 2px 10px rgba(255, 117, 24, 0.5);
+  z-index: 2;
+}
+
+/* Sección temática de Halloween en index.html */
+.seccion-halloween {
+  background: radial-gradient(circle at 85% 15%, #38124b 0%, #1a0824 55%, #100417 100%);
+  border-radius: var(--radio-l);
+  padding: 36px;
+  color: #FFF;
+  border: 2px solid rgba(255, 117, 24, 0.45);
+  box-shadow: 0 16px 40px -10px rgba(26, 8, 36, 0.65);
+  position: relative;
+  overflow: hidden;
+  margin: 36px 0;
+}
+
+.seccion-halloween::before {
+  content: "🕸️";
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 3.5rem;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.halloween-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 30px;
+  align-items: center;
+}
+
+.seccion-halloween .eyebrow {
+  color: #FFB74D;
+}
+
+.seccion-halloween h2 {
+  color: #FFF;
+  font-size: clamp(1.8rem, 3.8vw, 2.4rem);
+  margin: 8px 0 12px;
+}
+
+.seccion-halloween p {
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.96rem;
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+
+.halloween-card-preview {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.hw-preview-box {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 117, 24, 0.35);
+  border-radius: var(--radio-m);
+  padding: 14px 10px;
+  text-align: center;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  color: #FFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hw-preview-box:hover {
+  background: rgba(255, 117, 24, 0.18);
+  border-color: #FF7518;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 117, 24, 0.25);
+}
+
+.hw-preview-box img {
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 8px;
+  border: 2px solid #FF7518;
+  background: #240E31;
+}
+
+.hw-preview-box strong {
+  font-size: 0.84rem;
+  color: #FFD54F;
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.hw-preview-box span {
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+@media (max-width: 768px) {
+  .halloween-bar {
+    padding: 8px 0;
+  }
+  .halloween-bar-inner {
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+  }
+  .halloween-tag {
+    width: 100%;
+    justify-content: center;
+  }
+  .halloween-countdown-wrap {
+    width: 100%;
+    justify-content: center;
+  }
+  .halloween-actions {
+    width: 100%;
+    justify-content: center;
+  }
+  .halloween-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .seccion-halloween {
+    padding: 24px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hw-unit {
+    min-width: 38px;
+    padding: 2px 6px;
+  }
+  .hw-num {
+    font-size: 1.02rem;
+  }
+  .hw-lbl {
+    font-size: 0.54rem;
+  }
+  .halloween-actions .btn {
+    flex: 1;
+    font-size: 0.78rem;
+    padding: 7px 10px;
+    justify-content: center;
+  }
+  .halloween-card-preview {
+    gap: 8px;
+  }
+  .hw-preview-box img {
+    width: 68px;
+    height: 68px;
+  }
+}

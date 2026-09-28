@@ -1,0 +1,186 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <radialGradient id="topperBg1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF9E2C"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </radialGradient>
+    <radialGradient id="topperBg2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7B1FA2"/>
+      <stop offset="100%" stop-color="#311B92"/>
+    </radialGradient>
+    <radialGradient id="topperBg3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#263238"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <radialGradient id="topperBg4" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#43A047"/>
+      <stop offset="100%" stop-color="#1B5E20"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Fondo Hoja Rectangular A4 de Toppers -->
+  <rect width="500" height="500" fill="#FFFDF8" stroke="#5A3825" stroke-width="4" rx="16"/>
+
+  <text x="250" y="42" font-family="'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="900" text-anchor="middle" fill="#5A3825" letter-spacing="2">
+    🎃 MINI TOPPERS HALLOWEEN 👻
+  </text>
+  <text x="250" y="65" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#888">
+    Círculos comestibles de 5 cm para cupcakes y alfajores
+  </text>
+
+  <!-- FILA 1 -->
+  <!-- 1. Calabacita -->
+  <g transform="translate(45, 85)">
+    <circle cx="50" cy="50" r="48" fill="url(#topperBg1)" stroke="#5A3825" stroke-width="2" stroke-dasharray="4,2"/>
+    <ellipse cx="50" cy="54" rx="30" ry="24" fill="#FFA726"/>
+    <polygon points="40,46 48,50 44,56" fill="#1A092A"/>
+    <polygon points="60,46 52,50 56,56" fill="#1A092A"/>
+    <polygon points="50,54 47,59 53,59" fill="#1A092A"/>
+    <path d="M38 64 Q50 76, 62 64 Z" fill="#1A092A"/>
+    <rect x="47" y="26" width="6" height="8" rx="2" fill="#388E3C"/>
+  </g>
+
+  <!-- 2. Fantasmita -->
+  <g transform="translate(155, 85)">
+    <circle cx="50" cy="50" r="48" fill="url(#topperBg2)" stroke="#5A3825" stroke-width="2" stroke-dasharray="4,2"/>
+    <path d="M50 25 C32 25, 28 50, 28 65 C28 75, 34 72, 40 76 C46 72, 54 76, 60 72 C66 76, 72 65, 72 65 C72 50, 68 25, 50 25 Z" fill="#FFFFFF"/>
+    <circle cx="43" cy="46" r="3.5" fill="#1A092A"/>
+    <circle cx="57" cy="46" r="3.5" fill="#1A092A"/>
+    <ellipse cx="50" cy="55" rx="3" ry="5" fill="#1A092A"/>
+    <circle cx="38" cy="52" r="3" fill="#FF80AB" opacity="0.6"/>
+    <circle cx="62" cy="52" r="3" fill="#FF80AB" opacity="0.6"/>
+  </g>
+
+  <!-- 3. Murciélago -->
+  <g transform="translate(265, 85)">
+    <circle cx="50" cy="50" r="48" fill="url(#topperBg1)" stroke="#5A3825" stroke-width="2" stroke-dasharray="4,2"/>
+    <path d="M50 40 C44 32, 34 34, 28 40 C30 52, 42 50, 46 58 C48 50, 52 50, 54 58 C58 50, 70 52, 72 40 C66 34, 56 32, 50 40 Z" fill="#212121"/>
+    <circle cx="48" cy="45" r="1.5" fill="#FFEB3B"/>
+    <circle cx="52" cy="45" r="1.5" fill="#FFEB3B"/>
+  </g>
+
+  <!-- 4. Sombrero de Bruja -->
+  <g transform="translate(375, 85)">
+    <circle cx="50" cy="50" r="48" fill="url(#topperBg2)" stroke="#5A3825" stroke-width="2" stroke-dasharray="4,2"/>
+    <polygon points="50,22 34,60 66,60" fill="#212121"/>
+    <ellipse cx="50" cy="62" rx="32" ry="7" fill="#212121"/>
+    <rect x="36" y="55" width="28" height="5" fill="#FF5722"/>
+    <rect x="47" y="53" width="6" height="8" rx="1" fill="#FFD54F"/>
+  </g>
+
+  <!-- FILA 2 -->
+  <!-- 5. Ojo Loco -->
+  <g transform="translate(45, 190)">
+    <circle cx="50" cy="50" r="48" fill="url(#topperBg3)" stroke="#5A3825" stroke-width="2" stroke-dasharray="4,2"/>
+    <circle cx="50" cy="50" r="30" fill="#FFFFFF"/>
+    <path d="M26 42 Q36 46, 40 48 M74 42 Q64 46, 60 48" stroke="#E53935" stroke-width="1.5" fill="none"/>
+    <circle cx="50" cy="50" r="15" fill="#76FF03"/>
+    <circle cx="50" cy="50" r="8" fill="#000000"/>
+    <circle cx="47" cy="47" r="2.5" fill="#FFFFFF"/>
+  </g>
+
+  <!-- 6. Calaverita -->
+  <g transform="translate(155, 190)">
+    <circle cx="50" cy="50" r="48" fill="url(#topperBg4)" stroke="#5A3825" stroke-width="2" stroke-dasharray="4,2"/>
+    <ellipse cx="50" cy="46" rx="26" ry="24" fill="#FFFFFF"/>
+    <rect x="40" y="60" width="20" height="12" rx="3" fill="#FFFFFF"/>
+    <circle cx="41" cy="46" r="6" fill="#1A092A"/>
+    <circle cx="59" cy="46" r="6" fill="#1A092A"/>
+    <polygon points="50,53 47,59 53,59" fill="#1A092A"/>
+    <line x1="45" y1="64" x2="45" y2="70" stroke="#1A092A" stroke-width="2"/>
+    <line x1="50" y1="64" x2="50" y2="70" stroke="#1A092A" stroke-width="2"/>
+    <line x1="55" y1="64" x2="55" y2="70" stroke="#1A092A" stroke-width="2"/>
+  </g>
+
+  <!-- 7. Gato Negro -->
+  <g transform="translate(265, 190)">
+    <circle cx="50" cy="50" r="48" fill="url(#topperBg1)" stroke="#5A3825" stroke-width="2" stroke-dasharray="4,2"/>
+    <!-- Orejas -->
+    <polygon points="32,28 40,46 26,44" fill="#1F132B"/>
+    <polygon points="68,28 60,46 74,44" fill="#1F132B"/>
+    <circle cx="50" cy="50" r="24" fill="#1F132B"/>
+    <ellipse cx="41" cy="48" rx="4" ry="6" fill="#FFEB3B"/>
+    <ellipse cx="59" cy="48" rx="4" ry="6" fill="#FFEB3B"/>
+    <ellipse cx="41" cy="48" rx="1.5" ry="5" fill="#000"/>
+    <ellipse cx="59" cy="48" rx="1.5" ry="5" fill="#000"/>
+    <polygon points="50,56 47,59 53,59" fill="#FF80AB"/>
+    <line x1="28" y1="56" x2="42" y2="58" stroke="#FFF" stroke-width="1"/>
+    <line x1="28" y1="60" x2="42" y2="60" stroke="#FFF" stroke-width="1"/>
+    <line x1="72" y1="56" x2="58" y2="58" stroke="#FFF" stroke-width="1"/>
+    <line x1="72" y1="60" x2="58" y2="60" stroke="#FFF" stroke-width="1"/>
+  </g>
+
+  <!-- 8. Caldero Mágico -->
+  <g transform="translate(375, 190)">
+    <circle cx="50" cy="50" r="48" fill="url(#topperBg2)" stroke="#5A3825" stroke-width="2" stroke-dasharray="4,2"/>
+    <ellipse cx="50" cy="60" rx="26" ry="18" fill="#212121"/>
+    <ellipse cx="50" cy="48" rx="22" ry="5" fill="#69F0AE"/>
+    <circle cx="44" cy="40" r="4" fill="#69F0AE" opacity="0.8"/>
+    <circle cx="54" cy="35" r="5" fill="#69F0AE" opacity="0.9"/>
+    <circle cx="50" cy="43" r="3" fill="#69F0AE" opacity="0.7"/>
+    <line x1="32" y1="72" x2="28" y2="80" stroke="#212121" stroke-width="4" stroke-linecap="round"/>
+    <line x1="68" y1="72" x2="72" y2="80" stroke="#212121" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- FILA 3 -->
+  <!-- 9. Dulce / Caramelo -->
+  <g transform="translate(45, 295)">
+    <circle cx="50" cy="50" r="48" fill="url(#topperBg2)" stroke="#5A3825" stroke-width="2" stroke-dasharray="4,2"/>
+    <g transform="translate(25, 30)">
+      <polygon points="0,20 -10,12 -10,28" fill="#FF9800"/>
+      <polygon points="50,20 60,12 60,28" fill="#FF9800"/>
+      <rect x="0" y="8" width="50" height="24" rx="12" fill="#FFEB3B"/>
+      <line x1="15" y1="8" x2="15" y2="32" stroke="#E91E63" stroke-width="3"/>
+      <line x1="35" y1="8" x2="35" y2="32" stroke="#E91E63" stroke-width="3"/>
+    </g>
+  </g>
+
+  <!-- 10. Telaraña con Araña -->
+  <g transform="translate(155, 295)">
+    <circle cx="50" cy="50" r="48" fill="url(#topperBg1)" stroke="#5A3825" stroke-width="2" stroke-dasharray="4,2"/>
+    <path d="M20 20 L50 50 M80 20 L50 50 M20 80 L50 50 M80 80 L50 50" stroke="#FFF" stroke-width="1.5" opacity="0.6"/>
+    <circle cx="50" cy="50" r="10" stroke="#FFF" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <circle cx="50" cy="50" r="22" stroke="#FFF" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <!-- Araña -->
+    <circle cx="58" cy="56" r="6" fill="#1F132B"/>
+    <line x1="58" y1="56" x2="68" y2="50" stroke="#1F132B" stroke-width="1.5"/>
+    <line x1="58" y1="56" x2="68" y2="62" stroke="#1F132B" stroke-width="1.5"/>
+    <line x1="58" y1="56" x2="48" y2="50" stroke="#1F132B" stroke-width="1.5"/>
+    <line x1="58" y1="56" x2="48" y2="62" stroke="#1F132B" stroke-width="1.5"/>
+  </g>
+
+  <!-- 11. Boo / Trick or Treat -->
+  <g transform="translate(265, 295)">
+    <circle cx="50" cy="50" r="48" fill="url(#topperBg3)" stroke="#5A3825" stroke-width="2" stroke-dasharray="4,2"/>
+    <text x="50" y="48" font-family="'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="900" text-anchor="middle" fill="#FFEB3B" letter-spacing="1">
+      TRICK
+    </text>
+    <text x="50" y="66" font-family="'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="800" text-anchor="middle" fill="#FF5722" letter-spacing="1">
+      OR TREAT
+    </text>
+  </g>
+
+  <!-- 12. Frankenstein Chibi -->
+  <g transform="translate(375, 295)">
+    <circle cx="50" cy="50" r="48" fill="url(#topperBg4)" stroke="#5A3825" stroke-width="2" stroke-dasharray="4,2"/>
+    <rect x="28" y="28" width="44" height="44" rx="10" fill="#81C784"/>
+    <path d="M28 36 L34 28 L40 36 L46 28 L52 36 L58 28 L64 36 L72 28 L72 38 L28 38 Z" fill="#212121"/>
+    <circle cx="40" cy="48" r="3.5" fill="#212121"/>
+    <circle cx="60" cy="48" r="3.5" fill="#212121"/>
+    <line x1="42" y1="62" x2="58" y2="62" stroke="#212121" stroke-width="2"/>
+    <line x1="46" y1="59" x2="46" y2="65" stroke="#212121" stroke-width="1.5"/>
+    <line x1="54" y1="59" x2="54" y2="65" stroke="#212121" stroke-width="1.5"/>
+    <!-- Tornillo -->
+    <rect x="22" y="48" width="6" height="4" fill="#9E9E9E"/>
+    <rect x="72" y="48" width="6" height="4" fill="#9E9E9E"/>
+  </g>
+
+  <!-- Pie explicativo -->
+  <rect x="40" y="415" width="420" height="60" rx="12" fill="#FFF3E0" stroke="#FFB74D" stroke-width="1.5"/>
+  <text x="250" y="440" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" text-anchor="middle" fill="#E65100">
+    ¡Impresos en Papel de Arroz Comestible con Tinta Vegetal!
+  </text>
+  <text x="250" y="460" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#795548">
+    Listos para recortar y colocar en cupcakes, galletitas o alfajores.
+  </text>
+</svg>

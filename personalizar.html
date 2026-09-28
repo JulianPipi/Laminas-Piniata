@@ -14,6 +14,52 @@
 </head>
 <body data-tipo="personalizar">
 
+<aside class="halloween-bar" id="halloween-bar" aria-label="Especial Halloween">
+  <div class="container halloween-bar-inner">
+    <div class="halloween-tag">
+      <span class="halloween-icon" aria-hidden="true">🎃</span>
+      <div class="halloween-text">
+        <strong>¡Especial Halloween!</strong>
+        <span>Hacé tu pedido para el 31 de Octubre</span>
+      </div>
+    </div>
+    
+    <div class="halloween-countdown-wrap" id="hw-countdown-wrap">
+      <span class="hw-timer-label">Faltan:</span>
+      <div class="hw-countdown" role="timer" aria-live="polite">
+        <div class="hw-unit">
+          <span class="hw-num" data-hw-dias>00</span>
+          <span class="hw-lbl">Días</span>
+        </div>
+        <span class="hw-dots">:</span>
+        <div class="hw-unit">
+          <span class="hw-num" data-hw-horas>00</span>
+          <span class="hw-lbl">Hs</span>
+        </div>
+        <span class="hw-dots">:</span>
+        <div class="hw-unit">
+          <span class="hw-num" data-hw-min>00</span>
+          <span class="hw-lbl">Min</span>
+        </div>
+        <span class="hw-dots">:</span>
+        <div class="hw-unit">
+          <span class="hw-num" data-hw-seg>00</span>
+          <span class="hw-lbl">Seg</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="halloween-actions">
+      <a href="fototortas.html?cat=Halloween" class="btn btn-halloween btn-sm">
+        👻 Ver Diseños
+      </a>
+      <a href="chocotransfer.html?cat=Halloween" class="btn btn-halloween-ghost btn-sm">
+        🍫 Chocotransfer
+      </a>
+    </div>
+  </div>
+</aside>
+
 <header class="site-header">
   <div class="container nav-bar">
     <a href="index.html" class="brand">
@@ -99,12 +145,13 @@
       <h3 style="margin-top:20px;">2. Dedicatoria o Texto (Opcional)</h3>
       <div class="form-field">
         <label for="custom-text">Texto para la lámina</label>
-        <input type="text" id="custom-text" placeholder="Ej: ¡Feliz Cumple Bautista! / Mis 15 Sofi" maxlength="60" />
+        <input type="text" id="custom-text" placeholder="Ej: ¡Feliz Halloween! / Dulce o Truco / ¡Feliz Cumple Bautista!" maxlength="60" />
       </div>
       <div class="form-field">
         <label for="custom-text-color">Color del texto</label>
         <select id="custom-text-color">
           <option value="#FFFFFF" selected>Blanco (con borde negro)</option>
+          <option value="#FF7518">🎃 Naranja Halloween</option>
           <option value="#E04C7A">Rosa pastel</option>
           <option value="#FBD966">Dorado / Amarillo</option>
           <option value="#2E1C14">Chocolate oscuro</option>

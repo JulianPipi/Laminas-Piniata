@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <radialGradient id="skyPurple" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4A1C6D"/>
+      <stop offset="70%" stop-color="#240D3A"/>
+      <stop offset="100%" stop-color="#12051E"/>
+    </radialGradient>
+    <linearGradient id="candyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF5252"/>
+      <stop offset="50%" stop-color="#FFEB3B"/>
+      <stop offset="100%" stop-color="#FF9800"/>
+    </linearGradient>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Borde circular lámina -->
+  <circle cx="250" cy="250" r="240" fill="url(#skyPurple)" stroke="#9C27B0" stroke-width="6"/>
+
+  <!-- Estrellas y chispas mágicas -->
+  <circle cx="80" cy="140" r="3" fill="#E1BEE7"/>
+  <circle cx="160" cy="80" r="4" fill="#FFEB3B"/>
+  <circle cx="340" cy="110" r="3" fill="#FFEB3B"/>
+  <circle cx="420" cy="170" r="3.5" fill="#E1BEE7"/>
+  <circle cx="380" cy="360" r="2.5" fill="#FFEB3B"/>
+  <circle cx="110" cy="380" r="3" fill="#FFEB3B"/>
+
+  <!-- Pequeño murciélago amigable arriba -->
+  <path d="M250 80 C242 70, 230 72, 222 80 C215 72, 203 70, 195 80 C207 88, 218 84, 222 92 C226 84, 237 88, 250 80 Z" fill="#FFD54F"/>
+  <circle cx="220" cy="84" r="1.5" fill="#1A092A"/>
+  <circle cx="224" cy="84" r="1.5" fill="#1A092A"/>
+
+  <!-- Fantasmita Principal Brillante (Centro) -->
+  <g filter="url(#softGlow)">
+    <path d="M250 140 C190 140, 180 230, 180 290 C180 320, 200 310, 215 325 C230 310, 245 325, 260 310 C275 325, 290 310, 305 325 C320 310, 320 280, 320 250 C320 180, 310 140, 250 140 Z" fill="#FFFFFF"/>
+    <!-- Brillo mejillas sonrojadas -->
+    <ellipse cx="218" cy="225" rx="10" ry="6" fill="#FF80AB" opacity="0.6"/>
+    <ellipse cx="282" cy="225" rx="10" ry="6" fill="#FF80AB" opacity="0.6"/>
+    <!-- Ojos tiernos -->
+    <ellipse cx="225" cy="205" rx="8" ry="12" fill="#240D3A"/>
+    <circle cx="223" cy="201" r="3" fill="#FFFFFF"/>
+    <ellipse cx="275" cy="205" rx="8" ry="12" fill="#240D3A"/>
+    <circle cx="273" cy="201" r="3" fill="#FFFFFF"/>
+    <!-- Boquita feliz con colmillito -->
+    <path d="M242 225 Q250 240, 258 225 Z" fill="#240D3A"/>
+    <!-- Brazos saludando -->
+    <path d="M185 240 Q155 230, 160 215 Q175 220, 182 235 Z" fill="#FFFFFF"/>
+    <path d="M315 235 Q345 220, 340 205 Q325 215, 318 230 Z" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Sombrerito de bruja simpático en el fantasma -->
+  <polygon points="250,90 220,150 280,150" fill="#1F132B"/>
+  <ellipse cx="250" cy="150" rx="42" ry="10" fill="#2E1C44"/>
+  <rect x="228" y="142" width="44" height="6" fill="#FF7518" rx="2"/>
+  <rect x="245" y="140" width="10" height="10" fill="#FFD54F" rx="2"/>
+
+  <!-- Fantasmita Bebé Izquierdo -->
+  <g transform="translate(100, 240) scale(0.55)">
+    <path d="M100 80 C60 80, 50 140, 50 180 C50 200, 65 190, 75 200 C85 190, 95 200, 105 190 C115 200, 125 190, 135 200 C150 180, 150 140, 150 120 C150 70, 140 80, 100 80 Z" fill="#FFF" opacity="0.95"/>
+    <ellipse cx="85" cy="120" rx="5" ry="7" fill="#240D3A"/>
+    <ellipse cx="115" cy="120" rx="5" ry="7" fill="#240D3A"/>
+    <ellipse cx="100" cy="135" rx="5" ry="5" fill="#240D3A"/>
+  </g>
+
+  <!-- Caramelito Dulce de Halloween -->
+  <g transform="translate(330, 270) rotate(-15)">
+    <polygon points="0,20 -15,10 -15,30" fill="#FF9800"/>
+    <polygon points="40,20 55,10 55,30" fill="#FF9800"/>
+    <rect x="0" y="8" width="40" height="24" rx="12" fill="url(#candyGrad)"/>
+    <line x1="12" y1="8" x2="12" y2="32" stroke="#FFF" stroke-width="2"/>
+    <line x1="28" y1="8" x2="28" y2="32" stroke="#FFF" stroke-width="2"/>
+  </g>
+
+  <!-- Texto festivo con tipografía llamativa -->
+  <text x="250" y="400" font-family="'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="900" text-anchor="middle" fill="#FFEB3B" letter-spacing="4" stroke="#3D1A54" stroke-width="2">
+    ¡BOO!
+  </text>
+  <text x="250" y="435" font-family="'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800" text-anchor="middle" fill="#FFFFFF" letter-spacing="2">
+    DULCE NOCHE DE BRUJAS
+  </text>
+  <text x="250" y="465" font-family="'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="600" text-anchor="middle" fill="#CE93D8">
+    👻 Especial Fototorta 2026 👻
+  </text>
+</svg>

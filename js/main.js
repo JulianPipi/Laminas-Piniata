@@ -55,4 +55,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const anio = document.querySelector("[data-anio]");
   if (anio) anio.textContent = new Date().getFullYear();
+
+  // Contador regresivo a Halloween (31 de Octubre a las 23:59:59)
+  function iniciarContadorHalloween() {
+    const elDias = document.querySelector("[data-hw-dias]");
+    const elHoras = document.querySelector("[data-hw-horas]");
+    const elMin = document.querySelector("[data-hw-min]");
+    const elSeg = document.querySelector("[data-hw-seg]");
+    const countdownWrap = document.getElementById("hw-countdown-wrap");
+
+    if (!elDias || !elHoras || !elMin || !elSeg) return;
+
+    function pad(n) {
+      return String(Math.floor(n)).padStart(2, "0");
+    }
+
+    function actualizar() {
+      const ahora = new Date();
+      const anioActual = ahora.getFullYear();
+      // Mes 9 es Octubre en JavaScript (0-indexed). 31 de Octubre a las 23:59:59
+      let fechaObjetivo = new Date(anioActual, 9, 31, 23, 59, 59);
+
+      // Si ya pasó Halloween este año, apuntar al siguiente año
+      if (ahora.getTime() > fechaObjetivo.getTime()) {
+        fechaObjetivo = new Date(anioActual + 1, 9, 31, 23, 59, 59);
+      }
+
+      const diff = fechaObjetivo.getTime() - ahora.getTime();
+
+      if (diff <= 0) {
+        if (countdownWrap) {
+          countdownWrap.innerHTML = `<span style="font-weight:800; color:#FFD54F; font-size:1rem;">🎃 ¡FELIZ HALLOWEEN! ¡DULCE O TRUCO! 👻</span>`;
+        }
+        return;
+      }
+
+      const totalSeg = Math.floor(diff / 1000);
+      const dias = Math.floor(totalSeg / (3600 * 24));
+      const horas = Math.floor((totalSeg % (3600 * 24)) / 3600);
+      const minutos = Math.floor((totalSeg % 3600) / 60);
+      const segundos = totalSeg % 60;
+
+      elDias.textContent = pad(dias);
+      elHoras.textContent = pad(horas);
+      elMin.textContent = pad(minutos);
+      elSeg.textContent = pad(segundos);
+    }
+
+    actualizar();
+    setInterval(actualizar, 1000);
+  }
+
+  iniciarContadorHalloween();
 });
