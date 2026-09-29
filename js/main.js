@@ -107,4 +107,57 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   iniciarContadorHalloween();
+
+  // Zoom automático sobre la imagen del modal al pasar el cursor
+  function configurarZoomModal() {
+    const modalImgBox = document.querySelector(".modal-img");
+    const modalImg = document.getElementById("modal-img");
+    if (!modalImgBox || !modalImg) return;
+
+    function resetZoom() {
+      modalImg.style.transformOrigin = "center center";
+      modalImg.style.transform = "scale(1)";
+      modalImgBox.classList.remove("is-zoomed");
+    }
+
+    modalImgBox.addEventListener("mousemove", (e) => {
+      const rect = modalImgBox.getBoundingClientRect();
+      if (rect.width <= 0 || rect.height <= 0) return;
+      const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+      const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+      modalImg.style.transformOrigin = `${x.toFixed(1)}% ${y.toFixed(1)}%`;
+      modalImg.style.transform = "scale(2.2)";
+      modalImgBox.classList.add("is-zoomed");
+    });
+
+    modalImgBox.addEventListener("mouseleave", resetZoom);
+
+    // Toque en móviles para alternar zoom
+    modalImgBox.addEventListener("click", () => {
+      if (window.matchMedia("(hover: none)").matches) {
+        if (modalImgBox.classList.contains("is-zoomed")) {
+          resetZoom();
+        } else {
+          modalImg.style.transformOrigin = "center center";
+          modalImg.style.transform = "scale(1.8)";
+          modalImgBox.classList.add("is-zoomed");
+        }
+      }
+    });
+
+    // Resetear al cerrar modal
+    const modalEl = document.getElementById("modal");
+    if (modalEl) {
+      modalEl.addEventListener("click", (e) => {
+        if (e.target === modalEl || e.target.closest("[data-cerrar-modal]")) {
+          resetZoom();
+        }
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") resetZoom();
+      });
+    }
+  }
+
+  configurarZoomModal();
 });

@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
         <div class="product-body">
           <span class="product-cat">${p.categoria}${p.subcategoria ? " · " + p.subcategoria : ""}</span>
-          <span class="product-name">${p.nombre}</span>
+          <span class="product-name" data-abrir-modal="${p.id}">${p.nombre}</span>
           <span class="product-price">${formatoPrecio(p.precio)}</span>
           <div class="product-actions">
             <button class="btn btn-rosa btn-sm btn-block" data-agregar="${p.id}">Agregar al pedido</button>
@@ -119,6 +119,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   function abrirModal(p) {
     modalImg.src = p.imagen;
     modalImg.alt = p.nombre;
+    modalImg.style.transform = "scale(1)";
+    modalImg.style.transformOrigin = "center center";
+    const modalImgBox = document.querySelector(".modal-img");
+    if (modalImgBox) modalImgBox.classList.remove("is-zoomed");
     modalNombre.textContent = p.nombre;
     modalCategoria.textContent = p.categoria;
     modalPrecio.textContent = formatoPrecio(p.precio);

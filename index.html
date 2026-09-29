@@ -303,7 +303,10 @@
 <div class="modal-overlay" id="modal">
   <div class="modal-box" style="position:relative;">
     <button class="modal-close" data-cerrar-modal aria-label="Cerrar">✕</button>
-    <div class="modal-img"><img id="modal-img" src="" alt="" /></div>
+    <div class="modal-img">
+      <img id="modal-img" src="" alt="" />
+      <span class="zoom-hint">🔍 Pasá el cursor para zoom</span>
+    </div>
     <div class="modal-info">
       <span class="product-cat" id="modal-categoria"></span>
       <span class="product-name" id="modal-nombre"></span>
@@ -329,6 +332,10 @@
       if (!modal) return;
       modalImg.src = p.imagen;
       modalImg.alt = p.nombre;
+      modalImg.style.transform = "scale(1)";
+      modalImg.style.transformOrigin = "center center";
+      const modalImgBox = document.querySelector(".modal-img");
+      if (modalImgBox) modalImgBox.classList.remove("is-zoomed");
       modalNombre.textContent = p.nombre;
       modalCategoria.textContent = `${p.categoria} · ${p.tipo === "fototorta" ? "Fototorta" : "Chocotransfer"}`;
       modalPrecio.textContent = formatoPrecio(p.precio);
@@ -367,7 +374,7 @@
           </div>
           <div class="product-body">
             <span class="product-cat">${p.categoria} · ${p.tipo === "fototorta" ? "Fototorta" : "Chocotransfer"}</span>
-            <span class="product-name">${p.nombre}</span>
+            <span class="product-name" data-abrir-modal="${p.id}">${p.nombre}</span>
             <span class="product-price">${formatoPrecio(p.precio)}</span>
             <div class="product-actions" style="display:flex; gap:6px;">
               <button class="btn btn-rosa btn-sm btn-block" data-agregar="${p.id}">Agregar</button>
