@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestor de Catálogo — Laminas Piniata</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    body {
+      background: var(--crema);
+      color: var(--chocolate);
+      padding-bottom: 60px;
+    }
+    .admin-header {
+      background: var(--chocolate);
+      color: var(--crema);
+      padding: 16px 0;
+      box-shadow: var(--sombra);
+      position: sticky;
+      top: 0;
+      z-index: 60;
+    }
+    .admin-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .admin-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+    .admin-badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #2ECC71;
+    }
+    .status-dot.offline {
+      background: #F1C40F;
+    }
+
+    .admin-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .stat-card {
+      background: var(--superficie);
+      border-radius: var(--radio-m);
+      padding: 18px;
+      box-shadow: var(--sombra-suave);
+      border-left: 4px solid var(--rosa-fuerte);
+    }
+    .stat-card.choco { border-left-color: var(--chocolate); }
+    .stat-card.ready { border-left-color: var(--dorado); }
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--chocolate);
+      line-height: 1.1;
+    }
+    .stat-lbl {
+      font-size: 0.82rem;
+      font-weight: 700;
+      opacity: 0.75;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 4px;
+    }
+
+    .admin-panel-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    @media (max-width: 992px) {
+      .admin-panel-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Formulario de carga */
+    .admin-form-card {
+      background: var(--superficie);
+      border-radius: var(--radio-l);
+      padding: 24px;
+      box-shadow: var(--sombra);
+      position: sticky;
+      top: 90px;
+    }
+    .admin-form-card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+      color: var(--chocolate);
+    }
+    .admin-form-card p {
+      font-size: 0.86rem;
+      opacity: 0.75;
+      margin-bottom: 18px;
+    }
+
+    .image-preview-zone {
+      width: 100%;
+      height: 180px;
+      border: 2px dashed rgba(90, 56, 37, 0.25);
+      border-radius: var(--radio-m);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 12px;
+      cursor: pointer;
+      background: #FCF9F6;
+      transition: all 0.2s ease;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 14px;
+    }
+    .image-preview-zone:hover {
+      border-color: var(--rosa-fuerte);
+      background: #FFF5F7;
+    }
+    .image-preview-zone img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: var(--radio-s);
+    }
+    .image-preview-zone .prompt-text {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--chocolate);
+    }
+    .image-preview-zone .prompt-sub {
+      font-size: 0.72rem;
+      opacity: 0.65;
+      margin-top: 4px;
+    }
+
+    .source-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .source-tab-btn {
+      flex: 1;
+      padding: 7px 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1px solid rgba(90, 56, 37, 0.18);
+      background: var(--crema);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .source-tab-btn.active {
+      background: var(--rosa-fuerte);
+      color: #fff;
+      border-color: var(--rosa-fuerte);
+    }
+
+    /* Listado de productos */
+    .admin-list-section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .admin-toolbar {
+      background: var(--superficie);
+      padding: 14px 18px;
+      border-radius: var(--radio-m);
+      box-shadow: var(--sombra-suave);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-search {
+      flex: 1 1 240px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--crema);
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(90, 56, 37, 0.12);
+    }
+    .admin-search input {
+      border: none;
+      background: transparent;
+      outline: none;
+      width: 100%;
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 18px;
+    }
+
+    .admin-card {
+      background: var(--superficie);
+      border-radius: var(--radio-m);
+      overflow: hidden;
+      box-shadow: var(--sombra-suave);
+      border: 1px solid rgba(90, 56, 37, 0.08);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      position: relative;
+    }
+    .admin-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--sombra);
+    }
+    .admin-card-thumb {
+      aspect-ratio: 1 / 1;
+      background: #FAF7F2;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      position: relative;
+    }
+    .admin-card-thumb img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .admin-card-body {
+      padding: 12px 14px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+    .admin-card-cat {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--rosa-fuerte);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .admin-card-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--chocolate);
+      margin-bottom: 2px;
+    }
+    .admin-card-price {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--chocolate);
+    }
+    .admin-card-id {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(46, 28, 20, 0.75);
+      color: #FFF;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 3px 7px;
+      border-radius: 999px;
+      backdrop-filter: blur(4px);
+    }
+    .btn-delete-prod {
+      background: #FFEBEE;
+      color: #D32F2F;
+      border: 1px solid #FFCDD2;
+      border-radius: var(--radio-s);
+      padding: 9px 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 8px;
+      transition: all 0.15s ease;
+      width: 100%;
+    }
+    .btn-delete-prod:hover {
+      background: #D32F2F;
+      color: #FFF;
+      border-color: #D32F2F;
+      box-shadow: 0 4px 12px rgba(211, 47, 47, 0.35);
+    }
+
+    /* Modal de confirmación */
+    .confirm-modal-box {
+      background: var(--superficie);
+      border-radius: var(--radio-l);
+      padding: 24px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: var(--sombra);
+    }
+    .confirm-modal-box .warn-icon {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    /* Toast */
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--chocolate);
+      color: #FFF;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .toast-msg.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+<header class="admin-header">
+  <div class="container admin-nav">
+    <div class="admin-title">
+      <span style="font-size:1.6rem;">⚙️</span>
+      <div>
+        <div>Gestor de Catálogo</div>
+        <span class="admin-badge-status" id="badge-conexion">
+          <span class="status-dot" id="status-dot"></span>
+          <span id="status-text">Detectando servidor...</span>
+        </span>
+      </div>
+    </div>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <a href="index.html" class="btn btn-sm btn-outline" style="color:var(--crema); border-color:rgba(255,255,255,0.4);">
+        🛍️ Ir a la Tienda
+      </a>
+      <button type="button" class="btn btn-sm btn-rosa" id="btn-exportar-json" title="Descargar copia del archivo products.json">
+        📥 Descargar JSON
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <!-- Tarjetas de estadísticas -->
+  <div class="admin-stats">
+    <div class="stat-card">
+      <div class="stat-num" id="stat-total">0</div>
+      <div class="stat-lbl">Productos en Tienda</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="stat-tortas">0</div>
+      <div class="stat-lbl">Fototortas</div>
+    </div>
+    <div class="stat-card choco">
+      <div class="stat-num" id="stat-choco">0</div>
+      <div class="stat-lbl">Chocotransfer</div>
+    </div>
+    <div class="stat-card ready">
+      <div class="stat-num" id="stat-disponibles">0</div>
+      <div class="stat-lbl">Fotos sin publicar</div>
+    </div>
+  </div>
+
+  <div class="admin-panel-grid">
+    <!-- Columna 1: Formulario para Cargar Producto -->
+    <aside class="admin-form-card">
+      <h2>➕ Cargar Nuevo Producto</h2>
+      <p>Subí una foto o elegí una de las imágenes que ya tenés en la carpeta.</p>
+
+      <form id="form-nuevo-prod">
+        <!-- Pestañas de origen de imagen -->
+        <label style="display:block; font-weight:700; font-size:0.86rem; margin-bottom:6px;">Imagen del producto *</label>
+        <div class="source-tabs">
+          <button type="button" class="source-tab-btn active" id="tab-upload">📁 Subir archivo</button>
+          <button type="button" class="source-tab-btn" id="tab-existing">🖼️ Fotos en carpeta</button>
+        </div>
+
+        <!-- Modo 1: Subir archivo -->
+        <div id="box-upload">
+          <input type="file" id="input-file-prod" accept="image/png, image/jpeg, image/webp" style="display:none;" />
+          <div class="image-preview-zone" id="preview-zone" title="Hacé clic para seleccionar una imagen">
+            <span style="font-size:2.2rem; margin-bottom:6px;">📸</span>
+            <span class="prompt-text">Hacé clic para elegir foto</span>
+            <span class="prompt-sub">JPG, PNG o WEBP</span>
+          </div>
+        </div>
+
+        <!-- Modo 2: Elegir de imágenes disponibles en carpeta -->
+        <div id="box-existing" style="display:none; margin-bottom:14px;">
+          <select id="select-existing-img" class="filter-select" style="width:100%; border-radius:var(--radio-s);">
+            <option value="">Cargando fotos disponibles...</option>
+          </select>
+          <div class="image-preview-zone" id="preview-existing-zone" style="margin-top:10px; height:140px;">
+            <span class="prompt-sub">Seleccioná una imagen para previsualizar</span>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="nombre-prod">Nombre del producto *</label>
+          <input type="text" id="nombre-prod" required placeholder="Ej: Taylor Swift / Dragón Ball / Cumple 15" />
+        </div>
+
+        <div class="form-field">
+          <label for="tipo-prod">Tipo de producto *</label>
+          <select id="tipo-prod" required>
+            <option value="fototorta" selected>🍰 Lámina Fototorta ($2.500)</option>
+            <option value="chocotransfer">🍫 Chocotransfer ($4.500)</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="categoria-prod">Categoría *</label>
+          <select id="categoria-prod" required>
+            <!-- Se poblará dinámicamente -->
+            <option value="Animales">Animales</option>
+            <option value="Futbol">Futbol</option>
+            <option value="Disney">Disney</option>
+            <option value="Dibujos animados">Dibujos animados</option>
+            <option value="Peliculas">Peliculas</option>
+            <option value="Series">Series</option>
+            <option value="Cumpleanos">Cumpleaños</option>
+            <option value="Juegos">Juegos</option>
+            <option value="Basquet">Basquet</option>
+            <option value="Halloween">Halloween 🎃</option>
+            <option value="__otra__">➕ Escribir nueva categoría...</option>
+          </select>
+          <input type="text" id="categoria-nueva" placeholder="Escribí el nombre de la nueva categoría" style="display:none; margin-top:8px;" />
+        </div>
+
+        <div class="form-field">
+          <label for="precio-prod">Precio ($ ARS)</label>
+          <input type="number" id="precio-prod" value="2500" min="0" step="50" required />
+        </div>
+
+        <div class="form-field" style="display:flex; align-items:center; gap:8px;">
+          <input type="checkbox" id="destacado-prod" style="width:18px; height:18px; margin:0;" />
+          <label for="destacado-prod" style="margin:0; font-size:0.88rem; cursor:pointer;">⭐ Destacar en la portada principal</label>
+        </div>
+
+        <button type="submit" class="btn btn-rosa btn-block" style="margin-top:14px; padding:12px;" id="btn-submit-prod">
+          💾 Guardar y Publicar
+        </button>
+      </form>
+    </aside>
+
+    <!-- Columna 2: Catálogo Actual y Eliminación -->
+    <section class="admin-list-section">
+      <div class="admin-toolbar">
+        <div class="admin-search">
+          <span>🔍</span>
+          <input type="text" id="admin-search-input" placeholder="Buscar por nombre, ID o categoría..." />
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <select id="admin-filter-tipo" class="filter-select" style="padding:8px 12px; font-size:0.84rem;">
+            <option value="todos">Todos los tipos</option>
+            <option value="fototorta">Fototortas</option>
+            <option value="chocotransfer">Chocotransfer</option>
+          </select>
+          <select id="admin-filter-cat" class="filter-select" style="padding:8px 12px; font-size:0.84rem;">
+            <option value="todas">Todas las categorías</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <span style="font-size:0.9rem; font-weight:700; opacity:0.8;" id="count-display">Cargando productos...</span>
+      </div>
+
+      <!-- Grilla de productos para administrar y borrar -->
+      <div class="admin-grid" id="admin-product-grid">
+        <!-- Renderizado dinámicamente -->
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- Modal de confirmación para eliminar -->
+<div class="modal-overlay" id="modal-confirm" style="display:none;">
+  <div class="confirm-modal-box">
+    <div class="warn-icon">🗑️</div>
+    <h3 style="margin-bottom:8px;">¿Eliminar producto?</h3>
+    <p id="confirm-text" style="font-size:0.9rem; opacity:0.85; margin-bottom:20px;"></p>
+    <div style="display:flex; gap:10px;">
+      <button type="button" class="btn btn-outline btn-block" id="btn-cancel-delete">Cancelar</button>
+      <button type="button" class="btn btn-block" id="btn-confirm-delete" style="background:#D32F2F; color:#FFF;">Sí, eliminar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Notificación Toast -->
+<div class="toast-msg" id="toast-msg">✅ Cambios guardados con éxito</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  let productos = [];
+  let isServerOnline = false;
+  let productoAEliminar = null;
+  let imagenDataParaGuardar = null;
+
+  const badgeConexion = document.getElementById("badge-conexion");
+  const statusDot = document.getElementById("status-dot");
+  const statusText = document.getElementById("status-text");
+  const grid = document.getElementById("admin-product-grid");
+  const searchInput = document.getElementById("admin-search-input");
+  const filterTipo = document.getElementById("admin-filter-tipo");
+  const filterCat = document.getElementById("admin-filter-cat");
+  const countDisplay = document.getElementById("count-display");
+  const formNuevo = document.getElementById("form-nuevo-prod");
+  const btnExportar = document.getElementById("btn-exportar-json");
+  const toastEl = document.getElementById("toast-msg");
+
+  const statTotal = document.getElementById("stat-total");
+  const statTortas = document.getElementById("stat-tortas");
+  const statChoco = document.getElementById("stat-choco");
+  const statDisponibles = document.getElementById("stat-disponibles");
+
+  // Pestañas de origen de foto
+  const tabUpload = document.getElementById("tab-upload");
+  const tabExisting = document.getElementById("tab-existing");
+  const boxUpload = document.getElementById("box-upload");
+  const boxExisting = document.getElementById("box-existing");
+  const inputFile = document.getElementById("input-file-prod");
+  const previewZone = document.getElementById("preview-zone");
+  const selectExisting = document.getElementById("select-existing-img");
+  const previewExistingZone = document.getElementById("preview-existing-zone");
+
+  const tipoProd = document.getElementById("tipo-prod");
+  const precioProd = document.getElementById("precio-prod");
+  const categoriaProd = document.getElementById("categoria-prod");
+  const categoriaNueva = document.getElementById("categoria-nueva");
+
+  const modalConfirm = document.getElementById("modal-confirm");
+  const confirmText = document.getElementById("confirm-text");
+  const btnCancelDelete = document.getElementById("btn-cancel-delete");
+  const btnConfirmDelete = document.getElementById("btn-confirm-delete");
+
+  function showToast(msg, isError = false) {
+    toastEl.textContent = msg;
+    toastEl.style.background = isError ? "#D32F2F" : "var(--chocolate)";
+    toastEl.classList.add("show");
+    setTimeout(() => toastEl.classList.remove("show"), 2800);
+  }
+
+  // Detectar si el servidor local Node.js está disponible
+  async function checkServer() {
+    try {
+      const res = await fetch("/api/productos");
+      if (res.ok) {
+        isServerOnline = true;
+        statusDot.classList.remove("offline");
+        statusText.textContent = "Servidor local activo (guardado automático)";
+        return await res.json();
+      }
+    } catch (e) {
+      // Servidor no disponible, cargar de data/products.json
+    }
+
+    isServerOnline = false;
+    statusDot.classList.add("offline");
+    statusText.textContent = "Modo estático (descarga manual)";
+    const res = await fetch("data/products.json");
+    return await res.json();
+  }
+
+  async function cargarImagenesDisponibles() {
+    if (!isServerOnline) {
+      statDisponibles.textContent = "0";
+      return;
+    }
+    try {
+      const res = await fetch("/api/imagenes-disponibles");
+      const data = await res.json();
+      const list = data.disponibles || [];
+      statDisponibles.textContent = list.length;
+
+      if (list.length) {
+        selectExisting.innerHTML = '<option value="">-- Seleccionar imagen de carpeta --</option>' +
+          list.map(f => `<option value="${f}">${f.replace('images/fototorta/', '').replace('images/chocotransfer/', '')}</option>`).join('');
+      } else {
+        selectExisting.innerHTML = '<option value="">No hay imágenes sin registrar en la carpeta</option>';
+      }
+    } catch (e) {
+      statDisponibles.textContent = "0";
+    }
+  }
+
+  function actualizarStats() {
+    statTotal.textContent = productos.length;
+    statTortas.textContent = productos.filter(p => p.tipo === "fototorta").length;
+    statChoco.textContent = productos.filter(p => p.tipo === "chocotransfer").length;
+  }
+
+  function poblarCategorias() {
+    const cats = [...new Set(productos.map(p => p.categoria).filter(Boolean))].sort();
+    adminFilterCatOptions(cats);
+  }
+
+  function adminFilterCatOptions(cats) {
+    const current = filterCat.value;
+    filterCat.innerHTML = '<option value="todas">Todas las categorías</option>' +
+      cats.map(c => `<option value="${c}">${c}</option>`).join('');
+    if (cats.includes(current)) filterCat.value = current;
+  }
+
+  // Renderizar la lista de productos
+  function renderProductos() {
+    const term = (searchInput.value || "").toLowerCase().trim();
+    const t = filterTipo.value;
+    const c = filterCat.value;
+
+    const filtrados = productos.filter(p => {
+      if (t !== "todos" && p.tipo !== t) return false;
+      if (c !== "todas" && p.categoria !== c) return false;
+      if (term) {
+        const matchesName = (p.nombre || "").toLowerCase().includes(term);
+        const matchesCat = (p.categoria || "").toLowerCase().includes(term);
+        const matchesId = String(p.id).includes(term);
+        if (!matchesName && !matchesCat && !matchesId) return false;
+      }
+      return true;
+    });
+
+    countDisplay.textContent = `Mostrando ${filtrados.length} de ${productos.length} productos`;
+
+    if (!filtrados.length) {
+      grid.innerHTML = `
+        <div style="grid-column:1/-1; text-align:center; padding:40px; background:var(--superficie); border-radius:var(--radio-m); opacity:0.8;">
+          <p style="font-size:1.1rem; font-weight:700;">No se encontraron productos con ese filtro.</p>
+        </div>`;
+      return;
+    }
+
+    grid.innerHTML = filtrados.map(p => `
+      <article class="admin-card" data-id="${p.id}">
+        <span class="admin-card-id">ID ${p.id}</span>
+        <div class="admin-card-thumb">
+          <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" />
+        </div>
+        <div class="admin-card-body">
+          <span class="admin-card-cat">${p.categoria} · ${p.tipo === "fototorta" ? "Fototorta" : "Chocotransfer"}</span>
+          <span class="admin-card-title">${p.nombre}</span>
+          <span class="admin-card-price">$ ${p.precio.toLocaleString('es-AR')}</span>
+          <button type="button" class="btn-delete-prod" data-delete-id="${p.id}">
+            🗑️ Eliminar Producto
+          </button>
+        </div>
+      </article>
+    `).join('');
+
+    // Listener para botones de eliminar
+    grid.querySelectorAll("[data-delete-id]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = parseInt(btn.dataset.deleteId, 10);
+        const p = productos.find(x => x.id === id);
+        if (p) solicitarEliminacion(p);
+      });
+    });
+  }
+
+  // Solicitud de eliminación
+  function solicitarEliminacion(p) {
+    productoAEliminar = p;
+    confirmText.innerHTML = `¿Estás seguro de que querés eliminar <strong>"${p.nombre}"</strong> (ID ${p.id}) del catálogo?`;
+    modalConfirm.style.display = "flex";
+  }
+
+  btnCancelDelete.addEventListener("click", () => {
+    modalConfirm.style.display = "none";
+    productoAEliminar = null;
+  });
+
+  btnConfirmDelete.addEventListener("click", async () => {
+    if (!productoAEliminar) return;
+    const id = productoAEliminar.id;
+    const nombre = productoAEliminar.nombre;
+    modalConfirm.style.display = "none";
+
+    if (isServerOnline) {
+      try {
+        const res = await fetch(`/api/productos/${id}`, { method: "DELETE" });
+        const resData = await res.json();
+        if (resData.success) {
+          productos = productos.filter(p => p.id !== id);
+          actualizarStats();
+          poblarCategorias();
+          renderProductos();
+          showToast(`🗑️ "${nombre}" eliminado del catálogo.`);
+        } else {
+          showToast(`Error: ${resData.error}`, true);
+        }
+      } catch (err) {
+        showToast("Error de conexión al eliminar producto.", true);
+      }
+    } else {
+      // Modo estático sin servidor
+      productos = productos.filter(p => p.id !== id);
+      actualizarStats();
+      poblarCategorias();
+      renderProductos();
+      showToast(`🗑️ Eliminado en memoria. Recordá descargar el JSON.`);
+    }
+
+    productoAEliminar = null;
+  });
+
+  // Filtros y buscador
+  searchInput.addEventListener("input", renderProductos);
+  filterTipo.addEventListener("change", renderProductos);
+  filterCat.addEventListener("change", renderProductos);
+
+  // Tabs de origen de foto
+  tabUpload.addEventListener("click", () => {
+    tabUpload.classList.add("active");
+    tabExisting.classList.remove("active");
+    boxUpload.style.display = "block";
+    boxExisting.style.display = "none";
+  });
+
+  tabExisting.addEventListener("click", () => {
+    tabExisting.classList.add("active");
+    tabUpload.classList.remove("active");
+    boxExisting.style.display = "block";
+    boxUpload.style.display = "none";
+  });
+
+  // Carga de archivo
+  previewZone.addEventListener("click", () => inputFile.click());
+
+  inputFile.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      imagenDataParaGuardar = ev.target.result;
+      previewZone.innerHTML = `<img src="${imagenDataParaGuardar}" alt="Vista previa" />`;
+      // Sugerir nombre a partir del archivo si el campo está vacío
+      if (!document.getElementById("nombre-prod").value) {
+        const nameClean = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+        document.getElementById("nombre-prod").value = nameClean.charAt(0).toUpperCase() + nameClean.slice(1);
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // Selección de imagen existente
+  selectExisting.addEventListener("change", (e) => {
+    const val = e.target.value;
+    if (val) {
+      imagenDataParaGuardar = val;
+      previewExistingZone.innerHTML = `<img src="${val}" alt="Vista previa" style="max-height:100%; max-width:100%; object-fit:contain;" />`;
+      if (!document.getElementById("nombre-prod").value) {
+        const base = val.split('/').pop().replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+        document.getElementById("nombre-prod").value = base.charAt(0).toUpperCase() + base.slice(1);
+      }
+    } else {
+      imagenDataParaGuardar = null;
+      previewExistingZone.innerHTML = `<span class="prompt-sub">Seleccioná una imagen para previsualizar</span>`;
+    }
+  });
+
+  // Ajustar precio según tipo
+  tipoProd.addEventListener("change", () => {
+    if (tipoProd.value === "chocotransfer") {
+      precioProd.value = 4500;
+    } else {
+      precioProd.value = 2500;
+    }
+  });
+
+  // Toggle otra categoría
+  categoriaProd.addEventListener("change", () => {
+    if (categoriaProd.value === "__otra__") {
+      categoriaNueva.style.display = "block";
+      categoriaNueva.required = true;
+      categoriaNueva.focus();
+    } else {
+      categoriaNueva.style.display = "none";
+      categoriaNueva.required = false;
+    }
+  });
+
+  // Formulario: Guardar nuevo producto
+  formNuevo.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!imagenDataParaGuardar) {
+      alert("Por favor cargá o seleccioná una foto para el producto.");
+      return;
+    }
+
+    let catFinal = categoriaProd.value;
+    if (catFinal === "__otra__") {
+      catFinal = categoriaNueva.value.trim() || "Varios";
+    }
+
+    const nuevo = {
+      nombre: document.getElementById("nombre-prod").value.trim(),
+      tipo: tipoProd.value,
+      categoria: catFinal,
+      precio: Number(precioProd.value) || 2500,
+      destacado: document.getElementById("destacado-prod").checked,
+      imagen: imagenDataParaGuardar
+    };
+
+    const submitBtn = document.getElementById("btn-submit-prod");
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Guardando...";
+
+    if (isServerOnline) {
+      try {
+        const res = await fetch("/api/productos", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(nuevo)
+        });
+        const data = await res.json();
+        if (data.success) {
+          productos.push(data.producto);
+          actualizarStats();
+          poblarCategorias();
+          renderProductos();
+          formNuevo.reset();
+          imagenDataParaGuardar = null;
+          previewZone.innerHTML = `
+            <span style="font-size:2.2rem; margin-bottom:6px;">📸</span>
+            <span class="prompt-text">Hacé clic para elegir foto</span>
+            <span class="prompt-sub">JPG, PNG o WEBP</span>`;
+          categoriaNueva.style.display = "none";
+          cargarImagenesDisponibles();
+          showToast(`🎉 ¡"${nuevo.nombre}" guardado y publicado!`);
+        } else {
+          showToast(`Error: ${data.error}`, true);
+        }
+      } catch (err) {
+        showToast("Error de conexión al guardar producto.", true);
+      }
+    } else {
+      // Modo estático
+      const maxId = productos.reduce((max, p) => Math.max(max, p.id || 0), 0);
+      nuevo.id = maxId + 1;
+      nuevo.activo = true;
+      productos.push(nuevo);
+      actualizarStats();
+      poblarCategorias();
+      renderProductos();
+      formNuevo.reset();
+      showToast(`🎉 Producto agregado en memoria. Descargá el JSON para actualizar.`);
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = "💾 Guardar y Publicar";
+  });
+
+  // Botón exportar/descargar JSON
+  btnExportar.addEventListener("click", () => {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(productos, null, 4));
+    const a = document.createElement("a");
+    a.href = dataStr;
+    a.download = "products.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    showToast("📥 Archivo products.json descargado.");
+  });
+
+  // Cargar datos iniciales
+  productos = await checkServer();
+  actualizarStats();
+  poblarCategorias();
+  renderProductos();
+  cargarImagenesDisponibles();
+});
+</script>
+</body>
+</html>
