@@ -1370,100 +1370,416 @@ h1, h2, h3, .display {
    ========================================================= */
 .customizer-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.06fr 0.94fr;
   gap: 32px;
   align-items: start;
   margin-top: 24px;
 }
-.simulator-card {
+.simulator-card,
+.customizer-form-card {
   background: var(--superficie);
   border-radius: var(--radio-l);
-  padding: 30px;
+  padding: 28px;
   box-shadow: var(--sombra);
-  position: sticky;
-  top: 90px;
+  box-sizing: border-box;
+}
+.simulator-card {
   text-align: center;
 }
-.format-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
+.customizer-form-card {
+  text-align: left;
 }
-.format-tab-btn {
-  background: var(--crema);
-  border: 1.5px solid rgba(90, 56, 37, 0.15);
-  border-radius: 999px;
-  padding: 8px 16px;
-  font-size: 0.85rem;
+
+.live-badge,
+.options-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
   font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.live-badge {
+  background: rgba(224, 76, 122, 0.12);
+  color: var(--rosa-fuerte);
+}
+.options-badge {
+  background: rgba(90, 56, 37, 0.08);
+  color: var(--chocolate);
+}
+.live-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--rosa-fuerte);
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.7; }
+}
+
+/* Grilla de selección de 3 formatos equilibrada */
+.format-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.format-card-btn {
+  background: var(--crema);
+  border: 2px solid rgba(90, 56, 37, 0.12);
+  border-radius: var(--radio-m);
+  padding: 10px 6px;
   cursor: pointer;
   color: var(--chocolate);
-  transition: all 0.2s ease;
-}
-.format-tab-btn.active {
-  background: var(--rosa-fuerte);
-  color: var(--blanco);
-  border-color: var(--rosa-fuerte);
-  box-shadow: var(--sombra-suave);
-}
-.sheet-stage {
-  background: radial-gradient(circle, #FFF4E6 0%, #FEE8D6 100%);
-  border-radius: var(--radio-m);
-  padding: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 380px;
-  position: relative;
+  gap: 3px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 74px;
+  box-sizing: border-box;
 }
+.format-card-btn:hover {
+  border-color: var(--rosa-pastel);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(90, 56, 37, 0.08);
+}
+.format-card-btn.active {
+  background: #FFF0F4;
+  border-color: var(--rosa-fuerte);
+  color: var(--chocolate);
+  box-shadow: 0 4px 14px rgba(217, 108, 138, 0.25);
+}
+.format-card-btn.active .fmt-title {
+  color: var(--rosa-fuerte);
+}
+.fmt-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+.fmt-title {
+  font-weight: 700;
+  font-size: 0.86rem;
+  line-height: 1.15;
+}
+.fmt-sub {
+  font-size: 0.70rem;
+  opacity: 0.75;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+/* Escenario / Tarjeta del Simulador */
+.sheet-stage {
+  background: radial-gradient(circle, #FFF4E6 0%, #FDE9D9 100%);
+  border-radius: var(--radio-m);
+  padding: 22px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 385px;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid rgba(90, 56, 37, 0.08);
+}
+.stage-info-pill {
+  margin-top: 14px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(90, 56, 37, 0.12);
+  color: var(--chocolate);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(90, 56, 37, 0.06);
+}
+
+/* Mockup Base Común */
 .sheet-mockup {
   position: relative;
-  width: 270px;
-  height: 270px;
   background: var(--blanco);
-  box-shadow: 0 10px 25px -5px rgba(90, 56, 37, 0.25);
+  box-shadow: 0 12px 28px -6px rgba(90, 56, 37, 0.25);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 4px solid var(--blanco);
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
 }
+
+/* 1. Formato Redonda (Torta) con base de pastelería */
 .sheet-mockup.round {
-  border-radius: 50%;
-  aspect-ratio: 1 / 1;
-}
-.sheet-mockup.rect {
-  width: 250px;
-  height: 330px;
-  border-radius: 6px;
-}
-.sheet-mockup.toppers {
-  border-radius: 14px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  padding: 14px;
-  background: #FFFBF7;
   width: 270px;
   height: 270px;
-}
-.topper-circle {
-  aspect-ratio: 1 / 1;
   border-radius: 50%;
-  background: var(--blanco);
-  box-shadow: 0 4px 10px rgba(90, 56, 37, 0.15);
-  overflow: hidden;
-  position: relative;
+  padding: 8px;
+  background: conic-gradient(from 0deg, #E6D3B3, #FFF6E5, #DFBF91, #FFF6E5, #D2AC7B, #FFF5E2, #E6D3B3);
+  box-shadow: 0 12px 28px -6px rgba(90, 56, 37, 0.3), inset 0 2px 5px rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  border: none;
 }
-.topper-circle img {
+.round-cake-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(90, 56, 37, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.round-cut-guide {
+  position: absolute;
+  inset: 10px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(217, 108, 138, 0.75);
+  pointer-events: none;
+  z-index: 4;
+}
+.round-cut-tag {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--rosa-fuerte);
+  border: 1px solid rgba(217, 108, 138, 0.4);
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  z-index: 5;
+  pointer-events: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  white-space: nowrap;
+}
+
+/* 2. Formato Rectangular A4 con tamaño ajustable */
+.sheet-mockup.rect {
+  width: 245px;
+  height: 346px; /* Proporción A4 oficial ~ 1:1.414 */
+  border-radius: 4px;
+  background: #FFFFFF;
+  border: 1px solid rgba(90, 56, 37, 0.12);
+  box-shadow: 0 12px 30px -8px rgba(90, 56, 37, 0.28);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+.rect-crop-corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: rgba(90, 56, 37, 0.35);
+  border-style: solid;
+  pointer-events: none;
+  z-index: 4;
+}
+.rect-crop-corner.tl { top: 5px; left: 5px; border-width: 1.5px 0 0 1.5px; }
+.rect-crop-corner.tr { top: 5px; right: 5px; border-width: 1.5px 1.5px 0 0; }
+.rect-crop-corner.bl { bottom: 5px; left: 5px; border-width: 0 0 1.5px 1.5px; }
+.rect-crop-corner.br { bottom: 5px; right: 5px; border-width: 0 1.5px 1.5px 0; }
+
+.rect-scalable-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14);
+  border: 1px dashed rgba(217, 108, 138, 0.85);
+  background: #FFFDF9;
+  z-index: 2;
+  overflow: hidden;
+  transition: width 0.15s ease, height 0.15s ease;
+}
+.rect-scalable-box img.user-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
+
+/* 3. Formato Mini Toppers (x24) con los 24 círculos reales */
+.sheet-mockup.toppers {
+  width: 245px;
+  height: 346px; /* Hoja A4 con 24 círculos (4 cols x 6 rows) */
+  border-radius: 4px;
+  background: #FFFFFF;
+  border: 1px solid rgba(90, 56, 37, 0.12);
+  box-shadow: 0 12px 30px -8px rgba(90, 56, 37, 0.28);
+  position: relative;
+  padding: 10px 8px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.toppers-grid-24 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 5px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.topper-circle-item {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: #FFFBF7;
+  border: 1px dashed rgba(217, 108, 138, 0.65);
+  box-shadow: 0 1px 3px rgba(90, 56, 37, 0.1);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.topper-circle-item.empty {
+  background: #FFF8F0;
+  color: rgba(90, 56, 37, 0.35);
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+.topper-circle-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.toppers-prompt-overlay {
+  position: absolute;
+  inset: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(2px);
+  border-radius: var(--radio-s);
+  border: 2px dashed var(--rosa-fuerte);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
+  z-index: 5;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 6px 16px rgba(90, 56, 37, 0.12);
+}
+.toppers-prompt-overlay:hover {
+  background: rgba(255, 240, 245, 0.96);
+  transform: scale(1.01);
+}
+
+/* Panel de control manual de tamaño para Rectangular A4 */
+.size-control-panel {
+  background: #FFFDF9;
+  border: 1.5px solid rgba(217, 108, 138, 0.3);
+  border-radius: var(--radio-m);
+  padding: 14px 16px;
+  margin-top: 14px;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(90, 56, 37, 0.05);
+}
+.size-control-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.size-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--chocolate);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+.size-value-badge {
+  background: var(--rosa-fuerte);
+  color: #FFFFFF;
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.slider-row input[type="range"] {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  background: #F0D9DE;
+  accent-color: var(--rosa-fuerte);
+  cursor: pointer;
+}
+.slider-min, .slider-max {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--chocolate);
+  opacity: 0.7;
+}
+.size-presets {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.preset-btn {
+  background: var(--crema);
+  border: 1px solid rgba(90, 56, 37, 0.15);
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--chocolate);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.preset-btn:hover {
+  border-color: var(--rosa-fuerte);
+}
+.preset-btn.active {
+  background: var(--rosa-fuerte);
+  color: #FFFFFF;
+  border-color: var(--rosa-fuerte);
+}
+.size-dimensions-hint {
+  font-size: 0.76rem;
+  color: var(--chocolate);
+  opacity: 0.88;
+  line-height: 1.35;
+  border-top: 1px dashed rgba(90, 56, 37, 0.12);
+  padding-top: 8px;
+}
+
+/* Imagen y textos */
 .sheet-mockup img.user-img {
   width: 100%;
   height: 100%;
@@ -1484,6 +1800,7 @@ h1, h2, h3, .display {
   word-break: break-word;
   padding: 4px 8px;
   line-height: 1.25;
+  z-index: 6;
 }
 .sheet-mockup.round .sheet-text-overlay {
   bottom: 30px;
@@ -1585,32 +1902,6 @@ h1, h2, h3, .display {
   margin-top: 16px;
   flex-wrap: wrap;
 }
-.live-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(224, 76, 122, 0.12);
-  color: var(--rosa-fuerte);
-  font-size: 0.78rem;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 999px;
-  margin-bottom: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-.live-badge-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--rosa-fuerte);
-  animation: pulse 1.8s infinite;
-}
-@keyframes pulse {
-  0% { transform: scale(0.95); opacity: 0.7; }
-  50% { transform: scale(1.3); opacity: 1; }
-  100% { transform: scale(0.95); opacity: 0.7; }
-}
 .whatsapp-modal-content {
   background: var(--superficie);
   border-radius: var(--radio-l);
@@ -1642,13 +1933,14 @@ h1, h2, h3, .display {
 
 @media (max-width: 860px) {
   .customizer-layout { grid-template-columns: 1fr; gap: 20px; }
-  .simulator-card { position: static; padding: 20px 14px; }
-  .sheet-stage { padding: 16px 10px; min-height: 290px; }
-  .sheet-mockup { width: min(250px, 76vw); height: min(250px, 76vw); }
-  .sheet-mockup.rect { width: min(230px, 70vw); height: min(290px, 88vw); }
-  .sheet-mockup.toppers { width: min(250px, 76vw); height: min(250px, 76vw); gap: 8px; padding: 10px; }
-  .format-tabs { gap: 6px; margin-bottom: 14px; }
-  .format-tab-btn { padding: 10px 12px; font-size: 0.84rem; min-height: 44px; flex: 1 1 auto; text-align: center; }
+  .simulator-card, .customizer-form-card { padding: 20px 14px; }
+  .sheet-mockup.round { width: min(260px, 74vw); height: min(260px, 74vw); }
+  .sheet-mockup.rect { width: min(230px, 68vw); height: min(325px, 96vw); }
+  .sheet-mockup.toppers { width: min(230px, 68vw); height: min(325px, 96vw); }
+  .format-selector-grid { gap: 6px; }
+  .format-card-btn { padding: 8px 4px; min-height: 64px; }
+  .fmt-title { font-size: 0.78rem; }
+  .fmt-sub { font-size: 0.65rem; }
   .preview-tools { gap: 8px; }
   .preview-tools .btn { width: 100%; min-height: 44px; justify-content: center; }
 }

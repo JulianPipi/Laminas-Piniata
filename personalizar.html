@@ -100,10 +100,22 @@
         <span class="live-badge-dot"></span> Simulador en tiempo real
       </div>
 
-      <div class="format-tabs">
-        <button type="button" class="format-tab-btn active" data-format="round">🎂 Redonda (Torta)</button>
-        <button type="button" class="format-tab-btn" data-format="rect">📄 Rectangular A4</button>
-        <button type="button" class="format-tab-btn" data-format="toppers">🧁 Mini Toppers (x24)(4.5cm)</button>
+      <div class="format-selector-grid" role="tablist" aria-label="Elegí el formato de tu lámina">
+        <button type="button" class="format-card-btn active" data-format="round" role="tab" aria-selected="true">
+          <span class="fmt-icon">🎂</span>
+          <span class="fmt-title">Redonda</span>
+          <span class="fmt-sub">Ø 20 cm (Torta)</span>
+        </button>
+        <button type="button" class="format-card-btn" data-format="rect" role="tab" aria-selected="false">
+          <span class="fmt-icon">📄</span>
+          <span class="fmt-title">Rectangular</span>
+          <span class="fmt-sub">A4 (20x29 cm)</span>
+        </button>
+        <button type="button" class="format-card-btn" data-format="toppers" role="tab" aria-selected="false">
+          <span class="fmt-icon">🧁</span>
+          <span class="fmt-title">Mini Toppers</span>
+          <span class="fmt-sub">x24 (4.5 cm)</span>
+        </button>
       </div>
 
       <div class="sheet-stage" id="mockup-stage">
@@ -114,6 +126,33 @@
             <small>Formatos JPG, PNG o WEBP</small>
           </div>
           <div class="sheet-text-overlay" id="text-overlay"></div>
+        </div>
+        <div class="stage-info-pill" id="stage-info-pill">
+          🎂 Formato Redondo: Diámetro 20 cm con guía de corte para torta
+        </div>
+      </div>
+
+      <!-- Control manual de tamaño para Rectangular A4 -->
+      <div class="size-control-panel" id="panel-tamano-a4" style="display:none;">
+        <div class="size-control-header">
+          <label for="slider-tamano-a4" class="size-label">
+            <span class="size-icon">📐</span>
+            <span>Tamaño de la foto en la hoja A4:</span>
+          </label>
+          <span class="size-value-badge" id="val-tamano-a4">85%</span>
+        </div>
+        <div class="slider-row">
+          <span class="slider-min">40%</span>
+          <input type="range" id="slider-tamano-a4" min="40" max="100" value="85" step="1" aria-label="Tamaño de la imagen en la hoja A4" />
+          <span class="slider-max">100%</span>
+        </div>
+        <div class="size-presets">
+          <button type="button" class="preset-btn" data-preset="100">100% (Hoja completa)</button>
+          <button type="button" class="preset-btn active" data-preset="85">85% (Con margen 2cm)</button>
+          <button type="button" class="preset-btn" data-preset="70">70% (Centrada)</button>
+        </div>
+        <div class="size-dimensions-hint" id="hint-tamano-a4">
+          📏 Tamaño impreso: aprox. <strong>17.0 x 24.5 cm</strong> (margen blanco de 2 cm para manipular y cortar)
         </div>
       </div>
 
@@ -127,8 +166,11 @@
     </div>
 
     <!-- Columna 2: Opciones de lámina y formulario -->
-    <div class="pedido-side">
-      <h3>1. Tipo de producto</h3>
+    <div class="customizer-form-card">
+      <div class="options-badge">
+        <span class="options-badge-icon">📋</span> Configuración de tu Lámina
+      </div>
+      <h3 style="margin-top:14px;">1. Tipo de producto</h3>
       <div class="tipo-selector-grid">
         <div class="tipo-choice-card selected" data-tipo-card="fototorta">
           <strong>🍰 Lámina Fototorta</strong>
