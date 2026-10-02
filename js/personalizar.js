@@ -7,11 +7,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Elementos del simulador
   const mockup = document.getElementById('sheet-mockup');
-  const mockupStage = document.getElementById('mockup-stage');
   const fileInput = document.getElementById('input-foto');
-  const fileChooseBtn = document.getElementById('btn-choose-file');
   const fileNameDisplay = document.getElementById('file-name-display');
   const btnRemoveImg = document.getElementById('btn-remove-img');
+  const btnSampleToggle = document.getElementById('btn-sample-toggle');
   const btnDownloadPreview = document.getElementById('btn-download-preview');
   const stageInfoPill = document.getElementById('stage-info-pill');
 
@@ -38,11 +37,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalWhatsapp = document.getElementById('modal-whatsapp-confirm');
   const btnCerrarModal = document.getElementById('btn-cerrar-modal-wa');
 
+  // Diseños de muestra predeterminados para que el simulador siempre tenga contenido vivo
+  const DISENOS_MUESTRA = {
+    round: 'images/fototorta/stitch-redondo.jpg',
+    rect: 'images/fototorta/dibujos-animados-paw-patrol-chico-1-48.jpg',
+    toppers: 'images/fototorta/dibujos-animados-masha-topper-46.jpg'
+  };
+
   // Estado
   let currentFormat = 'round'; // 'round' | 'rect' | 'toppers'
   let currentTipo = 'fototorta'; // 'fototorta' ($2500) | 'chocotransfer' ($4500)
-  let currentImageSrc = null;
-  let currentFileName = '';
+  let isSample = true; // Empieza con diseño de muestra activo
+  let userImageSrc = null;
+  let userFileName = '';
+  let currentImageSrc = DISENOS_MUESTRA['round'];
   let tamanoRectA4 = 85; // Porcentaje de escala dentro de la hoja A4 (40 a 100)
 
   const PRECIOS = {
@@ -73,6 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       btn.setAttribute('aria-selected', 'true');
       currentFormat = btn.dataset.format;
+
+      // Si está en modo muestra, cargar el diseño predeterminado de este formato
+      if (isSample) {
+        currentImageSrc = DISENOS_MUESTRA[currentFormat] || DISENOS_MUESTRA['round'];
+      }
+
       actualizarMockupVisual();
     });
   });
@@ -158,30 +172,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    const muestraBadge = isSample ? '<span class="sample-design-badge">✨ Muestra</span>' : '';
+
     if (currentFormat === 'round') {
-      if (currentImageSrc) {
-        mockup.innerHTML = `
-          <div class="round-cake-inner">
-            <img class="user-img" src="${currentImageSrc}" alt="Diseño personalizado para torta">
-            <div class="round-cut-guide"></div>
-            <span class="round-cut-tag">Guía de corte Ø 20 cm</span>
-            <div class="sheet-text-overlay" id="text-overlay">${escaparHTML(dedicatoria)}</div>
-          </div>
-        `;
-      } else {
-        mockup.innerHTML = `
-          <div class="round-cake-inner">
-            <div class="dropzone-overlay" id="dropzone-prompt">
-              <span class="drop-icon">🎂</span>
-              <p><strong>Arrastrá tu foto acá</strong> o hacé clic para subir</p>
-              <small>Lámina redonda hasta 20 cm para torta</small>
-            </div>
-            <div class="round-cut-guide"></div>
-            <span class="round-cut-tag">Guía de corte Ø 20 cm</span>
-            <div class="sheet-text-overlay" id="text-overlay">${escaparHTML(dedicatoria)}</div>
-          </div>
-        `;
-      }
+      mockup.innerHTML = `
+        <div class="round-cake-inner">
+          <img class="user-img" src="${currentImageSrc}" alt="Diseño personalizado para torta">
+          <div class="round-cut-guide"></div>
+          <span class="round-cut-tag">Guía de corte Ø 20 cm</span>
+          ${muestraBadge}
+          <div class="sheet-text-overlay" id="text-overlay">${escaparHTML(dedicatoria)}</div>
+        </div>
+      `;
       aplicarEstiloTexto();
     } else if (currentFormat === 'rect') {
       const scaleHtml = `
@@ -190,15 +192,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="rect-crop-corner bl"></div>
         <div class="rect-crop-corner br"></div>
         <div class="rect-scalable-box" id="rect-scale-box" style="width:${tamanoRectA4}%; height:${tamanoRectA4}%;">
-          ${currentImageSrc ? `
-            <img class="user-img" src="${currentImageSrc}" alt="Diseño rectangular A4">
-          ` : `
-            <div class="dropzone-overlay" id="dropzone-prompt">
-              <span class="drop-icon">📄</span>
-              <p><strong>Arrastrá tu foto acá</strong> o hacé clic para subir</p>
-              <small>Hoja completa A4 (21 x 29.7 cm)</small>
-            </div>
-          `}
+          <img class="user-img" src="${currentImageSrc}" alt="Diseño rectangular A4">
+          ${muestraBadge}
           <div class="sheet-text-overlay" id="text-overlay">${escaparHTML(dedicatoria)}</div>
         </div>
       `;
@@ -208,48 +203,44 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (currentFormat === 'toppers') {
       let circlesHtml = '';
       for (let i = 1; i <= 24; i++) {
-        if (currentImageSrc) {
-          circlesHtml += `<div class="topper-circle-item" title="Mini topper #${i} (4.5 cm)"><img src="${currentImageSrc}" alt="Topper ${i}"></div>`;
-        } else {
-          circlesHtml += `<div class="topper-circle-item empty" title="Espacio topper #${i}"><span>#${i}</span></div>`;
-        }
+        circlesHtml += `<div class="topper-circle-item" title="Mini topper #${i} (4.5 cm)"><img src="${currentImageSrc}" alt="Topper ${i}"></div>`;
       }
 
       mockup.innerHTML = `
         <div class="toppers-grid-24">${circlesHtml}</div>
-        ${!currentImageSrc ? `
-          <div class="toppers-prompt-overlay" id="dropzone-prompt">
-            <span class="drop-icon">🧁</span>
-            <p><strong>Subí tu foto o logo</strong></p>
-            <small>Se multiplicará en los 24 mini toppers (4.5 cm)</small>
-          </div>
-        ` : ''}
+        ${muestraBadge}
       `;
     }
 
+    // Botones de herramientas
     if (btnRemoveImg) {
-      btnRemoveImg.style.display = currentImageSrc ? 'inline-flex' : 'none';
+      btnRemoveImg.style.display = isSample ? 'none' : 'inline-flex';
+    }
+    if (btnSampleToggle) {
+      btnSampleToggle.style.display = isSample ? 'none' : 'inline-flex';
     }
     if (btnDownloadPreview) {
-      btnDownloadPreview.style.display = currentImageSrc ? 'inline-flex' : 'none';
+      btnDownloadPreview.style.display = 'inline-flex';
     }
   }
 
-  // --- Carga de Imagen ---
+  // --- Carga de Imagen del Usuario ---
   function procesarArchivo(file) {
     if (!file || !file.type.startsWith('image/')) {
       alert('Por favor seleccioná un archivo de imagen válido (JPG, PNG o WEBP).');
       return;
     }
 
-    currentFileName = file.name;
+    userFileName = file.name;
     if (fileNameDisplay) {
-      fileNameDisplay.textContent = 'Archivo: ' + file.name;
+      fileNameDisplay.textContent = 'Tu foto cargada: ' + file.name;
     }
 
     const reader = new FileReader();
     reader.onload = (e) => {
-      currentImageSrc = e.target.result;
+      userImageSrc = e.target.result;
+      currentImageSrc = userImageSrc;
+      isSample = false;
       actualizarMockupVisual();
     };
     reader.readAsDataURL(file);
@@ -263,17 +254,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (fileChooseBtn) {
-    fileChooseBtn.addEventListener('click', () => fileInput.click());
-  }
-
+  // Drag and drop en el mockup
   if (mockup) {
-    mockup.addEventListener('click', (e) => {
-      if (!currentImageSrc || e.target.closest('#dropzone-prompt')) {
-        fileInput.click();
-      }
-    });
-
     mockup.addEventListener('dragover', (e) => {
       e.preventDefault();
       mockup.style.transform = 'scale(1.02)';
@@ -292,14 +274,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Botón para volver al diseño de muestra
+  if (btnSampleToggle) {
+    btnSampleToggle.addEventListener('click', restaurarDisenoMuestra);
+  }
+
+  // Botón para quitar foto
   if (btnRemoveImg) {
-    btnRemoveImg.addEventListener('click', () => {
-      currentImageSrc = null;
-      currentFileName = '';
-      fileInput.value = '';
-      if (fileNameDisplay) fileNameDisplay.textContent = 'Ningún archivo cargado aún';
-      actualizarMockupVisual();
-    });
+    btnRemoveImg.addEventListener('click', restaurarDisenoMuestra);
+  }
+
+  function restaurarDisenoMuestra() {
+    isSample = true;
+    userImageSrc = null;
+    userFileName = '';
+    if (fileInput) fileInput.value = '';
+    currentImageSrc = DISENOS_MUESTRA[currentFormat] || DISENOS_MUESTRA['round'];
+    if (fileNameDisplay) {
+      fileNameDisplay.textContent = '✨ Diseño de muestra activo (podés cambiarlo por tu foto)';
+    }
+    actualizarMockupVisual();
   }
 
   // --- Texto Dedicatoria en Vivo ---
@@ -550,8 +544,10 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         msg += `✍️ *Texto / Dedicatoria:* Sin dedicatoria (solo la imagen)\n`;
       }
-      if (currentFileName) {
-        msg += `📁 *Archivo elegido en la web:* ${currentFileName}\n`;
+      if (!isSample && userFileName) {
+        msg += `📁 *Archivo elegido en la web:* ${userFileName}\n`;
+      } else {
+        msg += `📁 *Archivo:* Se adjunta en este chat (en la web se visualizó con diseño de muestra)\n`;
       }
       msg += `💵 *Precio estimado:* ${typeof formatoPrecio === 'function' ? formatoPrecio(precio) : '$' + precio}\n\n`;
 
@@ -562,7 +558,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (notas) {
         msg += `📝 *Observaciones:* ${notas}\n`;
       }
-      msg += `\n📎 *¡Te adjunto la imagen a continuación en este chat de WhatsApp!*\n¿Me confirman disponibilidad y datos para la seña? ¡Muchas gracias!`;
+      msg += `\n📎 *¡Te adjunto la foto o imagen a continuación en este chat de WhatsApp!*\n¿Me confirman disponibilidad y datos para la seña? ¡Muchas gracias!`;
 
       const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(msg)}`;
 
@@ -586,16 +582,6 @@ document.addEventListener('DOMContentLoaded', () => {
         modalWhatsapp.style.display = 'none';
       }
     });
-  }
-
-  function limpiarFormulario() {
-    currentImageSrc = null;
-    currentFileName = '';
-    if (fileInput) fileInput.value = '';
-    if (fileNameDisplay) fileNameDisplay.textContent = 'Ningún archivo cargado aún';
-    if (customTextInput) customTextInput.value = '';
-    if (inputNotas) inputNotas.value = '';
-    actualizarMockupVisual();
   }
 
   function crearMiniatura(imgSrc, callback) {
@@ -647,7 +633,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof agregarAlCarrito === 'function') {
           agregarAlCarrito(item, 1);
           alert(`✅ ¡Agregado a tu pedido!\n\n${item.nombre}\nPrecio: ${typeof formatoPrecio === 'function' ? formatoPrecio(precio) : '$' + precio}\n\nPodés verlo en el botón "Mi pedido" del menú superior.`);
-          limpiarFormulario();
         }
       });
     });

@@ -157,12 +157,13 @@
       </div>
 
       <div class="preview-tools">
-        <input type="file" id="input-foto" accept="image/png, image/jpeg, image/webp" style="display:none;" />
-        <button type="button" class="btn btn-sm btn-rosa" id="btn-choose-file">📁 Elegir mi foto / imagen</button>
+        <input type="file" id="input-foto" accept="image/png, image/jpeg, image/webp" class="visually-hidden-file-input" />
+        <label for="input-foto" class="btn btn-sm btn-rosa" id="btn-choose-file">📁 Subir mi propia foto</label>
+        <button type="button" class="btn btn-sm btn-outline" id="btn-sample-toggle" style="display:none;">🎨 Ver diseño de muestra</button>
         <button type="button" class="btn btn-sm btn-outline" id="btn-remove-img" style="display:none; color:var(--rosa-fuerte);">🗑️ Quitar foto</button>
-        <button type="button" class="btn btn-sm btn-outline" id="btn-download-preview" style="display:none;">📥 Descargar boceto</button>
+        <button type="button" class="btn btn-sm btn-outline" id="btn-download-preview">📥 Descargar boceto</button>
       </div>
-      <div class="file-chosen-name" id="file-name-display" style="margin-top:12px;">Ningún archivo cargado aún</div>
+      <div class="file-chosen-name" id="file-name-display" style="margin-top:12px;">✨ Diseño de muestra activo (podés cambiarlo por tu foto)</div>
     </div>
 
     <!-- Columna 2: Opciones de lámina y formulario -->
