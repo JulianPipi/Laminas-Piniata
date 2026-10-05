@@ -61,7 +61,7 @@ h1, h2, h3, .display {
 }
 
 .container {
-  max-width: 1180px;
+  max-width: 1220px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -1370,24 +1370,27 @@ h1, h2, h3, .display {
    ========================================================= */
 .customizer-layout {
   display: grid;
-  grid-template-columns: 1.06fr 0.94fr;
-  gap: 32px;
+  grid-template-columns: 380px minmax(0, 1fr);
+  gap: 28px;
   align-items: start;
   margin-top: 24px;
+  width: 100%;
 }
 .carousel-showcase-card,
 .customizer-form-card {
-  background: var(--superficie);
+  min-width: 0;
   border-radius: var(--radio-l);
-  padding: 28px;
   box-shadow: var(--sombra);
   box-sizing: border-box;
 }
 .carousel-showcase-card {
   text-align: center;
+  padding: 22px 18px;
 }
 .customizer-form-card {
   text-align: left;
+  background: var(--superficie);
+  padding: 28px 30px;
 }
 
 .live-badge,
@@ -1429,38 +1432,39 @@ h1, h2, h3, .display {
   background: radial-gradient(ellipse at top, #FFFDFB 0%, #FFF9F2 100%);
   border: 1.5px solid rgba(217, 183, 122, 0.3);
   border-radius: var(--radio-l);
-  padding: 26px 22px;
+  padding: 22px 18px;
   box-shadow: 0 16px 36px -10px rgba(90, 56, 37, 0.16);
   box-sizing: border-box;
   text-align: center;
   position: relative;
+  min-width: 0;
 }
 
 .showcase-header {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   text-align: center;
 }
 .showcase-eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.72rem;
+  font-size: 0.70rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--rosa-fuerte);
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 .showcase-title {
   font-family: var(--fuente-display);
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 600;
   color: var(--chocolate);
-  margin: 2px 0 6px;
+  margin: 2px 0 4px;
   line-height: 1.15;
 }
 .showcase-sub {
-  font-size: 0.84rem;
+  font-size: 0.80rem;
   color: var(--chocolate);
   opacity: 0.78;
   margin: 0;
@@ -1468,28 +1472,24 @@ h1, h2, h3, .display {
 
 .carousel-filter-tabs {
   display: flex;
-  gap: 7px;
-  overflow-x: auto;
-  padding: 4px 2px 10px;
-  margin-bottom: 14px;
-  scrollbar-width: none;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 2px 0 10px;
+  margin-bottom: 12px;
   justify-content: center;
-}
-.carousel-filter-tabs::-webkit-scrollbar {
-  display: none;
 }
 .carousel-tab-btn {
   background: #FFFFFF;
   border: 1.5px solid rgba(90, 56, 37, 0.12);
   border-radius: 999px;
-  padding: 7px 15px;
-  font-size: 0.80rem;
+  padding: 5px 12px;
+  font-size: 0.76rem;
   font-weight: 700;
   color: var(--chocolate);
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.22s ease;
-  box-shadow: 0 2px 6px rgba(90, 56, 37, 0.04);
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(90, 56, 37, 0.04);
 }
 .carousel-tab-btn:hover {
   border-color: var(--rosa-pastel);
@@ -1507,11 +1507,13 @@ h1, h2, h3, .display {
   position: relative;
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  width: 100%;
 }
 .carousel-track-container {
   overflow: hidden;
   width: 100%;
+  min-width: 0;
   border-radius: var(--radio-m);
   background: #FFFFFF;
   border: 1px solid rgba(217, 183, 122, 0.25);
@@ -1525,7 +1527,7 @@ h1, h2, h3, .display {
 .carousel-slide {
   min-width: 100%;
   box-sizing: border-box;
-  padding: 16px 14px 20px;
+  padding: 12px 10px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1534,7 +1536,7 @@ h1, h2, h3, .display {
 
 .sample-card {
   width: 100%;
-  max-width: 390px;
+  max-width: 100%;
   cursor: pointer;
   position: relative;
   transition: transform 0.25s ease;
@@ -1544,17 +1546,17 @@ h1, h2, h3, .display {
 }
 .sample-img-wrap {
   width: 100%;
-  height: 330px;
+  height: 275px;
   position: relative;
   border-radius: var(--radio-m);
   overflow: hidden;
   background: radial-gradient(circle, #FFFDFB 0%, #FFF6EC 100%);
   border: 1.5px solid rgba(217, 183, 122, 0.2);
-  box-shadow: 0 10px 28px -6px rgba(90, 56, 37, 0.16);
+  box-shadow: 0 8px 22px -6px rgba(90, 56, 37, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px;
+  padding: 10px;
   box-sizing: border-box;
 }
 .sample-img-wrap img {
@@ -1637,14 +1639,14 @@ h1, h2, h3, .display {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(8px);
   border: 1.5px solid rgba(217, 183, 122, 0.35);
   color: var(--chocolate);
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   line-height: 1;
   display: flex;
   align-items: center;
@@ -1658,29 +1660,30 @@ h1, h2, h3, .display {
   background: var(--rosa-fuerte);
   color: #FFFFFF;
   border-color: var(--rosa-fuerte);
-  transform: translateY(-50%) scale(1.1);
+  transform: translateY(-50%) scale(1.08);
   box-shadow: 0 6px 18px rgba(217, 108, 138, 0.35);
 }
-.carousel-arrow.prev { left: -14px; }
-.carousel-arrow.next { right: -14px; }
+.carousel-arrow.prev { left: -10px; }
+.carousel-arrow.next { right: -10px; }
 
 /* Tira de Miniaturas (Thumbnails) */
 .carousel-thumb-strip {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   overflow-x: auto;
-  padding: 10px 4px 6px;
-  margin-top: 8px;
+  padding: 8px 2px 4px;
+  margin-top: 6px;
   scrollbar-width: none;
   justify-content: center;
   align-items: center;
+  max-width: 100%;
 }
 .carousel-thumb-strip::-webkit-scrollbar {
   display: none;
 }
 .carousel-thumb-item {
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radio-s);
   border: 2px solid rgba(90, 56, 37, 0.12);
   overflow: hidden;
@@ -1688,7 +1691,7 @@ h1, h2, h3, .display {
   cursor: pointer;
   transition: all 0.2s ease;
   flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   padding: 2px;
   box-sizing: border-box;
 }
@@ -1713,7 +1716,7 @@ h1, h2, h3, .display {
   align-items: center;
   justify-content: center;
   gap: 7px;
-  margin-top: 12px;
+  margin-top: 10px;
 }
 .carousel-dot {
   width: 8px;
@@ -1732,31 +1735,32 @@ h1, h2, h3, .display {
 }
 
 .carousel-footer-note {
-  margin-top: 14px;
+  margin-top: 12px;
   background: #FFFDF9;
   border: 1px solid rgba(217, 183, 122, 0.35);
   border-radius: var(--radio-m);
-  padding: 12px 16px;
-  font-size: 0.82rem;
+  padding: 10px 14px;
+  font-size: 0.78rem;
   color: var(--chocolate);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   text-align: left;
-  line-height: 1.4;
+  line-height: 1.35;
   box-shadow: 0 2px 8px rgba(90, 56, 37, 0.04);
 }
 
 /* Selector de Formato en el Formulario */
 .form-format-selector-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 .form-format-option {
   position: relative;
   cursor: pointer;
+  min-width: 0;
 }
 .form-format-option input[type="radio"] {
   position: absolute;
@@ -1772,9 +1776,9 @@ h1, h2, h3, .display {
   background: var(--crema);
   border: 2px solid rgba(90, 56, 37, 0.12);
   border-radius: var(--radio-m);
-  padding: 10px 6px;
+  padding: 10px 8px;
   cursor: pointer;
-  min-height: 72px;
+  min-height: 74px;
   box-sizing: border-box;
   text-align: center;
   transition: all 0.2s ease;
@@ -1796,24 +1800,26 @@ h1, h2, h3, .display {
   line-height: 1;
 }
 .form-format-option strong {
-  font-size: 0.84rem;
+  font-size: 0.86rem;
   color: var(--chocolate);
 }
 .form-format-option small {
-  font-size: 0.68rem;
+  font-size: 0.70rem;
   opacity: 0.75;
-  white-space: nowrap;
+  display: block;
+  line-height: 1.25;
+  text-align: center;
 }
 .tipo-selector-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
 }
 .tipo-choice-card {
   border: 2px solid rgba(90, 56, 37, 0.12);
   border-radius: var(--radio-m);
-  padding: 14px;
+  padding: 14px 16px;
   cursor: pointer;
   background: var(--superficie);
   transition: all 0.2s ease;
@@ -1821,19 +1827,20 @@ h1, h2, h3, .display {
   flex-direction: column;
   gap: 4px;
   text-align: left;
+  min-width: 0;
 }
 .tipo-choice-card.selected {
   border-color: var(--rosa-fuerte);
   background: #FFF3F6;
 }
 .tipo-choice-card strong {
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   color: var(--chocolate);
 }
 .tipo-choice-card span.price {
   font-weight: 800;
   color: var(--rosa-fuerte);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
 }
 .tipo-choice-card span.desc {
   font-size: 0.78rem;
@@ -1936,23 +1943,47 @@ h1, h2, h3, .display {
   margin-bottom: 0;
 }
 
-@media (max-width: 860px) {
-  .customizer-layout { grid-template-columns: 1fr; gap: 20px; }
-  .carousel-showcase-card, .customizer-form-card { padding: 20px 14px; }
-  .sample-img-wrap { height: min(290px, 68vw); }
-  .form-format-selector-grid { gap: 6px; }
-  .form-format-option .fmt-option-card { padding: 8px 4px; min-height: 64px; }
-  .form-format-option strong { font-size: 0.78rem; }
-  .form-format-option small { font-size: 0.65rem; }
-  .carousel-arrow { width: 36px; height: 36px; font-size: 1.5rem; }
-  .carousel-arrow.prev { left: -6px; }
-  .carousel-arrow.next { right: -6px; }
+@media (max-width: 980px) {
+  .customizer-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .carousel-showcase-card {
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .customizer-form-card {
+    padding: 24px 20px;
+  }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+  .customizer-layout {
+    gap: 18px;
+  }
+  .carousel-showcase-card,
+  .customizer-form-card {
+    padding: 18px 14px;
+  }
+  .sample-img-wrap {
+    height: min(260px, 68vw);
+  }
+  .form-format-selector-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
   .tipo-selector-grid {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
+  .carousel-arrow {
+    width: 34px;
+    height: 34px;
+    font-size: 1.3rem;
+  }
+  .carousel-arrow.prev { left: -6px; }
+  .carousel-arrow.next { right: -6px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
