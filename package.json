@@ -3,8 +3,6 @@
   "version": "1.0.0",
   "description": "Láminas comestibles y chocotransfer — Laminas Piniata",
   "scripts": {
-    "build": "echo Static site ready",
-    "start": "node tools/admin-server.js",
     "admin": "node tools/admin-server.js",
     "gestor": "node tools/gestor-cli.js"
   }
