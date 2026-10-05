@@ -1,96 +1,113 @@
-// =============================================================
-// Laminas Piniata — Carrusel de Muestras Personalizadas y Pedido
-// Permite ver trabajos reales con zoom interactivo, filtrar por formato
-// y armar el pedido personalizado directo a WhatsApp.
-// =============================================================
+// ==========================================================================
+// 🎨 LAMINAS PINIATA — CARRUSEL DE MUESTRAS Y PERSONALIZACIÓN DE PEDIDOS
+// ==========================================================================
+// ¡Hola! Acá podés configurar y elegir tus propias fotos de muestra.
+// Podés cambiar, quitar o agregar las que quieras editando la lista MUESTRAS abajo.
+//
+// Cada muestra tiene:
+// - id: número identificador único
+// - formatoClave: 'round' (redonda) | 'rect' (rectangular) | 'toppers' (mini toppers) | 'chocotransfer'
+// - filtro: 'redonda' | 'rectangular' | 'toppers' | 'chocotransfer' (coincide con los botones de filtro)
+// - badge: texto visible en la esquina de la foto (ej: '🎂 Redonda (Ø 20 cm)')
+// - titulo: nombre de la muestra (ej: 'Torta Stitch')
+// - desc: descripción corta del trabajo
+// - img: ruta de la imagen en tu proyecto (ej: 'images/fototorta/stitch-redondo.jpg')
+// - tipo: 'fototorta' o 'chocotransfer'
+// ==========================================================================
+
+const MUESTRAS_DEFAULT = [
+  {
+    id: 1,
+    formatoClave: 'round',
+    filtro: 'redonda',
+    badge: '🎂 Redonda (Ø 20 cm)',
+    titulo: 'Torta Redonda Stitch',
+    desc: 'Lámina circular comestible de 20 cm lista para colocar sobre cobertura, crema o fondant.',
+    img: 'images/fototorta/stitch-redondo.jpg',
+    tipo: 'fototorta'
+  },
+  {
+    id: 2,
+    formatoClave: 'round',
+    filtro: 'redonda',
+    badge: '🎂 Redonda (Ø 20 cm)',
+    titulo: 'Torta Merlina Addams',
+    desc: 'Ideal para tortas medianas y grandes de 20 a 24 cm con fondo decorado.',
+    img: 'images/fototorta/Merlina Redondo.jpg',
+    tipo: 'fototorta'
+  },
+  {
+    id: 3,
+    formatoClave: 'rect',
+    filtro: 'rectangular',
+    badge: '📄 Rectangular A4 (20x29 cm)',
+    titulo: 'Lámina A4 Messi Campeón',
+    desc: 'Hoja A4 completa para tortas rectangulares familiares, brownies o piononos.',
+    img: 'images/fototorta/Messi rectangular.png',
+    tipo: 'fototorta'
+  },
+  {
+    id: 4,
+    formatoClave: 'rect',
+    filtro: 'rectangular',
+    badge: '📄 Rectangular A4 (20x29 cm)',
+    titulo: 'Lámina A4 Paw Patrol',
+    desc: 'Diseño rectangular nítido con margen para manipular y cortar fácilmente.',
+    img: 'images/fototorta/dibujos-animados-paw-patrol-chico-1-48.jpg',
+    tipo: 'fototorta'
+  },
+  {
+    id: 5,
+    formatoClave: 'toppers',
+    filtro: 'toppers',
+    badge: '🧁 Mini Toppers (x24 círculos)',
+    titulo: '24 Mini Toppers Masha y el Oso',
+    desc: 'Plancha A4 con 24 círculos individuales de 4.5 cm para cupcakes, muffins y alfajores.',
+    img: 'images/fototorta/dibujos-animados-masha-topper-46.jpg',
+    tipo: 'fototorta'
+  },
+  {
+    id: 6,
+    formatoClave: 'toppers',
+    filtro: 'toppers',
+    badge: '🧁 Mini Toppers (x24 círculos)',
+    titulo: '24 Mini Toppers Club Boca',
+    desc: 'Círculos de 4.5 cm listos para cortar para mesas dulces y souvenirs comestibles.',
+    img: 'images/fototorta/Boca topper.png',
+    tipo: 'fototorta'
+  },
+  {
+    id: 7,
+    formatoClave: 'round',
+    filtro: 'redonda',
+    badge: '🎂 Redonda (Ø 20 cm)',
+    titulo: 'Torta Corona Dorada',
+    desc: 'Diseño circular elegante para cumpleaños de 15, bautismos o aniversarios.',
+    img: 'images/fototorta/Corona redondo.png',
+    tipo: 'fototorta'
+  },
+  {
+    id: 8,
+    formatoClave: 'chocotransfer',
+    filtro: 'chocotransfer',
+    badge: '🍫 Chocotransfer Especial',
+    titulo: 'Chocotransfer Bombones y Paletas',
+    desc: 'Hoja transfer para estampar chocolate blanco con acabados brillantes.',
+    img: 'images/chocotransfer/cumpleanos-1.svg',
+    tipo: 'chocotransfer'
+  }
+];
+
+// Permite acceder a las muestras desde la consola o scripts externos
+window.MUESTRAS_PERSONALIZADAS = MUESTRAS_DEFAULT;
 
 document.addEventListener('DOMContentLoaded', () => {
-  // --- Muestras de Trabajos Reales ---
-  const MUESTRAS = [
-    {
-      id: 1,
-      formatoClave: 'round',
-      filtro: 'redonda',
-      badge: '🎂 Redonda (Ø 20 cm)',
-      titulo: 'Torta Redonda Stitch',
-      desc: 'Lámina circular comestible de 20 cm lista para colocar sobre cobertura o fondant.',
-      img: 'images/fototorta/stitch-redondo.jpg',
-      tipo: 'fototorta'
-    },
-    {
-      id: 2,
-      formatoClave: 'round',
-      filtro: 'redonda',
-      badge: '🎂 Redonda (Ø 20 cm)',
-      titulo: 'Torta Merlina Addams',
-      desc: 'Ideal para tortas medianas y grandes de 20 a 24 cm con fondo decorado.',
-      img: 'images/fototorta/Merlina Redondo.jpg',
-      tipo: 'fototorta'
-    },
-    {
-      id: 3,
-      formatoClave: 'rect',
-      filtro: 'rectangular',
-      badge: '📄 Rectangular A4 (20x29 cm)',
-      titulo: 'Lámina A4 Messi Campeón',
-      desc: 'Hoja A4 completa para tortas rectangulares familiares, brownies o piononos.',
-      img: 'images/fototorta/Messi rectangular.png',
-      tipo: 'fototorta'
-    },
-    {
-      id: 4,
-      formatoClave: 'rect',
-      filtro: 'rectangular',
-      badge: '📄 Rectangular A4 (20x29 cm)',
-      titulo: 'Lámina A4 Paw Patrol',
-      desc: 'Diseño rectangular nítido con margen para manipular y cortar fácilmente.',
-      img: 'images/fototorta/dibujos-animados-paw-patrol-chico-1-48.jpg',
-      tipo: 'fototorta'
-    },
-    {
-      id: 5,
-      formatoClave: 'toppers',
-      filtro: 'toppers',
-      badge: '🧁 Mini Toppers (x24 círculos)',
-      titulo: '24 Mini Toppers Masha y el Oso',
-      desc: 'Plancha A4 con 24 círculos individuales de 4.5 cm para cupcakes, muffins y alfajores.',
-      img: 'images/fototorta/dibujos-animados-masha-topper-46.jpg',
-      tipo: 'fototorta'
-    },
-    {
-      id: 6,
-      formatoClave: 'toppers',
-      filtro: 'toppers',
-      badge: '🧁 Mini Toppers (x24 círculos)',
-      titulo: '24 Mini Toppers Club Boca',
-      desc: 'Círculos de 4.5 cm listos para cortar para mesas dulces y souvenirs comestibles.',
-      img: 'images/fototorta/Boca topper.png',
-      tipo: 'fototorta'
-    },
-    {
-      id: 7,
-      formatoClave: 'round',
-      filtro: 'redonda',
-      badge: '🎂 Redonda (Ø 20 cm)',
-      titulo: 'Torta Corona Dorada',
-      desc: 'Diseño circular elegante para cumpleaños de 15, bautismos o aniversarios.',
-      img: 'images/fototorta/Corona redondo.png',
-      tipo: 'fototorta'
-    },
-    {
-      id: 8,
-      formatoClave: 'chocotransfer',
-      filtro: 'chocotransfer',
-      badge: '🍫 Chocotransfer Especial',
-      titulo: 'Chocotransfer Bombones y Paletas',
-      desc: 'Hoja transfer para estampar chocolate blanco con acabados brillantes.',
-      img: 'images/chocotransfer/cumpleanos-1.svg',
-      tipo: 'chocotransfer'
-    }
-  ];
+  // Array de muestras activas
+  const MUESTRAS = window.MUESTRAS_PERSONALIZADAS;
 
   // Elementos del Carrusel
   const track = document.getElementById('carousel-track');
+  const thumbStrip = document.getElementById('carousel-thumb-strip');
   const dotsContainer = document.getElementById('carousel-dots');
   const counterDisplay = document.getElementById('carousel-counter');
   const btnPrev = document.getElementById('btn-carousel-prev');
@@ -156,11 +173,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!track) return;
     track.innerHTML = '';
     if (dotsContainer) dotsContainer.innerHTML = '';
+    if (thumbStrip) thumbStrip.innerHTML = '';
 
     if (itemsVisibles.length === 0) {
       track.innerHTML = `
         <div class="carousel-slide">
-          <p style="padding:40px; color:var(--chocolate); opacity:0.8;">No hay muestras en este formato actualmente.</p>
+          <div style="padding:48px 20px; text-align:center; color:var(--chocolate); opacity:0.8;">
+            <span style="font-size:2rem; display:block; margin-bottom:8px;">🎨</span>
+            <p style="margin:0; font-weight:600;">No hay muestras cargadas en esta categoría actualmente.</p>
+          </div>
         </div>
       `;
       if (counterDisplay) counterDisplay.textContent = '0 / 0';
@@ -172,13 +193,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     itemsVisibles.forEach((muestra, index) => {
+      // 1. Slide Principal
       const slide = document.createElement('div');
       slide.className = 'carousel-slide';
       slide.innerHTML = `
         <div class="sample-card" data-sample-id="${muestra.id}" title="Hacé clic para ampliar con zoom">
           <div class="sample-img-wrap">
             <span class="sample-format-badge">${muestra.badge}</span>
-            <img src="${muestra.img}" alt="${muestra.titulo}" loading="lazy">
+            <img src="${muestra.img}" alt="${muestra.titulo}" loading="lazy" onerror="this.src='images/logo.png'">
             <span class="sample-zoom-badge">🔍 Clic para Zoom</span>
           </div>
           <div class="sample-meta">
@@ -193,15 +215,29 @@ document.addEventListener('DOMContentLoaded', () => {
       if (card) {
         card.addEventListener('click', () => abrirZoomModal(muestra));
       }
-
       track.appendChild(slide);
 
-      // Crear Dot indicador
+      // 2. Miniatura en la Tira (Thumbnails)
+      if (thumbStrip) {
+        const thumbBtn = document.createElement('button');
+        thumbBtn.type = 'button';
+        thumbBtn.className = 'carousel-thumb-item' + (index === indiceActual ? ' active' : '');
+        thumbBtn.setAttribute('aria-label', `Ver muestra ${index + 1}: ${muestra.titulo}`);
+        thumbBtn.title = muestra.titulo;
+        thumbBtn.innerHTML = `<img src="${muestra.img}" alt="${muestra.titulo}" loading="lazy" onerror="this.src='images/logo.png'">`;
+        thumbBtn.addEventListener('click', () => {
+          irADiapositiva(index);
+          reiniciarAutoplay();
+        });
+        thumbStrip.appendChild(thumbBtn);
+      }
+
+      // 3. Dot indicador
       if (dotsContainer) {
         const dot = document.createElement('button');
         dot.type = 'button';
         dot.className = 'carousel-dot' + (index === indiceActual ? ' active' : '');
-        dot.setAttribute('aria-label', `Ir a muestra ${index + 1}`);
+        dot.setAttribute('aria-label', `Ir a diapositiva ${index + 1}`);
         dot.addEventListener('click', () => {
           irADiapositiva(index);
           reiniciarAutoplay();
@@ -227,6 +263,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const dots = dotsContainer.querySelectorAll('.carousel-dot');
       dots.forEach((dot, idx) => {
         dot.classList.toggle('active', idx === indiceActual);
+      });
+    }
+
+    // Actualizar thumbnails
+    if (thumbStrip) {
+      const thumbs = thumbStrip.querySelectorAll('.carousel-thumb-item');
+      thumbs.forEach((th, idx) => {
+        const isActive = idx === indiceActual;
+        th.classList.toggle('active', isActive);
+        if (isActive) {
+          th.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
       });
     }
   }
@@ -264,6 +312,19 @@ document.addEventListener('DOMContentLoaded', () => {
       reiniciarAutoplay();
     });
   }
+
+  // Navegación con teclado (Flechas izquierda y derecha)
+  document.addEventListener('keydown', (e) => {
+    if (modal && modal.style.display === 'flex') return; // no mover carrusel si el modal está abierto
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+    if (e.key === 'ArrowRight') {
+      diapositivaSiguiente();
+      reiniciarAutoplay();
+    } else if (e.key === 'ArrowLeft') {
+      diapositivaAnterior();
+      reiniciarAutoplay();
+    }
+  });
 
   // --- Filtros de Muestras ---
   filterBtns.forEach((btn) => {
@@ -358,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Zoom automático al pasar el ratón (efecto lupa fluido)
+  // Zoom interactivo al pasar el cursor (efecto lupa dinámico)
   if (modalImgBox && modalImg) {
     modalImgBox.addEventListener('mousemove', (e) => {
       const rect = modalImgBox.getBoundingClientRect();
@@ -372,21 +433,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     modalImgBox.addEventListener('mouseleave', resetZoomModal);
 
-    // Toque en móviles para alternar zoom
-    modalImgBox.addEventListener('click', () => {
+    // Toque en móviles para alternar zoom centrado
+    modalImgBox.addEventListener('click', (e) => {
       if (window.matchMedia('(hover: none)').matches) {
         if (modalImgBox.classList.contains('is-zoomed')) {
           resetZoomModal();
         } else {
-          modalImg.style.transformOrigin = 'center center';
-          modalImg.style.transform = 'scale(1.9)';
+          const rect = modalImgBox.getBoundingClientRect();
+          const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+          const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+          modalImg.style.transformOrigin = `${x.toFixed(1)}% ${y.toFixed(1)}%`;
+          modalImg.style.transform = 'scale(2)';
           modalImgBox.classList.add('is-zoomed');
         }
       }
     });
   }
 
-  // Cerrar modal
+  // Cerrar modal al hacer clic en fondo o en cruz
   if (modal) {
     modal.addEventListener('click', (e) => {
       if (e.target === modal || e.target.closest('[data-cerrar-modal]')) {
@@ -545,7 +609,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Inicializar
+  // Inicializar todo
   renderizarCarrusel();
   iniciarAutoplay();
   actualizarPrecioVisual();
