@@ -254,8 +254,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Drag and drop en el mockup
+  // Click y Drag and drop en el mockup
   if (mockup) {
+    mockup.addEventListener('click', () => {
+      if (fileInput) fileInput.click();
+    });
+
     mockup.addEventListener('dragover', (e) => {
       e.preventDefault();
       mockup.style.transform = 'scale(1.02)';
