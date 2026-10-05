@@ -352,6 +352,183 @@
       transform: translateY(0);
       opacity: 1;
     }
+
+    /* Switch de modo de carga */
+    .mode-switch-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 18px;
+      background: var(--crema);
+      padding: 4px;
+      border-radius: var(--radio-m);
+      border: 1px solid rgba(90, 56, 37, 0.12);
+    }
+    .mode-tab-btn {
+      flex: 1;
+      padding: 9px 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: none;
+      background: transparent;
+      border-radius: var(--radio-s);
+      cursor: pointer;
+      color: var(--chocolate);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .mode-tab-btn:hover {
+      background: rgba(255, 255, 255, 0.6);
+    }
+    .mode-tab-btn.active {
+      background: var(--superficie);
+      color: var(--rosa-fuerte);
+      box-shadow: 0 2px 8px rgba(90, 56, 37, 0.1);
+    }
+    .mode-tab-btn.active.batch-tab {
+      color: #9C5100;
+      background: #FFF9E6;
+      border: 1px solid rgba(245, 166, 35, 0.4);
+    }
+
+    /* Batch Dropzone */
+    .batch-dropzone {
+      border: 2px dashed rgba(217, 108, 138, 0.6);
+      background: #FFFDFB;
+      border-radius: var(--radio-m);
+      padding: 24px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .batch-dropzone:hover,
+    .batch-dropzone.dragover {
+      border-color: var(--rosa-fuerte);
+      background: #FFF0F4;
+      transform: scale(1.01);
+    }
+    .batch-dropzone-icon {
+      font-size: 2.8rem;
+      margin-bottom: 8px;
+    }
+    .batch-dropzone h4 {
+      margin: 0 0 4px;
+      font-size: 1.05rem;
+      color: var(--chocolate);
+    }
+    .batch-dropzone p {
+      font-size: 0.82rem;
+      color: var(--chocolate);
+      opacity: 0.8;
+      margin: 0 0 14px;
+    }
+    .batch-buttons-row {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Grilla de previsualización de lote */
+    .batch-summary-badge {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FFF5F7;
+      border: 1px solid rgba(217, 108, 138, 0.3);
+      border-radius: var(--radio-s);
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--rosa-fuerte);
+    }
+    .batch-preview-list {
+      max-height: 260px;
+      overflow-y: auto;
+      border: 1px solid rgba(90, 56, 37, 0.12);
+      border-radius: var(--radio-s);
+      background: var(--crema);
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .batch-item-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--superficie);
+      padding: 6px 10px;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .batch-item-row img {
+      width: 42px;
+      height: 42px;
+      object-fit: cover;
+      border-radius: 4px;
+      background: #eee;
+    }
+    .batch-item-info {
+      flex: 1;
+      min-width: 0;
+      text-align: left;
+    }
+    .batch-item-name {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--chocolate);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .batch-item-cat {
+      font-size: 0.72rem;
+      color: var(--rosa-fuerte);
+      font-weight: 600;
+    }
+    .batch-item-remove {
+      background: transparent;
+      border: none;
+      color: #D32F2F;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .batch-item-remove:hover {
+      background: rgba(211, 47, 47, 0.1);
+    }
+
+    /* Barra de progreso de lote */
+    .batch-progress-wrap {
+      margin-top: 12px;
+      display: none;
+    }
+    .batch-progress-bar-bg {
+      height: 10px;
+      border-radius: 5px;
+      background: #F0D9DE;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+    .batch-progress-bar-fill {
+      height: 100%;
+      background: var(--rosa-fuerte);
+      width: 0%;
+      transition: width 0.2s ease;
+    }
+    .batch-progress-text {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--chocolate);
+    }
   </style>
 </head>
 <body>
@@ -401,85 +578,159 @@
   </div>
 
   <div class="admin-panel-grid">
-    <!-- Columna 1: Formulario para Cargar Producto -->
+    <!-- Columna 1: Formulario para Cargar Producto (Individual o por Carpetas) -->
     <aside class="admin-form-card">
-      <h2>➕ Cargar Nuevo Producto</h2>
-      <p>Subí una foto o elegí una de las imágenes que ya tenés en la carpeta.</p>
+      <!-- Selector de Modo: 1x1 vs Masivo por Carpetas -->
+      <div class="mode-switch-tabs" role="tablist">
+        <button type="button" class="mode-tab-btn active" id="btn-mode-single">⚡ Carga 1x1</button>
+        <button type="button" class="mode-tab-btn batch-tab" id="btn-mode-batch">📁 Carga por Carpetas</button>
+      </div>
 
-      <form id="form-nuevo-prod">
-        <!-- Pestañas de origen de imagen -->
-        <label style="display:block; font-weight:700; font-size:0.86rem; margin-bottom:6px;">Imagen del producto *</label>
-        <div class="source-tabs">
-          <button type="button" class="source-tab-btn active" id="tab-upload">📁 Subir archivo</button>
-          <button type="button" class="source-tab-btn" id="tab-existing">🖼️ Fotos en carpeta</button>
-        </div>
+      <!-- MODO 1: Carga Individual 1x1 -->
+      <div id="section-mode-single">
+        <h2>➕ Cargar 1 Producto</h2>
+        <p>Subí una foto o elegí una de las imágenes que ya tenés en la carpeta.</p>
 
-        <!-- Modo 1: Subir archivo -->
-        <div id="box-upload">
-          <input type="file" id="input-file-prod" accept="image/png, image/jpeg, image/webp" style="display:none;" />
-          <div class="image-preview-zone" id="preview-zone" title="Hacé clic para seleccionar una imagen">
-            <span style="font-size:2.2rem; margin-bottom:6px;">📸</span>
-            <span class="prompt-text">Hacé clic para elegir foto</span>
-            <span class="prompt-sub">JPG, PNG o WEBP</span>
+        <form id="form-nuevo-prod">
+          <!-- Pestañas de origen de imagen -->
+          <label style="display:block; font-weight:700; font-size:0.86rem; margin-bottom:6px;">Imagen del producto *</label>
+          <div class="source-tabs">
+            <button type="button" class="source-tab-btn active" id="tab-upload">📁 Subir archivo</button>
+            <button type="button" class="source-tab-btn" id="tab-existing">🖼️ Fotos en carpeta</button>
+          </div>
+
+          <!-- Modo 1: Subir archivo -->
+          <div id="box-upload">
+            <input type="file" id="input-file-prod" accept="image/png, image/jpeg, image/webp" style="display:none;" />
+            <div class="image-preview-zone" id="preview-zone" title="Hacé clic para seleccionar una imagen">
+              <span style="font-size:2.2rem; margin-bottom:6px;">📸</span>
+              <span class="prompt-text">Hacé clic para elegir foto</span>
+              <span class="prompt-sub">JPG, PNG o WEBP</span>
+            </div>
+          </div>
+
+          <!-- Modo 2: Elegir de imágenes disponibles en carpeta -->
+          <div id="box-existing" style="display:none; margin-bottom:14px;">
+            <select id="select-existing-img" class="filter-select" style="width:100%; border-radius:var(--radio-s);">
+              <option value="">Cargando fotos disponibles...</option>
+            </select>
+            <div class="image-preview-zone" id="preview-existing-zone" style="margin-top:10px; height:140px;">
+              <span class="prompt-sub">Seleccioná una imagen para previsualizar</span>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="nombre-prod">Nombre del producto *</label>
+            <input type="text" id="nombre-prod" required placeholder="Ej: Taylor Swift / Dragón Ball / Cumple 15" />
+          </div>
+
+          <div class="form-field">
+            <label for="tipo-prod">Tipo de producto *</label>
+            <select id="tipo-prod" required>
+              <option value="fototorta" selected>🍰 Lámina Fototorta ($2.500)</option>
+              <option value="chocotransfer">🍫 Chocotransfer ($4.500)</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="categoria-prod">Categoría *</label>
+            <select id="categoria-prod" required>
+              <option value="Animales">Animales</option>
+              <option value="Futbol">Futbol</option>
+              <option value="Disney">Disney</option>
+              <option value="Dibujos animados">Dibujos animados</option>
+              <option value="Peliculas">Peliculas</option>
+              <option value="Series">Series</option>
+              <option value="Cumpleanos">Cumpleaños</option>
+              <option value="Juegos">Juegos</option>
+              <option value="Basquet">Basquet</option>
+              <option value="Halloween">Halloween 🎃</option>
+              <option value="__otra__">➕ Escribir nueva categoría...</option>
+            </select>
+            <input type="text" id="categoria-nueva" placeholder="Escribí el nombre de la nueva categoría" style="display:none; margin-top:8px;" />
+          </div>
+
+          <div class="form-field">
+            <label for="precio-prod">Precio ($ ARS)</label>
+            <input type="number" id="precio-prod" value="2500" min="0" step="50" required />
+          </div>
+
+          <div class="form-field" style="display:flex; align-items:center; gap:8px;">
+            <input type="checkbox" id="destacado-prod" style="width:18px; height:18px; margin:0;" />
+            <label for="destacado-prod" style="margin:0; font-size:0.88rem; cursor:pointer;">⭐ Destacar en la portada principal</label>
+          </div>
+
+          <button type="submit" class="btn btn-rosa btn-block" style="margin-top:14px; padding:12px;" id="btn-submit-prod">
+            💾 Guardar y Publicar
+          </button>
+        </form>
+      </div>
+
+      <!-- MODO 2: Carga Masiva por Carpetas -->
+      <div id="section-mode-batch" style="display:none;">
+        <h2>📁 Carga Masiva por Carpetas</h2>
+        <p>Arrastrá una carpeta entera o seleccionala. ¡El sistema detecta las fotos y las carga todas juntas sin hacer 1x1!</p>
+
+        <!-- Dropzone de Carpeta -->
+        <div class="batch-dropzone" id="batch-dropzone">
+          <input type="file" id="batch-input-folder" webkitdirectory directory multiple style="display:none;" />
+          <input type="file" id="batch-input-files" multiple accept="image/png, image/jpeg, image/webp" style="display:none;" />
+          <div class="batch-dropzone-icon">📂</div>
+          <h4>Arrastrá tu carpeta acá</h4>
+          <p>O hacé clic en uno de los botones para elegir:</p>
+          <div class="batch-buttons-row">
+            <button type="button" class="btn btn-sm btn-rosa" id="btn-pick-folder">📁 Elegir Carpeta</button>
+            <button type="button" class="btn btn-sm btn-outline" id="btn-pick-files">🖼️ Elegir Varias Fotos</button>
           </div>
         </div>
 
-        <!-- Modo 2: Elegir de imágenes disponibles en carpeta -->
-        <div id="box-existing" style="display:none; margin-bottom:14px;">
-          <select id="select-existing-img" class="filter-select" style="width:100%; border-radius:var(--radio-s);">
-            <option value="">Cargando fotos disponibles...</option>
-          </select>
-          <div class="image-preview-zone" id="preview-existing-zone" style="margin-top:10px; height:140px;">
-            <span class="prompt-sub">Seleccioná una imagen para previsualizar</span>
-          </div>
-        </div>
-
+        <!-- Ajustes para el lote -->
         <div class="form-field">
-          <label for="nombre-prod">Nombre del producto *</label>
-          <input type="text" id="nombre-prod" required placeholder="Ej: Taylor Swift / Dragón Ball / Cumple 15" />
-        </div>
-
-        <div class="form-field">
-          <label for="tipo-prod">Tipo de producto *</label>
-          <select id="tipo-prod" required>
+          <label for="batch-tipo">Tipo de producto para este lote *</label>
+          <select id="batch-tipo">
             <option value="fototorta" selected>🍰 Lámina Fototorta ($2.500)</option>
             <option value="chocotransfer">🍫 Chocotransfer ($4.500)</option>
           </select>
         </div>
 
         <div class="form-field">
-          <label for="categoria-prod">Categoría *</label>
-          <select id="categoria-prod" required>
-            <!-- Se poblará dinámicamente -->
-            <option value="Animales">Animales</option>
-            <option value="Futbol">Futbol</option>
-            <option value="Disney">Disney</option>
-            <option value="Dibujos animados">Dibujos animados</option>
-            <option value="Peliculas">Peliculas</option>
-            <option value="Series">Series</option>
-            <option value="Cumpleanos">Cumpleaños</option>
-            <option value="Juegos">Juegos</option>
-            <option value="Basquet">Basquet</option>
-            <option value="Halloween">Halloween 🎃</option>
-            <option value="__otra__">➕ Escribir nueva categoría...</option>
+          <label for="batch-categoria-modo">Categoría para este lote</label>
+          <select id="batch-categoria-modo">
+            <option value="auto" selected>📂 Automática (según el nombre de la carpeta)</option>
+            <option value="fija">🏷️ Asignar una categoría fija a todo el lote</option>
           </select>
-          <input type="text" id="categoria-nueva" placeholder="Escribí el nombre de la nueva categoría" style="display:none; margin-top:8px;" />
+          <input type="text" id="batch-categoria-fija" placeholder="Ej: Infantiles / Cumpleaños / Halloween" style="display:none; margin-top:8px;" />
         </div>
 
         <div class="form-field">
-          <label for="precio-prod">Precio ($ ARS)</label>
-          <input type="number" id="precio-prod" value="2500" min="0" step="50" required />
+          <label for="batch-precio">Precio para todo el lote ($ ARS)</label>
+          <input type="number" id="batch-precio" value="2500" min="0" step="50" required />
         </div>
 
-        <div class="form-field" style="display:flex; align-items:center; gap:8px;">
-          <input type="checkbox" id="destacado-prod" style="width:18px; height:18px; margin:0;" />
-          <label for="destacado-prod" style="margin:0; font-size:0.88rem; cursor:pointer;">⭐ Destacar en la portada principal</label>
-        </div>
+        <!-- Previsualización de imágenes detectadas -->
+        <div id="batch-preview-container" style="display:none;">
+          <div class="batch-summary-badge">
+            <span id="batch-count-badge">📸 0 imágenes detectadas</span>
+            <button type="button" id="btn-batch-clear" style="background:transparent; border:none; color:var(--chocolate); font-size:0.75rem; text-decoration:underline; cursor:pointer;">Limpiar</button>
+          </div>
 
-        <button type="submit" class="btn btn-rosa btn-block" style="margin-top:14px; padding:12px;" id="btn-submit-prod">
-          💾 Guardar y Publicar
-        </button>
-      </form>
+          <div class="batch-preview-list" id="batch-preview-list">
+            <!-- Filas de imágenes se generarán con JS -->
+          </div>
+
+          <button type="button" class="btn btn-rosa btn-block" id="btn-batch-submit" style="padding:13px; font-weight:800;">
+            🚀 Guardar todo el lote en el Catálogo
+          </button>
+
+          <!-- Barra de Progreso -->
+          <div class="batch-progress-wrap" id="batch-progress-wrap">
+            <div class="batch-progress-bar-bg">
+              <div class="batch-progress-bar-fill" id="batch-progress-fill"></div>
+            </div>
+            <div class="batch-progress-text" id="batch-progress-text">Guardando imágenes...</div>
+          </div>
+        </div>
+      </div>
     </aside>
 
     <!-- Columna 2: Catálogo Actual y Eliminación -->
@@ -889,6 +1140,320 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     submitBtn.disabled = false;
     submitBtn.textContent = "💾 Guardar y Publicar";
+  });
+
+  // --- MODO 1x1 VS CARGA MASIVA POR CARPETAS ---
+  const btnModeSingle = document.getElementById("btn-mode-single");
+  const btnModeBatch = document.getElementById("btn-mode-batch");
+  const sectionModeSingle = document.getElementById("section-mode-single");
+  const sectionModeBatch = document.getElementById("section-mode-batch");
+
+  btnModeSingle.addEventListener("click", () => {
+    btnModeSingle.classList.add("active");
+    btnModeBatch.classList.remove("active");
+    sectionModeSingle.style.display = "block";
+    sectionModeBatch.style.display = "none";
+  });
+
+  btnModeBatch.addEventListener("click", () => {
+    btnModeBatch.classList.add("active");
+    btnModeSingle.classList.remove("active");
+    sectionModeBatch.style.display = "block";
+    sectionModeSingle.style.display = "none";
+  });
+
+  // --- CARGA MASIVA POR CARPETAS (LOTE) ---
+  const batchDropzone = document.getElementById("batch-dropzone");
+  const batchInputFolder = document.getElementById("batch-input-folder");
+  const batchInputFiles = document.getElementById("batch-input-files");
+  const btnPickFolder = document.getElementById("btn-pick-folder");
+  const btnPickFiles = document.getElementById("btn-pick-files");
+  const batchTipo = document.getElementById("batch-tipo");
+  const batchCategoriaModo = document.getElementById("batch-categoria-modo");
+  const batchCategoriaFija = document.getElementById("batch-categoria-fija");
+  const batchPrecio = document.getElementById("batch-precio");
+  const batchPreviewContainer = document.getElementById("batch-preview-container");
+  const batchCountBadge = document.getElementById("batch-count-badge");
+  const batchPreviewList = document.getElementById("batch-preview-list");
+  const btnBatchClear = document.getElementById("btn-batch-clear");
+  const btnBatchSubmit = document.getElementById("btn-batch-submit");
+  const batchProgressWrap = document.getElementById("batch-progress-wrap");
+  const batchProgressFill = document.getElementById("batch-progress-fill");
+  const batchProgressText = document.getElementById("batch-progress-text");
+
+  let batchQueue = []; // Array de { file, name, category, dataUrl }
+
+  // Ajustar precio del lote según tipo
+  batchTipo.addEventListener("change", () => {
+    batchPrecio.value = batchTipo.value === "chocotransfer" ? 4500 : 2500;
+  });
+
+  // Toggle categoría fija en lote
+  batchCategoriaModo.addEventListener("change", () => {
+    if (batchCategoriaModo.value === "fija") {
+      batchCategoriaFija.style.display = "block";
+      batchCategoriaFija.focus();
+    } else {
+      batchCategoriaFija.style.display = "none";
+    }
+  });
+
+  btnPickFolder.addEventListener("click", (e) => {
+    e.stopPropagation();
+    batchInputFolder.click();
+  });
+
+  btnPickFiles.addEventListener("click", (e) => {
+    e.stopPropagation();
+    batchInputFiles.click();
+  });
+
+  batchDropzone.addEventListener("click", () => {
+    batchInputFolder.click();
+  });
+
+  batchDropzone.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    batchDropzone.classList.add("dragover");
+  });
+
+  batchDropzone.addEventListener("dragleave", () => {
+    batchDropzone.classList.remove("dragover");
+  });
+
+  batchDropzone.addEventListener("drop", async (e) => {
+    e.preventDefault();
+    batchDropzone.classList.remove("dragover");
+
+    const items = e.dataTransfer.items;
+    if (items && items.length > 0) {
+      await procesarDataTransferItems(items);
+    } else if (e.dataTransfer.files) {
+      procesarListaArchivos(e.dataTransfer.files);
+    }
+  });
+
+  batchInputFolder.addEventListener("change", (e) => {
+    if (e.target.files) procesarListaArchivos(e.target.files);
+  });
+
+  batchInputFiles.addEventListener("change", (e) => {
+    if (e.target.files) procesarListaArchivos(e.target.files);
+  });
+
+  async function procesarDataTransferItems(items) {
+    const archivosEncontrados = [];
+
+    async function leerEntry(entry, folderPath = "") {
+      if (entry.isFile) {
+        const file = await new Promise((resolve) => entry.file(resolve));
+        file._detectedFolder = folderPath;
+        archivosEncontrados.push(file);
+      } else if (entry.isDirectory) {
+        const reader = entry.createReader();
+        const subEntries = await new Promise((resolve) => {
+          reader.readEntries(resolve, () => resolve([]));
+        });
+        const currentFolder = folderPath ? `${folderPath}/${entry.name}` : entry.name;
+        for (const sub of subEntries) {
+          await leerEntry(sub, currentFolder);
+        }
+      }
+    }
+
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      if (typeof item.webkitGetAsEntry === "function") {
+        const entry = item.webkitGetAsEntry();
+        if (entry) await leerEntry(entry);
+      } else {
+        const f = item.getAsFile();
+        if (f) archivosEncontrados.push(f);
+      }
+    }
+
+    procesarListaArchivos(archivosEncontrados);
+  }
+
+  function limpiarNombreArchivo(filename) {
+    let base = filename.replace(/\.[^/.]+$/, ""); // quitar extensión
+    // quitar prefijos numéricos comunes como "01 - " o "1."
+    base = base.replace(/^[\d\s._-]+/, "");
+    // reemplazar guiones y guiones bajos por espacios
+    base = base.replace(/[-_]+/g, " ").trim();
+    // capitalizar palabras
+    return base
+      .split(" ")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ") || "Lámina Personalizada";
+  }
+
+  function detectarCategoriaDeArchivo(file) {
+    // Si tiene ruta relativa de carpeta (webkitRelativePath ej. "Infantiles/masha.jpg")
+    const relPath = file.webkitRelativePath || file._detectedFolder || "";
+    if (relPath) {
+      const parts = relPath.split("/").filter(Boolean);
+      if (parts.length > 1) {
+        // Tomar la primera o anteúltima carpeta
+        const cat = parts[parts.length - 2];
+        return cat.charAt(0).toUpperCase() + cat.slice(1);
+      } else if (parts.length === 1 && !parts[0].includes(".")) {
+        return parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
+      }
+    }
+    return "Varios";
+  }
+
+  function procesarListaArchivos(files) {
+    const validos = Array.from(files).filter((f) =>
+      /\.(jpe?g|png|webp)$/i.test(f.name)
+    );
+
+    if (validos.length === 0) {
+      alert("No se detectaron imágenes válidas (JPG, PNG o WEBP) en la selección.");
+      return;
+    }
+
+    let leidos = 0;
+    validos.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        batchQueue.push({
+          file: file,
+          name: limpiarNombreArchivo(file.name),
+          category: detectarCategoriaDeArchivo(file),
+          dataUrl: e.target.result
+        });
+
+        leidos++;
+        if (leidos === validos.length) {
+          renderBatchPreview();
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function renderBatchPreview() {
+    if (batchQueue.length === 0) {
+      batchPreviewContainer.style.display = "none";
+      return;
+    }
+
+    batchPreviewContainer.style.display = "block";
+    batchCountBadge.textContent = `📸 ${batchQueue.length} ${batchQueue.length === 1 ? 'imagen lista' : 'imágenes listas'}`;
+
+    batchPreviewList.innerHTML = batchQueue.map((item, idx) => `
+      <div class="batch-item-row" data-idx="${idx}">
+        <img src="${item.dataUrl}" alt="${item.name}" />
+        <div class="batch-item-info">
+          <div class="batch-item-name" title="${item.name}">${item.name}</div>
+          <div class="batch-item-cat">📂 ${item.category}</div>
+        </div>
+        <button type="button" class="batch-item-remove" title="Quitar del lote" data-remove-idx="${idx}">✕</button>
+      </div>
+    `).join("");
+
+    batchPreviewList.querySelectorAll("[data-remove-idx]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const i = parseInt(btn.dataset.removeIdx, 10);
+        batchQueue.splice(i, 1);
+        renderBatchPreview();
+      });
+    });
+  }
+
+  btnBatchClear.addEventListener("click", () => {
+    batchQueue = [];
+    renderBatchPreview();
+    batchInputFolder.value = "";
+    batchInputFiles.value = "";
+  });
+
+  // Enviar y Guardar Lote Completo
+  btnBatchSubmit.addEventListener("click", async () => {
+    if (batchQueue.length === 0) return;
+
+    const tipo = batchTipo.value;
+    const precio = Number(batchPrecio.value) || (tipo === "chocotransfer" ? 4500 : 2500);
+    const usarFija = batchCategoriaModo.value === "fija";
+    const catFija = batchCategoriaFija.value.trim() || "Varios";
+
+    const loteParaEnviar = batchQueue.map((item) => ({
+      nombre: item.name,
+      tipo: tipo,
+      categoria: usarFija ? catFija : item.category,
+      precio: precio,
+      imagen: item.dataUrl,
+      destacado: false
+    }));
+
+    btnBatchSubmit.disabled = true;
+    batchProgressWrap.style.display = "block";
+    batchProgressFill.style.width = "30%";
+    batchProgressText.textContent = `Subiendo lote de ${loteParaEnviar.length} productos...`;
+
+    if (isServerOnline) {
+      try {
+        const res = await fetch("/api/productos/lote", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ productos: loteParaEnviar })
+        });
+        const resData = await res.json();
+
+        if (resData.success) {
+          batchProgressFill.style.width = "100%";
+          batchProgressText.textContent = `¡Listo! ${resData.agregados} productos guardados.`;
+
+          // Recargar productos desde el servidor
+          productos = await checkServer();
+          actualizarStats();
+          poblarCategorias();
+          renderProductos();
+
+          showToast(`🎉 ¡${resData.agregados} productos importados con éxito!`);
+          batchQueue = [];
+          setTimeout(() => {
+            renderBatchPreview();
+            batchProgressWrap.style.display = "none";
+            btnBatchSubmit.disabled = false;
+          }, 1500);
+        } else {
+          showToast(`Error al guardar lote: ${resData.error}`, true);
+          btnBatchSubmit.disabled = false;
+        }
+      } catch (err) {
+        showToast("Error de conexión al subir lote.", true);
+        btnBatchSubmit.disabled = false;
+      }
+    } else {
+      // Modo estático sin servidor
+      let maxId = productos.reduce((max, p) => Math.max(max, p.id || 0), 0);
+      loteParaEnviar.forEach((item) => {
+        maxId++;
+        productos.push({
+          id: maxId,
+          ...item,
+          activo: true
+        });
+      });
+
+      batchProgressFill.style.width = "100%";
+      batchProgressText.textContent = `¡Lote cargado en memoria! Recordá descargar el JSON.`;
+
+      actualizarStats();
+      poblarCategorias();
+      renderProductos();
+      showToast(`🎉 ${loteParaEnviar.length} productos agregados. Descargá el JSON para actualizar.`);
+
+      batchQueue = [];
+      setTimeout(() => {
+        renderBatchPreview();
+        batchProgressWrap.style.display = "none";
+        btnBatchSubmit.disabled = false;
+      }, 1500);
+    }
   });
 
   // Botón exportar/descargar JSON

@@ -94,76 +94,44 @@
   </section>
 
   <div class="customizer-layout">
-    <!-- Columna 1: Simulador en vivo -->
-    <div class="simulator-card">
-      <div class="live-badge">
-        <span class="live-badge-dot"></span> Simulador en tiempo real
+    <!-- Columna 1: Carrusel de Diseños de Muestra -->
+    <div class="carousel-showcase-card">
+      <div class="showcase-header">
+        <div class="live-badge">
+          <span class="live-badge-dot"></span> Muestras y Trabajos Reales
+        </div>
+        <div class="showcase-counter" id="carousel-counter">1 / 6</div>
       </div>
 
-      <div class="format-selector-grid" role="tablist" aria-label="Elegí el formato de tu lámina">
-        <button type="button" class="format-card-btn active" data-format="round" role="tab" aria-selected="true">
-          <span class="fmt-icon">🎂</span>
-          <span class="fmt-title">Redonda</span>
-          <span class="fmt-sub">Ø 20 cm (Torta)</span>
-        </button>
-        <button type="button" class="format-card-btn" data-format="rect" role="tab" aria-selected="false">
-          <span class="fmt-icon">📄</span>
-          <span class="fmt-title">Rectangular</span>
-          <span class="fmt-sub">A4 (20x29 cm)</span>
-        </button>
-        <button type="button" class="format-card-btn" data-format="toppers" role="tab" aria-selected="false">
-          <span class="fmt-icon">🧁</span>
-          <span class="fmt-title">Mini Toppers</span>
-          <span class="fmt-sub">x24 (4.5 cm)</span>
-        </button>
+      <!-- Filtros rápidos de muestra -->
+      <div class="carousel-filter-tabs" role="tablist" aria-label="Filtrar muestras por formato">
+        <button type="button" class="carousel-tab-btn active" data-filter="todos">✨ Todos</button>
+        <button type="button" class="carousel-tab-btn" data-filter="redonda">🎂 Redondas</button>
+        <button type="button" class="carousel-tab-btn" data-filter="rectangular">📄 Rectangulares</button>
+        <button type="button" class="carousel-tab-btn" data-filter="toppers">🧁 Mini Toppers</button>
+        <button type="button" class="carousel-tab-btn" data-filter="chocotransfer">🍫 Chocotransfer</button>
       </div>
 
-      <div class="sheet-stage" id="mockup-stage">
-        <div class="sheet-mockup round" id="sheet-mockup" title="Hacé clic para cargar o cambiar tu imagen">
-          <div class="dropzone-overlay" id="dropzone-prompt">
-            <span class="drop-icon">📸</span>
-            <p><strong>Arrastrá tu foto acá</strong> o hacé clic para elegir archivo</p>
-            <small>Formatos JPG, PNG o WEBP</small>
+      <!-- Contenedor del Carrusel -->
+      <div class="carousel-wrapper" id="carousel-wrapper">
+        <button type="button" class="carousel-arrow prev" id="btn-carousel-prev" aria-label="Muestra anterior">‹</button>
+        
+        <div class="carousel-track-container">
+          <div class="carousel-track" id="carousel-track">
+            <!-- Las diapositivas se generan dinámicamente desde js/personalizar.js -->
           </div>
-          <div class="sheet-text-overlay" id="text-overlay"></div>
         </div>
-        <div class="stage-info-pill" id="stage-info-pill">
-          🎂 Formato Redondo: Diámetro 20 cm con guía de corte para torta
-        </div>
+
+        <button type="button" class="carousel-arrow next" id="btn-carousel-next" aria-label="Muestra siguiente">›</button>
       </div>
 
-      <!-- Control manual de tamaño para Rectangular A4 -->
-      <div class="size-control-panel" id="panel-tamano-a4" style="display:none;">
-        <div class="size-control-header">
-          <label for="slider-tamano-a4" class="size-label">
-            <span class="size-icon">📐</span>
-            <span>Tamaño de la foto en la hoja A4:</span>
-          </label>
-          <span class="size-value-badge" id="val-tamano-a4">85%</span>
-        </div>
-        <div class="slider-row">
-          <span class="slider-min">40%</span>
-          <input type="range" id="slider-tamano-a4" min="40" max="100" value="85" step="1" aria-label="Tamaño de la imagen en la hoja A4" />
-          <span class="slider-max">100%</span>
-        </div>
-        <div class="size-presets">
-          <button type="button" class="preset-btn" data-preset="100">100% (Hoja completa)</button>
-          <button type="button" class="preset-btn active" data-preset="85">85% (Con margen 2cm)</button>
-          <button type="button" class="preset-btn" data-preset="70">70% (Centrada)</button>
-        </div>
-        <div class="size-dimensions-hint" id="hint-tamano-a4">
-          📏 Tamaño impreso: aprox. <strong>17.0 x 24.5 cm</strong> (margen blanco de 2 cm para manipular y cortar)
-        </div>
-      </div>
+      <!-- Puntos indicadores (Dots) -->
+      <div class="carousel-dots" id="carousel-dots"></div>
 
-      <div class="preview-tools">
-        <input type="file" id="input-foto" accept="image/png, image/jpeg, image/webp" class="visually-hidden-file-input" />
-        <label for="input-foto" class="btn btn-sm btn-rosa" id="btn-choose-file">📁 Subir mi propia foto</label>
-        <button type="button" class="btn btn-sm btn-outline" id="btn-sample-toggle" style="display:none;">🎨 Ver diseño de muestra</button>
-        <button type="button" class="btn btn-sm btn-outline" id="btn-remove-img" style="display:none; color:var(--rosa-fuerte);">🗑️ Quitar foto</button>
-        <button type="button" class="btn btn-sm btn-outline" id="btn-download-preview">📥 Descargar boceto</button>
+      <div class="carousel-footer-note">
+        <span class="note-icon">💡</span>
+        <span>Hacé clic en cualquier muestra para verla en <strong>pantalla completa con zoom</strong>. Podés pedir cualquiera de estos formatos con tu propia foto o temática favorita.</span>
       </div>
-      <div class="file-chosen-name" id="file-name-display" style="margin-top:12px;">✨ Diseño de muestra activo (podés cambiarlo por tu foto)</div>
     </div>
 
     <!-- Columna 2: Opciones de lámina y formulario -->
@@ -185,7 +153,35 @@
         </div>
       </div>
 
-      <h3 style="margin-top:20px;">2. Dedicatoria o Texto (Opcional)</h3>
+      <h3 style="margin-top:20px;">2. Formato preferido</h3>
+      <div class="form-format-selector-grid">
+        <label class="form-format-option selected">
+          <input type="radio" name="formato-lamina" value="round" checked />
+          <span class="fmt-option-card">
+            <span class="fmt-opt-icon">🎂</span>
+            <strong>Redonda</strong>
+            <small>Ø 20 cm (Torta)</small>
+          </span>
+        </label>
+        <label class="form-format-option">
+          <input type="radio" name="formato-lamina" value="rect" />
+          <span class="fmt-option-card">
+            <span class="fmt-opt-icon">📄</span>
+            <strong>Rectangular</strong>
+            <small>A4 (20x29 cm)</small>
+          </span>
+        </label>
+        <label class="form-format-option">
+          <input type="radio" name="formato-lamina" value="toppers" />
+          <span class="fmt-option-card">
+            <span class="fmt-opt-icon">🧁</span>
+            <strong>Mini Toppers</strong>
+            <small>x24 (4.5 cm)</small>
+          </span>
+        </label>
+      </div>
+
+      <h3 style="margin-top:20px;">3. Dedicatoria o Texto (Opcional)</h3>
       <div class="form-field">
         <label for="custom-text">Texto para la lámina</label>
         <input type="text" id="custom-text" placeholder="Ej: ¡Feliz Halloween! / Dulce o Truco / ¡Feliz Cumple Bautista!" maxlength="60" />
@@ -202,7 +198,7 @@
         </select>
       </div>
 
-      <h3 style="margin-top:20px;">3. Datos para la entrega</h3>
+      <h3 style="margin-top:20px;">4. Datos para la entrega</h3>
       <form id="form-personalizar">
         <div class="form-field">
           <label for="nombre-cliente">Nombre y Apellido *</label>
@@ -240,6 +236,23 @@
     </div>
   </div>
 </main>
+
+<!-- Modal de Zoom para ver muestras en tamaño completo -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box" style="position:relative;">
+    <button class="modal-close" data-cerrar-modal aria-label="Cerrar">✕</button>
+    <div class="modal-img">
+      <img id="modal-img" src="" alt="Muestra de lámina personalizada" />
+      <span class="zoom-hint">🔍 Pasá el cursor para zoom (o tocá en celular)</span>
+    </div>
+    <div class="modal-info">
+      <span class="product-cat" id="modal-categoria">Muestra Personalizada</span>
+      <span class="product-name" id="modal-nombre"></span>
+      <p id="modal-desc" style="font-size:0.9rem; color:var(--chocolate); opacity:0.85; margin:6px 0 12px;"></p>
+      <button type="button" class="btn btn-rosa btn-block" id="modal-usar-formato">✨ Elegir este formato para mi pedido</button>
+    </div>
+  </div>
+</div>
 
 <!-- Modal de confirmación tras abrir WhatsApp -->
 <div class="modal-overlay" id="modal-whatsapp-confirm" style="display:none;">

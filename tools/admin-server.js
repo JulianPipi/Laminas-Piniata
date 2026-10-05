@@ -193,6 +193,77 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  // --- API: Cargar Lote Masivo de Productos ---
+  if (pathname === '/api/productos/lote' && req.method === 'POST') {
+    try {
+      const data = await parseJsonBody(req);
+      const lote = Array.isArray(data.productos) ? data.productos : [];
+      if (lote.length === 0) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, error: 'El lote está vacío' }));
+        return;
+      }
+
+      const products = readProducts();
+      let maxId = products.reduce((max, p) => Math.max(max, p.id || 0), 0);
+      let creados = 0;
+
+      for (const item of lote) {
+        if (!item.nombre || !item.tipo) continue;
+
+        let imagePath = item.imagen || '';
+        if (imagePath.startsWith('data:image/')) {
+          const matches = imagePath.match(/^data:image\/([a-zA-Z0-9+]+);base64,(.+)$/);
+          if (matches) {
+            const rawExt = matches[1].toLowerCase();
+            const ext = rawExt === 'jpeg' ? 'jpg' : rawExt;
+            const buffer = Buffer.from(matches[2], 'base64');
+
+            const safeName = (item.nombre || 'producto')
+              .toLowerCase()
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '')
+              .replace(/[^a-z0-9]+/g, '-')
+              .replace(/^-+|-+$/g, '');
+
+            const folder = item.tipo === 'chocotransfer' ? 'chocotransfer' : 'fototorta';
+            const filename = `${safeName}-${Date.now().toString().slice(-4)}-${Math.floor(Math.random()*900+100)}.${ext}`;
+            const destDir = path.join(ROOT_DIR, 'images', folder);
+            if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
+
+            fs.writeFileSync(path.join(destDir, filename), buffer);
+            imagePath = `images/${folder}/${filename}`;
+          }
+        }
+
+        maxId++;
+        products.push({
+          id: maxId,
+          nombre: String(item.nombre).trim(),
+          imagen: imagePath,
+          tipo: item.tipo,
+          categoria: String(item.categoria || 'Varios').trim(),
+          subcategoria: item.subcategoria ? String(item.subcategoria).trim() : null,
+          precio: Number(item.precio) || (item.tipo === 'chocotransfer' ? 4500 : 2500),
+          destacado: Boolean(item.destacado),
+          activo: true
+        });
+        creados++;
+      }
+
+      saveProducts(products);
+      console.log(`[ADMIN] Lote cargado con éxito: ${creados} nuevos productos.`);
+      res.writeHead(201, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, agregados: creados, total: products.length }));
+      return;
+    } catch (err) {
+      console.error('[ADMIN] Error en carga masiva:', err);
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, error: err.message }));
+      return;
+    }
+  }
+
   // --- API: Imágenes disponibles en images/ no registradas ---
   if (pathname === '/api/imagenes-disponibles' && req.method === 'GET') {
     const list = getAvailableUnusedImages();
