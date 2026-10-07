@@ -25,8 +25,36 @@ let PRODUCTOS_CACHE = null;
 
 async function cargarProductos() {
   if (PRODUCTOS_CACHE) return PRODUCTOS_CACHE;
-  const res = await fetch("data/products.json");
-  const data = await res.json();
+  let data = [];
+  try {
+    const res = await fetch("data/products.json?v=" + Date.now());
+    if (res.ok) {
+      data = await res.json();
+    }
+  } catch (err) {
+    console.warn("No se pudo cargar data/products.json remoto:", err);
+  }
+
+  // Integrar cambios realizados en el panel Admin (Modo Estático / Local)
+  try {
+    const local = localStorage.getItem("laminas_productos_guardados");
+    if (local) {
+      const prodsLocal = JSON.parse(local);
+      if (Array.isArray(prodsLocal) && prodsLocal.length > 0) {
+        prodsLocal.forEach(pLocal => {
+          const idx = data.findIndex(p => p.id === pLocal.id || (p.nombre && pLocal.nombre && p.nombre.toLowerCase() === pLocal.nombre.toLowerCase()));
+          if (idx >= 0) {
+            data[idx] = pLocal;
+          } else {
+            data.push(pLocal);
+          }
+        });
+      }
+    }
+  } catch (e) {
+    console.warn("Error leyendo productos de localStorage:", e);
+  }
+
   PRODUCTOS_CACHE = data
     .filter((p) => p.activo !== false)
     .map((p) => ({

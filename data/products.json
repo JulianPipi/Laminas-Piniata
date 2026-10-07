@@ -449,5 +449,38 @@
         "precio": 4500,
         "destacado": true,
         "activo": true
+    },
+    {
+        "id": 107,
+        "nombre": "Cat Noah Redondo 20cm",
+        "imagen": "images/fototorta/Cat Noah Redondo 20cm.png",
+        "tipo": "fototorta",
+        "categoria": "Series",
+        "subcategoria": "Miraculous",
+        "precio": 2500,
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 108,
+        "nombre": "Circulos y Logos Paw Patrol",
+        "imagen": "images/fototorta/Circulos y Logos Paw Patrol.png",
+        "tipo": "fototorta",
+        "categoria": "Dibujos animados",
+        "subcategoria": "Paw Patrol",
+        "precio": 2500,
+        "destacado": false,
+        "activo": true
+    },
+    {
+        "id": 109,
+        "nombre": "Plin plin x24 unidades",
+        "imagen": "images/chocotransfer/Plin plin x24 unidades.png",
+        "tipo": "chocotransfer",
+        "categoria": "Dibujos animados",
+        "subcategoria": "Plin Plin",
+        "precio": 4500,
+        "destacado": false,
+        "activo": true
     }
 ]

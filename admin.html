@@ -557,6 +557,11 @@
 </header>
 
 <main class="container">
+  <!-- Banner explicativo cuando no está el servidor local activo -->
+  <div id="banner-modo-estatico" style="display:none; background:#FFF4E5; border-left:4px solid #F1C40F; padding:14px 18px; border-radius:var(--radio-s); margin:18px 0; font-size:0.88rem; color:var(--chocolate); box-shadow:var(--sombra-suave); line-height:1.45;">
+    <strong>💡 Guardado en tu navegador activo:</strong> Los productos que cargues se guardan al instante en tu navegador para que los veas en la tienda. Para guardarlos permanentemente en los archivos de tu proyecto y publicarlos a tus clientes en internet, podés hacer clic en <strong>"📥 Descargar JSON"</strong> y reemplazar el archivo <code>data/products.json</code>, o iniciar el panel con guardado automático en disco ejecutando <strong><code>iniciar-servidor.bat</code></strong>.
+  </div>
+
   <!-- Tarjetas de estadísticas -->
   <div class="admin-stats">
     <div class="stat-card">
@@ -831,6 +836,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     setTimeout(() => toastEl.classList.remove("show"), 2800);
   }
 
+  const bannerModoEstatico = document.getElementById("banner-modo-estatico");
+
+  function guardarEnLocalStorage(lista) {
+    try {
+      localStorage.setItem("laminas_productos_guardados", JSON.stringify(lista));
+    } catch (e) {
+      console.warn("No se pudo guardar en localStorage:", e);
+    }
+  }
+
   // Detectar si el servidor local Node.js está disponible
   async function checkServer() {
     try {
@@ -839,6 +854,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         isServerOnline = true;
         statusDot.classList.remove("offline");
         statusText.textContent = "Servidor local activo (guardado automático)";
+        if (bannerModoEstatico) bannerModoEstatico.style.display = "none";
         return await res.json();
       }
     } catch (e) {
@@ -848,8 +864,35 @@ document.addEventListener("DOMContentLoaded", async () => {
     isServerOnline = false;
     statusDot.classList.add("offline");
     statusText.textContent = "Modo estático (descarga manual)";
-    const res = await fetch("data/products.json");
-    return await res.json();
+    if (bannerModoEstatico) bannerModoEstatico.style.display = "block";
+
+    let list = [];
+    try {
+      const res = await fetch("data/products.json?v=" + Date.now());
+      list = await res.json();
+    } catch (e) {
+      console.warn("Error cargando data/products.json:", e);
+    }
+
+    // Unir con productos guardados en localStorage
+    try {
+      const guardados = localStorage.getItem("laminas_productos_guardados");
+      if (guardados) {
+        const parsed = JSON.parse(guardados);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          parsed.forEach(item => {
+            const idx = list.findIndex(p => p.id === item.id || (p.nombre && item.nombre && p.nombre.toLowerCase() === item.nombre.toLowerCase()));
+            if (idx >= 0) {
+              list[idx] = item;
+            } else {
+              list.push(item);
+            }
+          });
+        }
+      }
+    } catch (e) {}
+
+    return list;
   }
 
   async function cargarImagenesDisponibles() {
@@ -984,10 +1027,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else {
       // Modo estático sin servidor
       productos = productos.filter(p => p.id !== id);
+      guardarEnLocalStorage(productos);
       actualizarStats();
       poblarCategorias();
       renderProductos();
-      showToast(`🗑️ Eliminado en memoria. Recordá descargar el JSON.`);
+      showToast(`🗑️ Eliminado de tu navegador. Recordá descargar el JSON.`);
     }
 
     productoAEliminar = null;
@@ -1131,11 +1175,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       nuevo.id = maxId + 1;
       nuevo.activo = true;
       productos.push(nuevo);
+      guardarEnLocalStorage(productos);
       actualizarStats();
       poblarCategorias();
       renderProductos();
       formNuevo.reset();
-      showToast(`🎉 Producto agregado en memoria. Descargá el JSON para actualizar.`);
+      imagenDataParaGuardar = null;
+      previewZone.innerHTML = `
+        <span style="font-size:2.2rem; margin-bottom:6px;">📸</span>
+        <span class="prompt-text">Hacé clic para elegir foto</span>
+        <span class="prompt-sub">JPG, PNG o WEBP</span>`;
+      categoriaNueva.style.display = "none";
+      showToast(`🎉 ¡Guardado en tu navegador! Podés verlo en la tienda.`);
     }
 
     submitBtn.disabled = false;
@@ -1439,13 +1490,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
       });
 
+      guardarEnLocalStorage(productos);
       batchProgressFill.style.width = "100%";
-      batchProgressText.textContent = `¡Lote cargado en memoria! Recordá descargar el JSON.`;
+      batchProgressText.textContent = `¡Lote guardado en tu navegador! Podés verlo en la tienda.`;
 
       actualizarStats();
       poblarCategorias();
       renderProductos();
-      showToast(`🎉 ${loteParaEnviar.length} productos agregados. Descargá el JSON para actualizar.`);
+      showToast(`🎉 ${loteParaEnviar.length} productos agregados a tu navegador. Descargá el JSON para actualizar.`);
 
       batchQueue = [];
       setTimeout(() => {
