@@ -48,31 +48,31 @@ const MUESTRAS_DEFAULT = [
   },
   {
     id: 4,
-    formatoClave: 'rect',
-    filtro: 'rectangular',
-    badge: '📄 Rectangular A4 (20x29 cm)',
-    titulo: 'Lámina A4 Paw Patrol',
-    desc: 'Diseño rectangular nítido con margen para manipular y cortar fácilmente.',
+      formatoClave: 'toppers',
+      filtro: 'toppers',
+      badge: '🧁 Mini Toppers (x24 círculos)',
+      titulo: '24 Mini Toppers Paw Patrol',
+      desc: 'Plancha A4 con 24 círculos individuales de 4.5 cm para cupcakes, muffins y alfajores.',
     img: 'images/fototorta/dibujos-animados-paw-patrol-chico-1-48.jpg',
-    tipo: 'fototorta'
+      tipo: 'chocotransfer'
   },
   {
     id: 5,
     formatoClave: 'toppers',
     filtro: 'toppers',
-    badge: '🧁 Mini Toppers (x24 círculos)',
-    titulo: '24 Mini Toppers Masha y el Oso',
-    desc: 'Plancha A4 con 24 círculos individuales de 4.5 cm para cupcakes, muffins y alfajores.',
+    badge: '🧁 Mini Toppers (x12 círculos)',
+    titulo: '12 Mini Toppers Masha y el Oso',
+    desc: 'Plancha A4 con 12 círculos individuales de 4.5 cm para cupcakes, muffins y alfajores.',
     img: 'images/fototorta/dibujos-animados-masha-topper-46.jpg',
     tipo: 'fototorta'
   },
   {
     id: 6,
-    formatoClave: 'toppers',
-    filtro: 'toppers',
-    badge: '🧁 Mini Toppers (x24 círculos)',
-    titulo: '24 Mini Toppers Club Boca',
-    desc: 'Círculos de 4.5 cm listos para cortar para mesas dulces y souvenirs comestibles.',
+      formatoClave: 'round',
+      filtro: 'redonda',
+      badge: '🎂 Redonda (Ø 20 cm)',
+    titulo: 'Torta Boca Juniors con replicas x5',
+      desc: 'Diseño circular elegante para cumpleaños, bautismos o aniversarios con replicas de 5cm.',
     img: 'images/fototorta/Boca topper.png',
     tipo: 'fototorta'
   },
@@ -81,8 +81,8 @@ const MUESTRAS_DEFAULT = [
     formatoClave: 'round',
     filtro: 'redonda',
     badge: '🎂 Redonda (Ø 20 cm)',
-    titulo: 'Torta Corona Dorada',
-    desc: 'Diseño circular elegante para cumpleaños de 15, bautismos o aniversarios.',
+    titulo: 'Torta Corona Dorada con replicas x10',
+    desc: 'Diseño circular elegante para cumpleaños, bautismos o aniversarios con replicas de 4cm',
     img: 'images/fototorta/Corona redondo.png',
     tipo: 'fototorta'
   },
@@ -93,7 +93,7 @@ const MUESTRAS_DEFAULT = [
     badge: '🍫 Chocotransfer Especial',
     titulo: 'Chocotransfer Bombones y Paletas',
     desc: 'Hoja transfer para estampar chocolate blanco con acabados brillantes.',
-    img: 'images/chocotransfer/cumpleanos-1.svg',
+    img: 'images/chocotransfer/Plin plin x24 unidades.png',
     tipo: 'chocotransfer'
   }
 ];
